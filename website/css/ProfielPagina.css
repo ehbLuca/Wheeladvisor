@@ -38,9 +38,17 @@ h1 {
 .gallery {
     text-align: center;
     border: 3px solid black;
-    margin: 30px;
+    margin-top: 10px;
     padding: 80px;
-}
+    background-color: whitesmoke;
+    overflow: auto;
+    white-space: nowrap;
+    padding: 10px;
+    }
+      
+ div.gallery img {
+        padding: 10px;
+ }
 
 .description {
     border: 2px outset black;
@@ -52,12 +60,14 @@ h1 {
     float: left;
     border-right: 2px outset black;
     margin: auto;
+    padding: 15px;
 }
 
 .negatives {
     color: rgb(253, 79, 79);
     float: left;
     margin: auto;
+    padding: 15px;
 }
 
 
