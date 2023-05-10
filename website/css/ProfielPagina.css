@@ -3,12 +3,48 @@ body {
 }
 
 button {
-    border: none;
     background-color: inherit;
+}
+
+.backbutton {
+    border: none;
+  padding: 15px;
+  float: left;
+}
+
+.sharebutton {
+    background-color: lightskyblue;
+    float: right;
+  padding: 5px;
+}
+
+.favbutton {
+    border: none;
+    float: right;
+}
+
+h1 {
+    text-align: center;
+}
+
+.staraverage {
+    float: right;
+}
+
+.checked {
+    color: orange;
+ }
+
+.gallery {
+    text-align: center;
+    border: 3px solid black;
+    margin: 30px;
+    padding: 80px;
 }
 
 .description {
     border: 2px outset black;
+    width: 45%;
 }
 
 .positives {
