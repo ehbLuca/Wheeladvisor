@@ -21,7 +21,7 @@
     <button type="button" class="favbutton"><img src="images/favorite.png" alt="buttonpng" width="25" height="40" /></button>
     </form>
     <div style="clear:both;"></div>
-    <h1>Naam plek</h1>
+    <h1>Name place</h1>
     &nbsp;
     <div class="staraverage">
         <span class="fa fa-star checked"></span>
@@ -47,9 +47,9 @@
     </form>
     &nbsp;
     <div class="description">
-        <p>
-            Here comes the description about the place.
-        </p>
+        <p><i>
+            Here comes the description about the place...
+        </i></p>
     </div>
     &nbsp;
     <div class="positives">
@@ -87,18 +87,23 @@
     </form>
     &nbsp;
     <h2>Reviews</h2>
+    <button type="button" class="filterbutton">Filter reviews</button>
+    &nbsp;
+    <div class="userreview">
     <form action="submit_review.php" method="post">
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+        <input type="text" id="name" name="name" required size="15" maxlength="30">
         <br>
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email" required size="15" maxlength="30">
         <br>
         <label for="review">Review:</label>
-        <textarea id="review" name="review" required></textarea>
+        <br>
+        <textarea id="review" name="review" required cols="30" rows="6"></textarea>
         <br>
         <input type="submit" value="Submit Review">
-    </form>
+    </form></div>
+    
 
 </body>
 
