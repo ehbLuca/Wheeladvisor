@@ -1,0 +1,28 @@
+body {
+    background-color: lightcyan;
+}
+
+button {
+    border: none;
+    background-color: inherit;
+}
+
+.description {
+    border: 2px outset black;
+}
+
+.positives {
+    color: rgb(22, 206, 16);
+    float: left;
+    border-right: 2px outset black;
+    margin: auto;
+}
+
+.negatives {
+    color: rgb(253, 79, 79);
+    float: left;
+    margin: auto;
+}
+
+
+
