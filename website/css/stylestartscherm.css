@@ -1,9 +1,13 @@
 
+
+
+
 /*container is rond de andere containers*/
 .container{
     display: flex;
     flex-direction: column;
     align-items: center;
+    align-content: space-around;
 }
 
 /*cantainer1 is rond de login en zoek optie*/
@@ -31,24 +35,39 @@
 /*container2 categorieën*/
 
 .child{
+    
+    padding: 0;
     display: grid;
     grid-template-columns: 50% 50%;
     grid-column-gap: 10% ;
     grid-row-gap: 10%;
+}
+
+.container2 li{
+    width: fit-content;
+    background-color: black;
     
 }
 
-.container2 li, .container2 a {
+.container2 a {
+ 
    color: white;
-   background-color: black;
+    align-self: flex-start;
    margin-top: 10%;
 }
 
-
+.container2 ul{
+    
+    width: fit-content;
+}
 
 .container2 ul, a{ 
+    
     text-decoration: none;
     list-style: none;
+}
+.container2{
+    align-self:center;
 }
 
 /*container2 eindig hier*/
