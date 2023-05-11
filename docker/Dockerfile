@@ -2,6 +2,15 @@ FROM alpine:latest
 
 RUN apk update
 
+# Install nginx
+RUN apk add nginx \
+	&& adduser -D -g 'www' www \
+	&& mkdir -p /www \
+	&& chown -R www:www /var/lib/nginx \
+	&& chown -R www:www /www
+COPY config/nginx.conf /etc/nginx/nginx.conf
+COPY config/index.html /www/index.html
+
 # Install mariadb
 RUN apk add mysql mysql-client \
 	&& mysql_install_db --user=mysql --datadir=/var/lib/mariadb \
@@ -11,6 +20,6 @@ RUN apk add mysql mysql-client \
 COPY config/startup.sh /usr/local/bin/startup
 RUN chmod +x /usr/local/bin/startup
 
-EXPOSE 3306
+EXPOSE 80 3306
 
 CMD ["startup"]

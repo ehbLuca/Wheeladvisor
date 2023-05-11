@@ -1,5 +1,7 @@
 #!/bin/sh
 
+nginx
+
 # This will keep the container running
 /usr/bin/mariadbd \
 	--basedir=/usr \
