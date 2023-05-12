@@ -20,8 +20,8 @@
 }
 
 .container1{
-    display: flex;
-    flex-direction: column;  
+   display: grid;
+   grid-template-rows: 50% 50%;  
 }
 
 .container1 form {
@@ -34,7 +34,7 @@
 
 /*container2 categorieën*/
 
-.child{
+.container2{
     
     padding: 0;
     display: grid;
@@ -43,7 +43,7 @@
     grid-row-gap: 10%;
 }
 
-.container2 li{
+.container2 a{
     width: fit-content;
     background-color: black;
     
