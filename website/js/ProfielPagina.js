@@ -1,10 +1,10 @@
 console.log("Test");
 
-/*favorite button aanspreken*/
-const favButton = document.querySelector('.fav-button');
+/*Favorite button aanspreken*/
+const favButton = document.querySelector('.favbutton');
 
 favButton.addEventListener('click', () => {
-/*Send an HTTP POST request to the server with the current page URL as the payload*/
+/*Sends an HTTP POST request to the server with the current page URL as the payload*/
   fetch('/favorites', {
     method: 'POST',
     body: JSON.stringify({url: window.location.href}),
@@ -21,9 +21,10 @@ favButton.addEventListener('click', () => {
   .catch(error => {
     console.error(error);
     alert('Failed to save favorite');
+
   });
 });
-```
+
 
 
 
