@@ -1,9 +1,10 @@
 body {
-    background-color: lightcyan;
+    background-color: #F7C59F;
 }
 
 button {
     background-color: inherit;
+    cursor: pointer;
 }
 
 .backbutton {
