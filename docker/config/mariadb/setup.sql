@@ -21,4 +21,4 @@ DROP DATABASE IF EXISTS test;
 DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'
 
 -- Reload changes
--- FLUSH PRIVILEGES;
+FLUSH PRIVILEGES;
