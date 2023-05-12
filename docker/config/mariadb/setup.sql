@@ -1,6 +1,7 @@
 -- create use for phpmyadmin
 CREATE USER 'padmin'@'localhost'
 IDENTIFIED BY 'kirikou';
+GRANT ALL PRIVILEGES ON *.* TO 'padmin'@'%' IDENTIFIED BY 'my_optional_remote_password' WITH GRANT OPTION;
 
 -- admin account
 GRANT ALL PRIVILEGES ON *.* 
