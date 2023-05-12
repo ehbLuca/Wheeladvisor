@@ -1,0 +1,118 @@
+body{
+    background-color: #F7C59F;
+    width:auto;
+}
+
+
+
+/*container is rond de andere containers*/
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: space-around;
+}
+
+/*cantainer1 is rond de login en zoek optie*/
+.container1 a{
+    color: white;
+    text-align: center;
+    padding: 5%;
+    background-color: black;
+    margin:none;
+}
+
+.container1{
+   display: grid;
+   grid-template-rows: 50% 50%;  
+}
+
+.container1 form {
+    margin-top: 5%;
+    margin-bottom: 10%;
+}
+
+/*container1 eindig hier*/
+
+
+/*categorie categorieën*/
+
+.categorie{
+    width: 100%;
+    display: grid;
+    align-content: center;
+    grid-template-columns: 20% 20%;
+    grid-column-gap: 10% ;
+    grid-row-gap: 10%;
+}
+
+.left{
+    justify-self: end;
+}
+
+
+.categorie a{
+    width: fit-content;
+    background-color: black;
+}
+
+.categorie a {
+   color: white;
+   margin-top: 10%;
+}
+
+
+
+.categorie a{ 
+    
+    text-decoration: none;
+    
+}
+
+
+
+/*categorie eindig hier*/
+
+
+/*Alles die met container3 te maken heeft zit hier*/
+
+ul {
+    margin: 0;
+}
+
+.container3 img {
+    display: block;
+    width: 50%;
+}
+
+.flex{
+    margin-top:10%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+}
+
+.ul_list{
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+}
+
+.ul_list li{
+    align-self: flex-end;
+    list-style: none;
+    margin: 5%;
+}
+
+.child{
+    float: right;
+}
+
+.flex h3 {
+    width: 80%;
+    margin: 5%;
+}
+
+/*Container3 eindig hier*/
