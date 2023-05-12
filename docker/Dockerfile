@@ -15,7 +15,9 @@ COPY config/index.html /www/index.html
 RUN apk add mysql mysql-client \
 	&& mysql_install_db --user=mysql --datadir=/var/lib/mariadb \
 	&& mkdir -p /run/mysqld \
-	&& chown mysql:mysql /run/mysqld
+	&& chown -R mysql:mysql /run/mysqld
+COPY config/mariadb/mariadb-server.sh /usr/local/bin/mariadb-server
+RUN chmod +x /usr/local/bin/mariadb-server
 
 COPY config/startup.sh /usr/local/bin/startup
 RUN chmod +x /usr/local/bin/startup
