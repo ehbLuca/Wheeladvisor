@@ -8,8 +8,8 @@ RUN apk add nginx \
 	&& mkdir -p /www \
 	&& chown -R www:www /var/lib/nginx \
 	&& chown -R www:www /www
-COPY config/nginx.conf /etc/nginx/nginx.conf
-COPY config/index.html /www/index.html
+COPY config/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY config/nginx/index.html /www/index.html
 
 # Install mariadb
 RUN apk add mysql mysql-client \
