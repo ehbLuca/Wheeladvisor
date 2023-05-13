@@ -1,8 +1,10 @@
 -- create user for phpmyadmin
 DROP USER IF EXISTS 'padmin'@'%';
 DROP DATABASE IF EXISTS padmindb;
-CREATE USER padmin IDENTIFIED BY 'bulbizarre';
+
 CREATE DATABASE padmindb;
+
+CREATE USER padmin IDENTIFIED BY 'bulbizarre';
 GRANT ALL PRIVILEGES ON padmindb.* 
 TO 'padmin'@'%' WITH GRANT OPTION;
 
