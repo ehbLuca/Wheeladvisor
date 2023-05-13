@@ -11,12 +11,9 @@ RUN apk add mysql mysql-client
 	&& mkdir -p /www \
 	&& chown -R www:www /var/lib/nginx \
 	&& chown -R www:www /www
-COPY config/nginx/nginx.conf /etc/nginx/nginx.conf
-COPY config/nginx/index.html /www/index.html
 
 # Setup phpmyadmin
 RUN mkdir -p /etc/nginx/snippets
-COPY config/nginx/snippet.conf /etc/nginx/snippets/phpmyadmin.conf
 RUN mkdir -p /srv \
 	&& wget -q 'https://files.directadmin.com/services/all/phpMyAdmin/phpMyAdmin-5.2.1-all-languages.tar.gz' \
 	&& tar xf phpMyAdmin-5.2.1-all-languages.tar.gz \
@@ -29,11 +26,14 @@ RUN mysql_install_db --user=mysql --datadir=/var/lib/mariadb \
 	&& mkdir -p /run/mysqld \
 	&& chown -R mysql:mysql /run/mysqld \
 	&& sed -i 's/^skip-networking/bind-address=0.0.0.0/' /etc/my.cnf.d/mariadb-server.cnf
+
+COPY config/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY config/nginx/index.html /www/index.html
+COPY config/nginx/snippet.conf /etc/nginx/snippets/phpmyadmin.conf
 COPY config/mariadb/setup.sql /tmp/setup.sql
 COPY config/mariadb/mariadb-server.sh /usr/local/bin/mariadb-server
-RUN chmod +x /usr/local/bin/mariadb-server
-
 COPY config/startup.sh /usr/local/bin/startup
+RUN chmod +x /usr/local/bin/mariadb-server
 RUN chmod +x /usr/local/bin/startup
 
 EXPOSE 80 3306
