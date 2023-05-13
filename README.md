@@ -31,6 +31,9 @@ services:
 cd docker
 docker compose up -d
 ```
+If no problems occurred. You should be able to enjoy the app at
+[http://localhost:4032/](http://localhost:4032/)
+
 #### Stopping
 ```bash
 docker stop wheelie1
