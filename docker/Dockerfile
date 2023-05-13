@@ -14,6 +14,16 @@ RUN apk add mysql mysql-client
 COPY config/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY config/nginx/index.html /www/index.html
 
+# Setup phpmyadmin
+RUN mkdir -p /etc/nginx/snippets
+COPY config/nginx/snippet.conf /etc/nginx/snippets/phpmyadmin.conf
+RUN mkdir -p /srv \
+	&& wget -q 'https://files.directadmin.com/services/all/phpMyAdmin/phpMyAdmin-5.2.1-all-languages.tar.gz' \
+	&& tar xf phpMyAdmin-5.2.1-all-languages.tar.gz \
+	&& rm phpMyAdmin-5.2.1-all-languages.tar.gz \
+	&& mv phpMyAdmin-5.2.1-all-languages /srv/phpmyadmin \
+	&& chmod -R 777 /srv/phpmyadmin
+
 # Setup mariadb
 RUN mysql_install_db --user=mysql --datadir=/var/lib/mariadb \
 	&& mkdir -p /run/mysqld \
@@ -25,16 +35,6 @@ RUN chmod +x /usr/local/bin/mariadb-server
 
 COPY config/startup.sh /usr/local/bin/startup
 RUN chmod +x /usr/local/bin/startup
-
-# Setup phpmyadmin
-RUN mkdir -p /etc/nginx/snippets
-COPY config/nginx/snippet.conf /etc/nginx/snippets/phpmyadmin.conf
-RUN mkdir -p /srv \
-	&& wget -q 'https://files.directadmin.com/services/all/phpMyAdmin/phpMyAdmin-5.2.1-all-languages.tar.gz' \
-	&& tar xf phpMyAdmin-5.2.1-all-languages.tar.gz \
-	&& rm phpMyAdmin-5.2.1-all-languages.tar.gz \
-	&& mv phpMyAdmin-5.2.1-all-languages /srv/phpmyadmin \
-	&& chmod -R 777 /srv/phpmyadmin
 
 EXPOSE 80 3306
 
