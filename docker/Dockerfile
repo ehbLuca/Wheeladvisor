@@ -38,4 +38,6 @@ RUN chmod +x /usr/local/bin/startup
 
 EXPOSE 80 3306
 
+WORKDIR /app
+
 CMD ["startup"]
