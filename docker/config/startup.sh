@@ -14,5 +14,8 @@ done
 mariadb < /tmp/setup.sql
 shred -uz /tmp/setup.sql
 
+npm install
+npm start
+
 # This will keep the container running
 tail -f /dev/null
