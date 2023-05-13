@@ -1,12 +1,10 @@
--- create use for phpmyadmin
-CREATE USER 'padmin'@'localhost'
-IDENTIFIED BY 'kirikou';
-GRANT ALL PRIVILEGES ON *.* TO 'padmin'@'%' IDENTIFIED BY 'kirikou' WITH GRANT OPTION;
-
--- admin account
-GRANT ALL PRIVILEGES ON *.* 
-TO 'padmin'@'localhost' WITH GRANT OPTION;
-
+-- create user for phpmyadmin
+DROP USER IF EXISTS 'padmin'@'%';
+DROP DATABASE IF EXISTS padmindb;
+CREATE USER padmin IDENTIFIED BY 'bulbizarre';
+CREATE DATABASE padmindb;
+GRANT ALL PRIVILEGES ON padmindb.* 
+TO 'padmin'@'%' WITH GRANT OPTION;
 
 -- From sql secure installation
 -- Remove anonymous user
@@ -21,4 +19,4 @@ DROP DATABASE IF EXISTS test;
 DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'
 
 -- Reload changes
-FLUSH PRIVILEGES;
+-- FLUSH PRIVILEGES;
