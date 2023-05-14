@@ -1,3 +1,8 @@
+*
+{
+    box-sizing: border-box;
+}
+
 body{
     background-color: #F7C59F;
     width:auto;
@@ -10,77 +15,67 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    align-content: space-around;
 }
 
 /*cantainer1 is rond de login en zoek optie*/
-.container1 a{
+.login_zoek a{
     color: white;
+    text-decoration: none;
     text-align: center;
-    padding: 5%;
+    padding: 2em;
     background-color: black;
-    margin:none;
+    border-radius: 1rem;
 }
 
-.container1{
+.login_zoek{
    display: grid;
    grid-template-rows: 50% 50%;  
 }
 
-.container1 form {
-    margin-top: 5%;
-    margin-bottom: 10%;
+.login_zoek input {
+    padding: 1em;
+    border-radius: 5rem;
+    margin-top: 10%;
+    margin-bottom: 20%;
 }
 
-/*container1 eindig hier*/
+/*login_zoek eindig hier*/
 
 
 /*categorie categorieën*/
 
 .categorie{
-    width: 100%;
-    display: grid;
-    align-content: center;
-    grid-template-columns: 20% 20%;
-    grid-column-gap: 10% ;
-    grid-row-gap: 10%;
-}
-
-.left{
-    justify-self: end;
+   display: grid;
+   grid-template-columns: 50% 50%;  
+  
 }
 
 
-.categorie a{
-    width: fit-content;
-    background-color: black;
+.categorie button{
+  color: white;
+  background-color: black;
+  border: none;
+  border-radius: 1em;
+  padding: 2em; 
+  margin: 1em;
 }
 
-.categorie a {
+
+.categorie li {
+    list-style: none;
    color: white;
-   margin-top: 10%;
 }
-
-
-
-.categorie a{ 
-    
-    text-decoration: none;
-    
-}
-
-
 
 /*categorie eindig hier*/
 
 
-/*Alles die met container3 te maken heeft zit hier*/
+/*Alles die met Kader te maken heeft zit hier*/
 
 ul {
     margin: 0;
 }
 
-.container3 img {
+.Kader img {
     display: block;
     width: 50%;
 }
@@ -92,6 +87,7 @@ ul {
     flex-direction: column;
     align-items: center;
     background-color: black;
+    border-radius: 3rem;
 }
 
 .ul_list{
@@ -106,13 +102,9 @@ ul {
     margin: 5%;
 }
 
-.child{
-    float: right;
-}
 
 .flex h3 {
     width: 80%;
-    margin: 5%;
 }
 
-/*Container3 eindig hier*/
+/*Kader eindig hier*/
