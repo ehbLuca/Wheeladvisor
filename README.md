@@ -5,36 +5,17 @@ First install [docker](https://docs.docker.com/engine/install/),
 checkout the [getting started](https://docs.docker.com/get-started/) page for more info.
 We will setup a docker container containing [mariadb](https://mariadb.org/), [nginx](https://www.nginx.com/) and the express js webapp.
 
-#### Building
-Build an image 'wheelie'
+#### Installation
+The install script will build an image 'wheelie'
+and run a container wheelie1.
 ```bash
-cd docker
-docker build -t wheelie .
+git clone https://github.com/EHB-TI/programming-project-groep-1-wheeladvisor.git wheeladvisor
+cd wheeladvisor
+systemctl start docker.service # ensure docker is running
+sudo ./build-run.sh # buils and brings the container up
 ```
-#### Running
-Bring a docker container 'wheelie1' up, based on the previously built image.
-> docker-compose.yml
-```yaml
-version: '3'
-services:
-  wheelie1:
-    image: wheelie
-    ports: 
-      - 4032:80 # nginx
-      - 4033:3306 # mariadb
-    container_name: wheelie1
-    volumes:
-      - ../node:/app
-      - ../website:/app/website
-```
-```bash
-cd docker
-docker compose up -d
-```
-If no problems occurred. You should be able to enjoy the app at
-[http://localhost:4032/](http://localhost:4032/)
 
 #### Stopping
 ```bash
-docker stop wheelie1
+sudo docker stop wheelie1
 ```
