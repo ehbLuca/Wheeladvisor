@@ -14,7 +14,7 @@ cd wheeladvisor
 Ensure docker is running or start it with
 `systemctl start docker.service`
 
-### Installation
+#### Installation
 To install and run, use this script.
 ```bash
 sudo ./build-run.sh
