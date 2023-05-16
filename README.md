@@ -14,8 +14,11 @@ cd wheeladvisor
 systemctl start docker.service # ensure docker is running
 sudo ./build-run.sh # buils and brings the container up
 ```
+After this, the container should be up and running.
 
 #### Stopping
 ```bash
 sudo docker stop wheelie1
 ```
+ It can be brought back with
+`sudo docker start wheelie1`
