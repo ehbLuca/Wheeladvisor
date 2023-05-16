@@ -15,9 +15,13 @@ Ensure docker is running or start it with
 `systemctl start docker.service`
 
 ### Installation
+To install and run, use this script.
+```bash
+sudo ./build-run.sh
+```
 This script will create the docker image and container for the project.
 Afterwards it will try to bring the container up.
-`sudo ./build-run.sh`
+
 If the script succeeds a link should appear in the console, and you're good to go!
 
 #### Stopping
