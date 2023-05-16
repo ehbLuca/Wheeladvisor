@@ -5,16 +5,20 @@ First install [docker](https://docs.docker.com/engine/install/),
 checkout the [getting started](https://docs.docker.com/get-started/) page for more info.
 We will setup a docker container containing [mariadb](https://mariadb.org/), [nginx](https://www.nginx.com/) and the [express js](http://expressjs.com/) webapp.
 
-#### Installation
-The install script will build an image 'wheelie'
-and run a container wheelie1.
+#### Setting up
+git clone the project and navigate to your newly created directory.
 ```bash
 git clone https://github.com/EHB-TI/programming-project-groep-1-wheeladvisor.git wheeladvisor
 cd wheeladvisor
-systemctl start docker.service # ensure docker is running
-sudo ./build-run.sh # buils and brings the container up
 ```
-After this, the container should be up and running.
+Ensure docker is running or start it with
+`systemctl start docker.service`
+
+### Installation
+This script will create the docker image and container for the project.
+Afterwards it will try to bring the container up.
+`sudo ./build-run.sh`
+If the script succeeds a link should appear in the console, and you're good to go!
 
 #### Stopping
 ```bash
