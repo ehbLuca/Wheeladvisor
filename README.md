@@ -3,7 +3,7 @@
 ### Setup with docker
 First install [docker](https://docs.docker.com/engine/install/),
 checkout the [getting started](https://docs.docker.com/get-started/) page for more info.
-We will setup a docker container containing [mariadb](https://mariadb.org/), [nginx](https://www.nginx.com/) and the express js webapp.
+We will setup a docker container containing [mariadb](https://mariadb.org/), [nginx](https://www.nginx.com/) and the [express js](http://expressjs.com/) webapp.
 
 #### Installation
 The install script will build an image 'wheelie'
