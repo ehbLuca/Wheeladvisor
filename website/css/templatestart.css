@@ -112,3 +112,25 @@ ul {
 }
 
 /*Kader eindig hier*/
+
+/*Grote schermen*/
+
+@media screen and (min-width:1000px ){
+
+    body{
+        background-color: red;
+    }
+
+    .login_zoek{
+       display: flex;
+       flex-direction: row;
+     }
+
+     .login_zoek form{
+        align-self: flex-end;
+     }
+    
+}
+
+
+
