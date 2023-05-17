@@ -6,6 +6,8 @@
 body{
     background-color: #F7C59F;
     width:auto;
+	margin: 0;
+	padding: 0;
 }
 
 
@@ -25,6 +27,7 @@ body{
     padding: 2em;
     background-color: black;
     border-radius: 1rem;
+	margin-top: 1em;
 }
 
 .login_zoek{
@@ -81,7 +84,8 @@ ul {
 }
 
 .flex{
-    margin-top:10%;
+    margin-top: 5%;
+	margin-bottom: 5%;
     color: white;
     display: flex;
     flex-direction: column;
