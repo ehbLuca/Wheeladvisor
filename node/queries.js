@@ -30,6 +30,19 @@ async function queryDB(query) {
 	}
 }
 
+// adds an user to the database, returns true if succesful, returns false if an error occurred.
+async function loginUser(values) {
+	let [name, password] = values;
+	let result = await queryDB(`
+		SELECT name, email FROM users
+		WHERE email = '${name}'
+			AND password = '${password}'
+	`);
+	if (result.length == 0)
+		return false;
+	return true;
+}
+
 module.exports = {
-	queryDB
+	queryDB, loginUser
 };
