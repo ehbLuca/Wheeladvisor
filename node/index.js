@@ -25,6 +25,21 @@ app.post('/login', async (req, res) => {
 	}
 });
 
+// route for registering
+// expects a name, email and password
+app.post('/register', async (req, res) => {
+	let name = req.body.name;
+	let email = req.body.email;
+	let password = req.body.password;
+	let result = await registerUser([name, email, password])
+	if (result)
+	{
+		res.redirect('/register.html');
+	} else {
+		res.redirect('/register-error.html');
+	}
+});
+
 app.listen(port, () => {
 	console.log(`http://localhost:${port}`);
 });
