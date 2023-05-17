@@ -5,8 +5,10 @@ There are two ways of setting up this project:
 1. [Setting up with docker on linux](https://github.com/EHB-TI/programming-project-groep-1-wheeladvisor/edit/readme/README.md#setup-with-docker-on-linux)
 2. [Setting up with node](https://github.com/EHB-TI/programming-project-groep-1-wheeladvisor/edit/readme/README.md#setup-with-node)<br />
 Setting up with node is easier, but you will have to setup a database server yourself and adjust the connection details in queries.js.
+<br />
+<br />
 
-### Setup with docker on linux
+### Setup with docker on linux/WSL2
 ##### Prerequisites
 First install [docker](https://docs.docker.com/engine/install/). We will setup a docker container that will run our webapp.
 
@@ -15,14 +17,13 @@ git clone the project and navigate to your newly created directory.
 git clone https://github.com/EHB-TI/programming-project-groep-1-wheeladvisor.git wheeladvisor
 cd wheeladvisor
 ```
-##### Installation
+##### Install and go
 To install and run, use this script.
 ```bash
 sudo ./build-run.sh
 ```
 This script will create the docker image and container for the project.
 Afterwards it will try to bring the container up.
-
 If the script succeeds a link should appear in the console, and you're good to go!
 
 ##### Stopping
@@ -31,21 +32,25 @@ sudo docker stop wheelie1
 ```
  It can be brought back with
 `sudo docker start wheelie1`
-
+<br />
+<br />
+<br />
+<br />
 ### Setup with node
+> Hopefully OS agnostic
 ##### Prerequisites
 First install [docker](https://docs.docker.com/engine/install/),
 We will setup a docker container that will run our webapp.
 
-git clone the project and navigate to your newly created directory.
+Then clone the project and navigate to your newly created directory.
 ```bash
 git clone https://github.com/EHB-TI/programming-project-groep-1-wheeladvisor.git wheeladvisor
 cd wheeladvisor
 ```
-You will also need to create a website directory, serving the files. Use a symbolic link.
-**Linux:**
-`ln -sf ../website website`
-**Bindows:**
+You will also need to create a website directory. Use a symbolic link.<br />
+**Linux:**<br />
+`ln -sf ../website website`<br />
+**Bindows:**<br />
 `mklink /D website ../website`
 
 ##### Installation
