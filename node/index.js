@@ -1,6 +1,10 @@
 const express = require('express');
 const path = require('path');
 
+const {
+	registerUser, loginUser
+} = require('./queries.js');
+
 let app = express();
 let port = 3000;
 
