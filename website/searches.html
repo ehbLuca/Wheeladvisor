@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<script>
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Retrieve the result query parameter from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const result = urlParams.get("search");
+
+    console.log(result)
+
+    let results = [
+  {
+    "name": "Wakko",
+    "latitude": 50.8430913,
+    "longitude": 4.3515473,
+    "category": "barber"
+  },
+  {
+    "name": "Grote Zavel - Grand Sablon",
+    "latitude": 50.840833,
+    "longitude": 4.3550831,
+    "category": "undefined"
+  },
+  {
+    "name": "Petit Sablon - Kleine Zavel",
+    "latitude": 50.8395032,
+    "longitude": 4.355737,
+    "category": "bus_stop"
+  },
+     ]
+
+
+     for (let iterator of results) {
+       // Create a <p> element and add the fetched result  
+        let p = document.createElement("p");
+         p.textContent = iterator.name;
+         document.body.appendChild(p);
+     }
+
+
+});
+</script>
+
+</body>
+</html>
