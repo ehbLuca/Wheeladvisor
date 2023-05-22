@@ -30,9 +30,12 @@ CREATE TABLE categories(
 
 CREATE TABLE pictures(
 	picture_id INT(11) AUTO_INCREMENT,
+	place_id INT(11) NOT NULL,
 	name VARCHAR(255) NOT NULL,
 	file_path VARCHAR(255) NOT NULL,
-	CONSTRAINT pk_picture_id PRIMARY KEY(picture_id)
+	CONSTRAINT pk_picture_id PRIMARY KEY(picture_id),
+	CONSTRAINT fk_picture_place_id FOREIGN KEY(place_id)
+		REFERENCES places(place_id)
 );
 
 
