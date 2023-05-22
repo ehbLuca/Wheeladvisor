@@ -54,10 +54,10 @@ async function queryDB(query) {
 
 // adds an user to the database, returns true if succesful, returns false if an error occurred.
 async function loginUser(values) {
-	let [name, password] = values;
+	let [email, password] = values;
 	let result = await queryDB(`
 		SELECT name, email FROM users
-		WHERE email = '${name}'
+		WHERE email = '${email}'
 			AND password = '${password}'
 	`);
 	if (result.length == 0)
