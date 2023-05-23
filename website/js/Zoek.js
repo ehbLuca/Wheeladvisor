@@ -2,6 +2,7 @@ window.addEventListener('DOMContentLoaded', function() {
     var contentContainer = document.getElementById('contentContainer');
     var isLoading = false;
     var page = 1;
+    var number = 1;
   
     function fetchData(page) {
       isLoading = true;
@@ -32,9 +33,10 @@ window.addEventListener('DOMContentLoaded', function() {
       var posts = [];
       for (var i = 1; i <= 10; i++) {
         var post = {
-          id: i + ((page - 1) * 10),
-          title: 'Post ' + (i + ((page - 1) * 10))
+          id: i + number,
+          title: 'Post ' + number
         };
+        number++;
         posts.push(post);
       }
       return posts;
