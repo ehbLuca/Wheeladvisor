@@ -18,6 +18,7 @@ places(
 	#place_id,
 	*name,
 	*adres,
+	*category,
 	°description,
 	°proscons,
 )
@@ -49,10 +50,4 @@ pictures(
 	*naam,
 	*file_path,
 	-place_id,
-)
-
-
-places_categories(
-	#place_id,
-	-category_id,
 )
