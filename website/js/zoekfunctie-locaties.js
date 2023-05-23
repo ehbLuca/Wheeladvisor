@@ -15,11 +15,15 @@ const connection = mysql.createConnection({
     return new Promise((resolve, reject) => {
       // Tegen SQL-injecties = SECURITY!
       const escapedSearchQuery = connection.escape(`%${searchQuery}%`);
-      // SQL query
+      // SQL query voor naam & categorie
       const query = `SELECT place.name AS place_name, categories.name AS category_name
       FROM places
       JOIN categories ON places.category_id = categories.id
       WHERE places.name LIKE ${escapedSearchQuery}`;
+      //SQL query als user zoekt voor minimum rating & boven (bv. gaat alle results met 3/5 + boven tonen)
+      if (minRating) {
+        query += ` AND places.id IN (SELECT places_id FROM reviews WHERE rating >= ${minRating})`;
+      }
       // voer query uit
       connection.query(query, (error, results) => {
         if (error) {
