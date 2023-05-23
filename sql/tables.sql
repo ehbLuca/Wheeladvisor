@@ -15,7 +15,7 @@ CREATE TABLE users(
 
 CREATE TABLE places(
 	place_id INT(11) AUTO_INCREMENT,
-	name VARCHAR(255) NOT NULL,
+	name VARCHAR(255) NOT NULL UNIQUE,
 	address VARCHAR(255) NOT NULL,
 	description TEXT NULL,
 	proscons VARCHAR(255) NULL,
