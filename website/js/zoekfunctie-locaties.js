@@ -10,16 +10,16 @@ const connection = mysql.createConnection({
     database: 'database_name'
   });
   
-// functie om locaties te zoeken
-  function searchLocations(searchQuery) {
+// functie om plaatsen te zoeken
+  function searchPlaces(searchQuery) {
     return new Promise((resolve, reject) => {
       // Tegen SQL-injecties = SECURITY!
       const escapedSearchQuery = connection.escape(`%${searchQuery}%`);
       // SQL query
-      const query = `SELECT locations.name AS location_name, categories.name AS category_name
-      FROM locations
-      JOIN categories ON locations.category_id = categories.id
-      WHERE locations.name LIKE ${escapedSearchQuery}`;
+      const query = `SELECT place.name AS place_name, categories.name AS category_name
+      FROM places
+      JOIN categories ON places.category_id = categories.id
+      WHERE places.name LIKE ${escapedSearchQuery}`;
       // voer query uit
       connection.query(query, (error, results) => {
         if (error) {
@@ -32,7 +32,7 @@ const connection = mysql.createConnection({
   }
   
 // voorbeeld: zoeken voor Brussel Nationaal Museum
-  searchLocations('Brussel Nationaal Museum')
+  searchPlaces('Brussel Nationaal Museum')
     .then((results) => {
       console.log(results);
     })
@@ -40,8 +40,8 @@ const connection = mysql.createConnection({
       console.error(error);
     });
  
-//Dit voorbeeld gaat ervan uit dat tabel met de naam "locaties" in MariaDB-database is met een kolom met de naam "naam" die de namen van de locaties opslaat. 
-//Functie "searchLocations" neemt parameter "searchQuery", de query die de gebruiker invoert. 
-//Tabel "locaties" heeft kolom met naam "category_id" die verwijst naar kolom "id" in tabel "categorieën".
+//Dit voorbeeld gaat ervan uit dat tabel met de naam "places" in MariaDB-database is met een kolom "name" genoemd die de namen van de plaatsen opslaat. 
+//Functie "searchPlaces" neemt parameter "searchQuery", de query die de gebruiker invoert. 
+//Tabel "plaatsen" heeft kolom met naam "category_id" die verwijst naar kolom "id" in tabel "categorieën".
 
   
