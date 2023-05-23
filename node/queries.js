@@ -77,6 +77,23 @@ async function insertPlace(place) {
 	}
 }
 
+async function queryPlaces(query) {
+	let conn = null;
+	let results = null;
+	try {
+		conn = await dbConnect();
+		results = await conn.query(`
+		SELECT * FROM places
+		WHERE UPPER(name) LIKE UPPER(?)
+		`, [`%${query}%`]);
+	} catch (err) {
+		console.error(`Error while searching for'${query}'`, err);
+	} finally {
+		conn.end();
+		return results;
+	}
+} 
+
 // adds an user to the database, returns true if succesful, returns false if an error occurred.
 async function loginUser(values) {
 	let [email, password] = values;
@@ -109,5 +126,5 @@ async function registerUser(values) {
 }
 
 module.exports = {
-	queryDB, loginUser, registerUser, insertPlace
+	queryDB, loginUser, registerUser, insertPlace, queryPlaces
 };
