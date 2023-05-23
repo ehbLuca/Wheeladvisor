@@ -24,6 +24,7 @@ async function valueUsed(values) {
 
 // Creates a connection with the database
 async function dbConnect() {
+	let conn = null;
 	try {
 		conn = await mariadb.createConnection({
 			// database connection details
