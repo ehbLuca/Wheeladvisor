@@ -60,6 +60,20 @@ async function queryDB(query) {
 	}
 }
 
+async function insertPlace(place) {
+	let {name, coordinates, category} = place;
+	let conn = null;
+	try {
+		conn = await dbConnect();
+		res = await conn.query(`
+			INSERT INTO places(name, address)
+			VALUES(?,?)
+			`, [name, `${coordinates.latitude} ${coordinates.longitude}`]);
+	} catch (err) {
+		console.error('Error while doing query:', err);
+	}
+}
+
 // adds an user to the database, returns true if succesful, returns false if an error occurred.
 async function loginUser(values) {
 	let [email, password] = values;
@@ -92,5 +106,5 @@ async function registerUser(values) {
 }
 
 module.exports = {
-	queryDB, loginUser, registerUser
+	queryDB, loginUser, registerUser, insertPlace
 };
