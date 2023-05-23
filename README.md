@@ -39,10 +39,7 @@ sudo docker stop wheelie1
 ### Setup with node
 > Hopefully OS agnostic
 ##### Prerequisites
-First install [docker](https://docs.docker.com/engine/install/),
-We will setup a docker container that will run our webapp.
-
-Then clone the project and navigate to your newly created directory.
+Clone the project and navigate to your newly created directory.
 ```bash
 git clone https://github.com/EHB-TI/programming-project-groep-1-wheeladvisor.git wheeladvisor
 cd wheeladvisor
