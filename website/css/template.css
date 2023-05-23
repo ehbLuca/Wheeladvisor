@@ -1,3 +1,4 @@
+
 @import "colors.css";
 
 *
@@ -8,7 +9,7 @@
 body{
     background-color: var(--bg-color);
     width:auto;
-	margin: 0;
+	margin: 0.5em;
 	padding: 0;
 }
 
@@ -21,30 +22,53 @@ body{
     align-items: center;
 }
 
-/*cantainer1 is rond de login en zoek optie*/
-.login_zoek a{
+/*loginbalk is rond de login en zoek optie*/
+.loginbalk a{
     color: white;
     text-decoration: none;
     text-align: center;
-    padding: 2em;
+    padding: 3px;
     background-color: var(--fg-color);
     border-radius: 1rem;
-	margin-top: 1em;
+	margin-top: 2em;
+   
 }
 
-.login_zoek{
-   display: grid;
-   grid-template-rows: 50% 50%;  
+.loginbalk{
+    align-self: flex-end;
 }
 
-.login_zoek input {
+
+
+/*loginbalk eindig hier*/
+
+
+/*zoek balk begint hier*/
+
+
+.zoekbalk input {
     padding: 1em;
     border-radius: 5rem;
-    margin-top: 10%;
-    margin-bottom: 20%;
+    margin-top: 5%;
+    margin-bottom: 10%;
+    width: 100%;
+   
+    
 }
 
-/*login_zoek eindig hier*/
+
+.zoekbalk{
+    
+    width: 90%;
+    
+}
+
+
+
+
+/*zoek balk eindig hier*/
+
+
 
 
 /*categorie categorieën*/
@@ -123,12 +147,12 @@ ul {
         background-color: red;
     }
 
-    .login_zoek{
+    .loginbalk{
        display: flex;
        flex-direction: row;
      }
 
-     .login_zoek form{
+     .loginbalk form{
         align-self: flex-end;
      }
     
