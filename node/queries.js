@@ -35,7 +35,7 @@ async function dbConnect() {
 		});
 		return conn;
 	} catch (err) {
-		throw err;
+		console.error('Error creating connection:', err);
 	}
 }
 
@@ -43,16 +43,17 @@ async function dbConnect() {
 // Later this shouldn't be exported
 async function queryDB(query) {
 	let conn = null;
+	let result;
 	try {
 		conn = await dbConnect();
-		res = await conn.query(query);
+		result = await conn.query(query);
 	} catch (err) {
 		throw err;
 	} finally {
 		if (conn) {
 			try {
 				await conn.end();
-				if (res) return res;
+				if (result) return result;
 			} catch (err) {
 				console.error('Error closing connection:', err);
 			}
