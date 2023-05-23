@@ -22,11 +22,8 @@ async function valueUsed(values) {
 		throw new ValueAlreadyUsedError([column, value]);
 }
 
-// Wrapper function that will make queries
-// Later this shouldn't be exported
-async function queryDB(query) {
-
-	let conn, res;
+// Creates a connection with the database
+async function dbConnect() {
 	try {
 		conn = await mariadb.createConnection({
 			// database connection details
@@ -36,7 +33,18 @@ async function queryDB(query) {
 			password: 'bulbizarre',
 			database: 'padmindb'
 		});
-		// the query itself
+		return conn;
+	} catch (err) {
+		throw err;
+	}
+}
+
+// Wrapper function that will make queries
+// Later this shouldn't be exported
+async function queryDB(query) {
+	let conn = null;
+	try {
+		conn = await dbConnect();
 		res = await conn.query(query);
 	} catch (err) {
 		throw err;
