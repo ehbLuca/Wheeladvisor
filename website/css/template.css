@@ -1,0 +1,116 @@
+@import "colors.css";
+
+*
+{
+    box-sizing: border-box;
+}
+
+body{
+    background-color: var(--bg-color);
+    width:auto;
+	margin: 0;
+	padding: 0;
+}
+
+
+
+/*container is rond de andere containers*/
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/*cantainer1 is rond de login en zoek optie*/
+.login_zoek a{
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    padding: 2em;
+    background-color: var(--fg-color);
+    border-radius: 1rem;
+	margin-top: 1em;
+}
+
+.login_zoek{
+   display: grid;
+   grid-template-rows: 50% 50%;  
+}
+
+.login_zoek input {
+    padding: 1em;
+    border-radius: 5rem;
+    margin-top: 10%;
+    margin-bottom: 20%;
+}
+
+/*login_zoek eindig hier*/
+
+
+/*categorie categorieën*/
+
+.categorie{
+   display: grid;
+   grid-template-columns: 50% 50%;  
+  
+}
+
+
+.categorie button{
+  color: white;
+  background-color: var(--fg-color);
+  border: none;
+  border-radius: 1em;
+  padding: 2em; 
+  margin: 1em;
+}
+
+
+.categorie li {
+    list-style: none;
+   color: white;
+}
+
+/*categorie eindig hier*/
+
+
+/*Alles die met Kader te maken heeft zit hier*/
+
+ul {
+    margin: 0;
+}
+
+.Kader img {
+    display: block;
+    width: 50%;
+}
+
+.flex{
+    margin-top: 5%;
+	margin-bottom: 5%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--fg-color);
+    border-radius: 3rem;
+}
+
+.ul_list{
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+}
+
+.ul_list li{
+    align-self: flex-end;
+    list-style: none;
+    margin: 5%;
+}
+
+
+.flex h3 {
+    width: 80%;
+}
+
+/*Kader eindig hier*/
