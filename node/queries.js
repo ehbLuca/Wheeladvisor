@@ -71,6 +71,8 @@ async function insertPlace(place) {
 			`, [name, `${coordinates.latitude} ${coordinates.longitude}`, category]);
 	} catch (err) {
 		console.error('Error while doing query:', err);
+	} finally {
+		conn.end()
 	}
 }
 
