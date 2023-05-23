@@ -66,9 +66,9 @@ async function insertPlace(place) {
 	try {
 		conn = await dbConnect();
 		res = await conn.query(`
-			INSERT INTO places(name, address)
-			VALUES(?,?)
-			`, [name, `${coordinates.latitude} ${coordinates.longitude}`]);
+			INSERT INTO places(name, address, category)
+			VALUES(?,?, ?)
+			`, [name, `${coordinates.latitude} ${coordinates.longitude}`, category]);
 	} catch (err) {
 		console.error('Error while doing query:', err);
 	}
