@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,18 +8,59 @@
     <title>Zoekfuctie</title>
     <script src="js/zoekfunctie-locaties.js"></script>
 </head>
+
 <body>
     <form>
-        <label for="placeName">Place name:</label>
+        <label for="placeName">Name of place:</label>
         <input type="text" id="placeName" name="placeName">
-      
+
         <label for="category">Category:</label>
         <input type="text" id="category" name="category">
-      
-        <label for="minRating">Minimum rating:</label>
+
+        <label for="minRating">Rating:</label>
         <input type="number" id="minRating" name="minRating" min="1" max="5">
-      
+
         <button type="submit">Search</button>
-      </form>      
+    </form>
+
+    <script>
+        const form = document.querySelector('form');
+        const resultsDiv = document.querySelector('#results');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const placeName = form.elements.placeName.value;
+            const category = form.elements.category.value;
+            const minRating = form.elements.minRating.value;
+
+            try {
+                const result = await searchPlaces(placeName, category, minRating);
+                displayResults(results);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        );
+//lijst resultaten wordt genereert//
+        function displayResults(results) {
+            resultsDiv.innerHTML = '';
+
+            if (results.length === 0) {
+                resultsDiv.textContent = 'No results found.';
+            } else {
+                const ul = document.createElement('ul');
+
+                for (const result of results) {
+                    const li = document.createElement('li');
+                    li.textContent = `${result.place_name} (${result.category_name})`;
+                    ul.appendChild(li);
+                }
+
+                resultsDiv.appendChild(ul);
+            }
+        }
+    </script>
 </body>
+
 </html>
