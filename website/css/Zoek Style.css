@@ -46,6 +46,12 @@ width: 95%;
   text-align: center;
 }
 
+#back{
+  border-radius: 5rem;
+  border: 1px;
+  margin: 15px;
+  margin-right: 0%;
+}
   
 #contentContainer {
   text-align: center;
