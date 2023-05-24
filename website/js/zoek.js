@@ -17,15 +17,14 @@ async function getPlaces() {
 	)
 }
 
-window.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('DOMContentLoaded', async function() {
   var contentContainer = document.getElementById('contentContainer');
-  var isLoading = false;
-  var page = 1;
+  // var isLoading = false;
+  // var page = 1;
   
-  function fetchData(page) {
-    isLoading = true;
+  // async function fetchData(page) {
+  //   isLoading = true;
         
-    setTimeout(async function() {
       let places = await getPlaces();
  
 	  for (let place of places) {
@@ -44,25 +43,24 @@ window.addEventListener('DOMContentLoaded', function() {
 		  anchorElement.appendChild(postElement);
       }
   
-      isLoading = false;
-      page++;
-    }, ); 
-  }
+      // isLoading = false;
+      // page++;
+  // }
   
-  function isScrollAtBottom() {
-    var windowHeight = window.innerHeight;
-    var documentHeight = document.documentElement.scrollHeight;
-    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  // function isScrollAtBottom() {
+    // var windowHeight = window.innerHeight;
+    // var documentHeight = document.documentElement.scrollHeight;
+    // var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
   
-    return (windowHeight + 50 + scrollTop >= documentHeight);
-  }
+    // return (windowHeight + 50 + scrollTop >= documentHeight);
+  // }
   
-  window.addEventListener('scroll', function() {
-    if (!isLoading && isScrollAtBottom()) {
-      fetchData(page);
-    }
-  });
+  // window.addEventListener('scroll', function() {
+    // if (!isLoading && isScrollAtBottom()) {
+      // fetchData(page);
+    // }
+  // });
   
-  // Initial data fetching
-  fetchData(page);
+  // // Initial data fetching
+  // fetchData(page);
 });
