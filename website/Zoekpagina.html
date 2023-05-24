@@ -5,18 +5,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Zoeken</title>
-  <link rel="stylesheet" href="Zoek Style.css" type="text/css" media="all">
+  <link rel="stylesheet" href="css/Zoek Style.css" type="text/css" media="all">
 </head>
 
 <body>
-  <div id="searchBar">
-    <label for="Request">SEARCH</label>
-    <input type="text" id="Request" name="Request">
-  </div>
+  <header class="fixed">
+    <form action="search" id="zoek">
+      <input type="text" id="request" name="q" placeholder="zoeken">
+    </form>
+    <button type="button" id="login"></button>
+  </header>
+  
 
   <div id="contentContainer"></div>
 
-  <script src="Zoek.js"></script>
+  <script src="js/Zoek.js"></script>
 </body>
 
 </html>

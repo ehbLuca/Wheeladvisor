@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded', function() {
     function fetchData(page) {
       isLoading = true;
   
-      // Simulating asynchronous data fetching
+      
       setTimeout(function() {
         var data = getPosts(page); // Replace this with your own data-fetching mechanism
   
@@ -23,18 +23,16 @@ window.addEventListener('DOMContentLoaded', function() {
   
         isLoading = false;
         page++;
-      }, ); // Simulated delay for demonstration purposes
+      }, ); 
     }
   
-    function getPosts(page) {
-      // Replace this with your own data-fetching mechanism (e.g., AJAX request, API call)
-      // Return the data for the specified page (e.g., an array of posts)
-      // For demonstration purposes, let's generate some dummy data
+    function getPosts() {
+      // Replace this with your own data-fetching mechanism
       var posts = [];
       for (var i = 1; i <= 10; i++) {
         var post = {
           id: i + number,
-          title: 'Post ' + number
+          title: "locatie " + number
         };
         number++;
         posts.push(post);
@@ -59,4 +57,17 @@ window.addEventListener('DOMContentLoaded', function() {
     // Initial data fetching
     fetchData(page);
   });
-  
+
+  document.getElementById('zoek').addEventListener('submit', function(event){
+    event.preventDefault();
+
+    let zoekword = document.getElementById("request")
+
+    console.log(zoekword.value)
+
+    
+    
+    window.location.href = "Zoekpagina.html?q=" + encodeURIComponent(zoekword.value);
+   
+
+});
