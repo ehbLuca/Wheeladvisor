@@ -8,12 +8,13 @@ const {
 let app = express();
 let port = 3000;
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use('/', express.static(path.join(__dirname, 'website')));
+
 app.get('/', (req, res) => {
 	res.redirect('/start.html')
 });
-
-app.use(express.urlencoded({ extended: true }));
-app.use('/', express.static(path.join(__dirname, 'website')))
 
 // route for logging in
 // expects an email and password
@@ -25,7 +26,7 @@ app.post('/login', async (req, res) => {
 	{
 		res.redirect('/login.html');
 	} else {
-		res.redirect('/login-error.html')
+		res.redirect('/login-error.html');
 	}
 });
 
