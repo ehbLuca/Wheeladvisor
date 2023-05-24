@@ -22,20 +22,31 @@ body{
     align-items: center;
 }
 
-/*loginbalk is rond de login en zoek optie*/
+/*loginbalk is rond de login*/
 .loginbalk a{
     color: white;
     text-decoration: none;
     text-align: center;
-    padding: 3px;
+    padding: 2%;
     background-color: var(--fg-color);
     border-radius: 1rem;
 	margin-top: 2em;
    
 }
 
+.loginbalk h1{
+    text-align: center;
+    color: white;
+    margin-bottom: 0;
+
+}
+
 .loginbalk{
-    align-self: flex-end;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
 }
 
 
