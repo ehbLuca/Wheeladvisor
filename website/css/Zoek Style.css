@@ -37,8 +37,6 @@ width: 90%;
 }
 
 #login{
-  border-radius: 5rem;
-  border: 1px;
   margin: 10px;
   margin-left: 0%;
 }
@@ -48,7 +46,7 @@ width: 90%;
   filter: invert(100%);
 }
 #login :hover{
-  filter: sepia(100%);
+  filter: none;
 }
 .fixed button{
   width: 5%;
@@ -56,10 +54,16 @@ width: 90%;
 }
 
 #back{
-  border-radius: 5rem;
-  border: 1px;
-  margin: 15px;
+  margin: 20px;
   margin-right: 0%;
+}
+#back img{
+  display: block;
+  width: 40px;
+  filter: invert(100%);
+}
+#back :hover{
+  filter: none;
 }
   
 #contentContainer {
