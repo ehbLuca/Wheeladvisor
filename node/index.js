@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 
 const {
-	registerUser, loginUser
+	registerUser, loginUser, queryPlaces
 } = require('./queries.js');
 
 let app = express();
@@ -42,6 +42,13 @@ app.post('/register', async (req, res) => {
 	} else {
 		res.redirect('/register-error.html');
 	}
+});
+
+app.post('/search', async (req, res) => {
+	let query = req.body.q;
+	console.error(`Searching for places matching '${query}'.`);
+	let result = await queryPlaces(query);
+	res.send(result);
 });
 
 app.listen(port, () => {
