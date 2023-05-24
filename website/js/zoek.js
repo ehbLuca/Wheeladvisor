@@ -22,10 +22,9 @@ window.addEventListener('DOMContentLoaded', function() {
   var isLoading = false;
   var page = 1;
   
-  function fetchData(page) {
+  async function fetchData(page) {
     isLoading = true;
         
-    setTimeout(async function() {
       let places = await getPlaces();
  
 	  for (let place of places) {
@@ -46,7 +45,6 @@ window.addEventListener('DOMContentLoaded', function() {
   
       isLoading = false;
       page++;
-    }, ); 
   }
   
   function isScrollAtBottom() {
