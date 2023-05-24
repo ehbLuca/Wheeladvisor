@@ -65,12 +65,3 @@ window.addEventListener('DOMContentLoaded', function() {
   // Initial data fetching
   fetchData(page);
 });
-
-document.getElementById('zoek').addEventListener('submit', function(event){
-  event.preventDefault();
-
-  let zoekword = document.getElementById("request")
-  console.log(zoekword.value)
-
-  window.location.href = "Zoekpagina.html?q=" + encodeURIComponent(zoekword.value);
-});
