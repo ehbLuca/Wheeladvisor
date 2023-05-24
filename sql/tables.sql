@@ -15,8 +15,9 @@ CREATE TABLE users(
 
 CREATE TABLE places(
 	place_id INT(11) AUTO_INCREMENT,
-	name VARCHAR(255) NOT NULL,
+	name VARCHAR(255) NOT NULL UNIQUE,
 	address VARCHAR(255) NOT NULL,
+	category VARCHAR(255) NOT NULL,
 	description TEXT NULL,
 	proscons VARCHAR(255) NULL,
 	CONSTRAINT pk_place_id PRIMARY KEY(place_id)
@@ -63,14 +64,4 @@ CREATE TABLE favorites(
 		FOREIGN KEY(place_id) REFERENCES places(place_id),
 	CONSTRAINT fk_favorite_user_id 
 		FOREIGN KEY(user_id) REFERENCES users(user_id)
-);
-
-
-CREATE TABLE places_categories(
-	category_id INT(11),
-	place_id INT(11),
-	CONSTRAINT fk_pc_category_id 
-		FOREIGN KEY(category_id) REFERENCES categories(category_id),
-	CONSTRAINT fk_pc_place_id 
-		FOREIGN KEY(place_id) REFERENCES places(place_id)
 );
