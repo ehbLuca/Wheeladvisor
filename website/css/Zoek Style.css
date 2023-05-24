@@ -22,8 +22,8 @@ body{
 }
 
 #zoek{
-padding: 15px;
-width: 95%;
+padding: 20px;
+width: 85%;
 
 }
 
@@ -40,10 +40,16 @@ width: 95%;
   border: 1px;
   margin: 15px;
   margin-left: 0%;
+  background-color: var(--bg-color);
+}
+#login img{
+  display: block;
+  width: 100%;
 }
 .fixed button{
-  width: 5%;
+  width: 10%;
   text-align: center;
+  margin-bottom: 100px;
 }
 
 #back{
