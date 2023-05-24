@@ -14,25 +14,38 @@ body{
 .fixed {
   text-align: center;
   position: fixed;
+  display: flex;
   top: 0;
   left: 0;
   width: 100%;
   background-color: var(--color3);
 }
+
+#zoek{
+padding: 15px;
+width: 95%;
+
+}
+
 #request{
   border-radius: 5rem;
   text-align: center;
-  border: 10px;
   padding: 10px;
-  width: 75%;
-  
+  width: 100%;
+  border: 1px;
 }
 
 #login{
-  position: right;
-  padding: 10px;
-  
+  border-radius: 5rem;
+  border: 1px;
+  margin: 15px;
+  margin-left: 0%;
 }
+.fixed button{
+  width: 5%;
+  text-align: center;
+}
+
   
 #contentContainer {
   text-align: center;
