@@ -1,51 +1,52 @@
+'use strict'
+async function getPlaces() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const query = urlParams.get("q");
+	return fetch("/search", {
+		method: "POST",
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			q: query
+		})
+	}).then(
+		result => result.json()
+	).catch(
+		err => console.error('Error:', err)
+	)
+}
+
 window.addEventListener('DOMContentLoaded', function() {
   var contentContainer = document.getElementById('contentContainer');
   var isLoading = false;
   var page = 1;
-  var number = 1;
   
   function fetchData(page) {
     isLoading = true;
         
-    setTimeout(function() {
-      var data = getPosts(page); // Replace this with your own data-fetching mechanism
+    setTimeout(async function() {
+      let places = await getPlaces();
  
-      if (data.length > 0) {
-        data.forEach(function(post) {
-          var anchorElement = document.createElement('a');
-          var postElement = document.createElement('div');
-          var imageElement = document.createElement('img');
+	  for (let place of places) {
+		  console.log(place)
+		  var anchorElement = document.createElement('a');
+		  var postElement = document.createElement('div');
+		  var imageElement = document.createElement('img');
 
-          imageElement.src = "images/"+post.imageName;
-          imageElement.classList.add('post-image');
-          postElement.classList.add('post');
-          postElement.textContent = post.title;
+		  imageElement.src = `images/places/${place.place_id}`;
+		  imageElement.classList.add('post-image');
+		  postElement.classList.add('post');
+		  postElement.textContent = place.name;
 
-          postElement.appendChild(imageElement);
-          contentContainer.appendChild(anchorElement);
-          anchorElement.appendChild(postElement);
-        });
+		  postElement.appendChild(imageElement);
+		  contentContainer.appendChild(anchorElement);
+		  anchorElement.appendChild(postElement);
       }
   
       isLoading = false;
       page++;
     }, ); 
-  }
-  
-  function getPosts() {
-    // Replace this with your own data-fetching mechanism
-    var posts = [];
-    for (var i = 1; i <= 10; i++) {
-      var post = {
-        id: i + number,
-        title: "locatie " + number,
-        imageName: "Nationaal-Park-Maasduinen.jpg"
-        
-      };
-      number++;
-      posts.push(post);
-    }
-    return posts;
   }
   
   function isScrollAtBottom() {
