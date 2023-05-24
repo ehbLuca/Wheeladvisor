@@ -31,7 +31,7 @@ width: 90%;
 #request{
   border-radius: 5rem;
   text-align: center;
-  padding: 15px;
+  padding: 17px;
   width: 100%;
   border: 1px;
 }
@@ -39,13 +39,16 @@ width: 90%;
 #login{
   border-radius: 5rem;
   border: 1px;
-  margin: 15px;
+  margin: 10px;
   margin-left: 0%;
-  background-color: var(--bg-color);
 }
 #login img{
   display: block;
   width: 100%;
+  filter: invert(100%);
+}
+#login :hover{
+  filter: sepia(100%);
 }
 .fixed button{
   width: 5%;
