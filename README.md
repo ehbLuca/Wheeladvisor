@@ -1,66 +1,31 @@
 # WheelAdvisor
 > Programming project Toegepaste Informatice 2022-2023
 
-There are two ways of setting up this project:
-1. [Setting up with docker on linux](https://github.com/EHB-TI/programming-project-groep-1-wheeladvisor/edit/readme/README.md#setup-with-docker-on-linux)
-2. [Setting up with node](https://github.com/EHB-TI/programming-project-groep-1-wheeladvisor/edit/readme/README.md#setup-with-node)<br />
-Setting up with node is easier, but you will have to setup a database server yourself and adjust the connection details in queries.js.
-<br />
-<br />
+## Project Overview
 
-### Setup with docker on linux/WSL2
-##### Prerequisites
-First install [docker](https://docs.docker.com/engine/install/). We will setup a docker container that will run our webapp.
+Wheeladvisor is a web application that aims to provide wheelchair users with recommendations for wheelchair-accessible places. The application utilizes a backend built with Express.js and a MariaDB database. The frontend is designed using HTML, CSS, and browser JavaScript to create an interactive user experience. Additionally, an API will be provided to facilitate communication between the frontend and backend, enabling users to make requests by providing essential information such as location, name of the place, and description.
 
-git clone the project and navigate to your newly created directory.
-```bash
-git clone https://github.com/EHB-TI/programming-project-groep-1-wheeladvisor.git wheeladvisor
-cd wheeladvisor
-```
-##### Install and go
-To install and run, use this script.
-```bash
-sudo ./build-run.sh
-```
-This script will create the docker image and container for the project.
-Afterwards it will try to bring the container up.
-If the script succeeds a link should appear in the console, and you're good to go!
+## Features
 
-##### Stopping
-```bash
-sudo docker stop wheelie1
-```
- It can be brought back with
-`sudo docker start wheelie1`
-<br />
-<br />
-<br />
-<br />
-### Setup with node
-> Hopefully OS agnostic
-##### Prerequisites
-Clone the project and navigate to your newly created directory.
-```bash
-git clone https://github.com/EHB-TI/programming-project-groep-1-wheeladvisor.git wheeladvisor
-cd wheeladvisor
-```
-You will also need to create a website directory. Use a symbolic link.<br />
-**Linux:**<br />
-`ln -sf ../website website`<br />
-**Bindows:**<br />
-`mklink /D website ../website`
+- **Wheelchair-accessible Place Recommendations:** Wheeladvisor offers a curated list of wheelchair-accessible places based on user preferences and location.
+- **Search Functionality:** Users can search for specific places or filter results based on various criteria such as distance, category, or accessibility features.
+- **User Reviews and Ratings:** Users can provide reviews and ratings for wheelchair-accessible places they have visited, allowing others to make informed decisions.
+- **User Profiles:** Registered users can create profiles, save favorite places, and manage their reviews and ratings.
+- **Integration with Mapping Services:** Integration with mapping services like [OpenStreetmaps](https://www.openstreetmap.org/) can provide directions to recommended places from the user's current location.
+- **API:** The application provides an API that allows developers to make requests to the backend, retrieving information on wheelchair-accessible places.
 
-##### Installation
-Navigate to node directory and install the dependencies.
+## Tech Stack
 
-```bash
-cd node
-npm install
-```
-If the command was succesful run:
-```bash
-npm run start
-```
-From here you should see an url in the console and the website should be running on [http://localhost:3000](http://localhost:3000)
-##### Stopping
-Simply close the terminal or hit Ctrl+C
+The project utilizes the following technologies:
+
+- **Backend:** Express.js is used to build the server-side application logic, handle API requests, and interact with the MariaDB database.
+- **Database:** MariaDB is employed as the relational database management system for storing and retrieving data related to places, users, reviews, and ratings.
+- **Frontend:** HTML, CSS, and browser JavaScript are used to create an intuitive and visually appealing user interface.
+- **API:** The backend provides a RESTful API that can be utilized by the frontend to communicate with the server, making requests for place recommendations, user management, and data retrieval.
+
+## Setting up
+For setting up the project checkout:
+[Getting Started](https://github.com/EHB-TI/programming-project-groep-1-wheeladvisor/wiki/Getting-Started)
+
+## API
+[API Documentation](https://github.com/EHB-TI/programming-project-groep-1-wheeladvisor/wiki/API-Documentation)
