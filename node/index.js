@@ -21,6 +21,7 @@ app.get('/', (req, res) => {
 app.post('/login', async (req, res) => {
 	let email = req.body.email;
 	let password = req.body.password;
+	console.log(`Logging in ${email} and ${password}`);
 	let result = await loginUser([email, password])
 	if (result)
 	{
