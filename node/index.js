@@ -24,7 +24,7 @@ app.post('/login', async (req, res) => {
 	let result = await loginUser([email, password])
 	if (result)
 	{
-		res.redirect('/login.html');
+		res.redirect('/start.html');
 	} else {
 		res.redirect('/login-error.html');
 	}
@@ -39,7 +39,7 @@ app.post('/register', async (req, res) => {
 	let result = await registerUser([name, email, password])
 	if (result)
 	{
-		res.redirect('/register.html');
+		res.redirect('/start.html');
 	} else {
 		res.redirect('/register-error.html');
 	}

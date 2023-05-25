@@ -6,19 +6,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/login-error.css">
 </head>
 
 <body>
 
     <section class="container">
+
             <a href="start.html">Start</a>
+
+            <p>
+            Email of password is fout! 
+            </p> 
+
+            <p>
+             Probeer opnieuw of maak een account!
+            </p>
 
         <form method="POST" action="/login" class="form">
             <!--Size en maxlenght kunnen we later aanpassen op basis van de database-->
             <p> <label>
 
-                    <input type="text" name="name" required size="15" maxlength="30" placeholder="email">
+                    <input type="email" name="email" required size="15" maxlength="30" placeholder="email">
                 </label> </p>
 
             <p><label>
