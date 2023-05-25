@@ -38,7 +38,7 @@ app.post('/register', async (req, res) => {
 	let result = await registerUser([name, email, password])
 	if (result)
 	{
-		res.redirect('/register.html');
+		res.redirect('/start.html');
 	} else {
 		res.redirect('/register-error.html');
 	}
