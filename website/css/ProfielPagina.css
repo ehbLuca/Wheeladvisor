@@ -1,6 +1,51 @@
+@import"colors.css";
+
 body {
-    background-color: #F7C59F;
+    background-color: var(--bg-color);
 }
+
+
+/*container om flex aan te passen*/
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+}
+ 
+/*container eindig hier*/
+
+/*header*/
+
+.header{
+
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+   
+    
+}
+
+
+
+/*header eindigt hier*/
+
+
+/*Voordelen*/
+
+.voordelen{
+    display: flex;
+    flex-direction: row;
+}
+
+/*voordelen eindig*/
+
+
+.ster{
+    display: flex;
+    flex-direction: row;
+}
+
 
 button {
     background-color: inherit;
@@ -63,7 +108,7 @@ h1 {
 .positives {
     color: rgb(22, 206, 16);
     float: left;
-    border-right: 2px outset black;
+    
     margin: auto;
     padding: 15px;
 }
