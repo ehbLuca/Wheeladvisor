@@ -1,0 +1,53 @@
+# : primary key
+* : NOT NULL
+° : NULL
+- : foreign key
+
+reviews(
+	#review_id,
+	*name,
+	*rating,
+	*likes,
+	*text,
+	-place_id,
+	-user_id,
+)
+
+
+places(
+	#place_id,
+	*name,
+	*adres,
+	*category,
+	°description,
+	°proscons,
+)
+
+
+categories(
+	#category_id,
+	*name,
+)
+
+
+users(
+	#user_id,
+	*name,
+	*email,
+	*password,
+)
+
+
+favorites(
+	#favorite_id,
+	-user_id,
+	-place_id,
+)
+
+
+pictures(
+	#picture_id,
+	*naam,
+	*file_path,
+	-place_id,
+)

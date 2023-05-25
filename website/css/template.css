@@ -1,0 +1,181 @@
+
+@import "colors.css";
+
+*
+{
+    box-sizing: border-box;
+}
+
+body{
+    background-color: var(--bg-color);
+    width:auto;
+	margin: 0.5em;
+	padding: 0;
+}
+
+
+
+/*container is rond de andere containers*/
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/*loginbalk is rond de login*/
+.loginbalk a{
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    padding: 2%;
+    background-color: var(--fg-color);
+    border-radius: 1rem;
+	margin-top: 2em;
+   
+}
+
+.loginbalk h1{
+    text-align: center;
+    color: white;
+    margin-bottom: 0;
+
+}
+
+.loginbalk{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+
+
+
+/*loginbalk eindig hier*/
+
+
+/*zoek balk begint hier*/
+
+
+.zoekbalk input {
+    padding: 1em;
+    border-radius: 5rem;
+    margin-top: 5%;
+    margin-bottom: 10%;
+    width: 100%;
+    
+}
+
+
+.zoekbalk{   
+    width: 90%;
+}
+
+/*zoek balk eindig hier*/
+
+
+
+
+/*categorie categorieën*/
+
+.categorie{
+   display: grid;
+   grid-template-columns: 50% 50%;  
+  
+}
+
+
+.categorie button{
+  color: white;
+  background-color: var(--fg-color);
+  border: none;
+  border-radius: 1em;
+  padding: 2em; 
+  margin: 1em;
+}
+
+
+
+
+/*categorie eindig hier*/
+
+
+/*Alles die met Kader te maken heeft zit hier*/
+
+ul {
+    margin: 0;
+}
+
+.Kader img {
+    display: block;
+    width: 50%;
+}
+
+.flex{
+    margin-top: 5%;
+	margin-bottom: 5%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--fg-color);
+    border-radius: 3rem;
+}
+
+.ul_list{
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+}
+
+.ul_list li{
+    align-self: flex-end;
+    list-style: none;
+    margin: 5%;
+}
+
+
+.flex h3 {
+    width: 80%;
+}
+
+/*Kader eindig hier*/
+
+/*Grote schermen*/
+
+@media screen and (min-width:1000px ){
+
+    body{
+        background-color: var(--bg-color);
+    }
+
+    .loginbalk{
+       display: flex;
+       flex-direction: row;
+     }
+
+     .loginbalk form{
+        align-self: flex-end;
+     }
+
+     .flex{
+        background-color: var(--fg-color);
+    }
+
+    .categorie button{
+        background-color: var(--fg-color);
+    }
+
+    .loginbalk a{
+        padding: 2em;
+        background-color: var(--fg-color);
+        background-image: url("../icons/icons8-login.svg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+
+    
+}}
+
+
+
