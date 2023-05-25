@@ -5,7 +5,6 @@ searchForm.addEventListener('submit', event => {
 });
 //Event Listener die 'searchPlaces' gaat aanspreken wanneer button wordt geklikt. 
 
-
 async function searchPlaces() {
 
   const searchInput = document.getElementById('searchInput');
@@ -20,7 +19,19 @@ async function searchPlaces() {
 
   resultsContainer.innerHTML = '';
 
-//Gaat asynchrone HTTP-request zenden naar database met zoek queries als parameters
-//Gaat resultaat assignen aan parameter 'response'
+  //Gaat asynchrone HTTP-request zenden naar database met zoek queries als parameters
+  //Gaat resultaat assignen aan parameter 'response'
 
+  if (results.length === 0) {
+    resultsContainer.innerHTML = 'No results found.';
+  } else {
+    results.forEach(result => {
+      const item = document.createElement('li');
+      item.innerText = `${result.name} - ${result.category}`;
+      resultsContainer.appendChild(item);
+    });
+  }
+ //Gaat 'No results found' tonen als geen resultaten worden terug gegeven
+ //Anders wordt lijst resultaten vertoont
 }
+
