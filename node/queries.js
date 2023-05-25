@@ -1,27 +1,5 @@
 const mariadb = require('mariadb');
 
-// Error that should be thrown if a value already exists in a column.
-class ValueAlreadyUsedError extends Error {
-	constructor([column, value]) {
-		const message = `${column}: '${value}' was already used.`;
-		super(message);
-		this.name = 'ValueAlreadyUsedError';
-		this.column = column;
-		this.value = value;
-	}
-}
-
-// Checks if a value is already used in the users table
-async function valueUsed(values) {
-	const [column, value] = values;
-	let res = await queryDB(`
-		SELECT * FROM users 
-		WHERE ${column} IN("${value}")
-	`);
-	if (res.length > 0)
-		throw new ValueAlreadyUsedError([column, value]);
-}
-
 // Creates a connection with the database
 async function dbConnect() {
 	let conn = null;
@@ -98,26 +76,33 @@ async function queryPlaces(query) {
 // adds an user to the database, returns true if succesful, returns false if an error occurred.
 async function loginUser(values) {
 	let [email, password] = values;
-	let result = await queryDB(`
-		SELECT name, email FROM users
-		WHERE email = '${email}'
-			AND password = '${password}'
-	`);
-	if (result.length == 0)
-		return false;
-	return true;
+	let conn = null;
+	try {
+		let result = await conn.query(`
+			SELECT name, email FROM users
+			WHERE email = ?
+			AND password = ?
+			`, [email, password]);
+		if (result.length == 0)
+			return false;
+		return true;
+	} catch {
+		console.error('Error:', err);
+	} finally {
+		conn.end();
+	}
 }
 
 // adds an user to the database, returns true if succesful, returns false if an error occurred.
 async function registerUser(values) {
 	let [name, email, password] = values;
+	let conn = null;
 	try {
-		await valueUsed(["name", name]);
-		await valueUsed(["email", email]);
-		queryDB(`
+		conn = await dbConnect();
+		await conn.query(`
 			INSERT INTO users(name, email, password)
-			VALUES('${name}', '${email}', '${password}')
-		`);
+			VALUES(?, ?, ?)
+		`, [name, email, password]);
 		return true;
 	} catch(error) {
 		console.log("Caught error:", error.message);
