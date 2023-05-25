@@ -77,6 +77,7 @@ async function loginUser(values) {
 	let [email, password] = values;
 	let conn = null;
 	try {
+		conn = await dbConnect();
 		let result = await conn.query(`
 			SELECT name, email FROM users
 			WHERE email = ?
