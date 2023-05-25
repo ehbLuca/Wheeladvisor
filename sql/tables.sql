@@ -8,7 +8,7 @@ use padmindb;
 CREATE TABLE users(
 	user_id INT(11) AUTO_INCREMENT,
 	name VARCHAR(255) NOT NULL,
-	email VARCHAR(255) NOT NULL,
+	email VARCHAR(255) NOT NULL UNIQUE,
 	password VARCHAR(255) NOT NULL,
 	CONSTRAINT pk_user_id PRIMARY KEY(user_id)
 );
@@ -28,17 +28,6 @@ CREATE TABLE categories(
 	name VARCHAR(255) NOT NULL,
 	CONSTRAINT pk_category_id PRIMARY KEY(category_id)
 );
-
-CREATE TABLE pictures(
-	picture_id INT(11) AUTO_INCREMENT,
-	place_id INT(11) NOT NULL,
-	name VARCHAR(255) NOT NULL,
-	file_path VARCHAR(255) NOT NULL,
-	CONSTRAINT pk_picture_id PRIMARY KEY(picture_id),
-	CONSTRAINT fk_picture_place_id FOREIGN KEY(place_id)
-		REFERENCES places(place_id)
-);
-
 
 CREATE TABLE reviews(
 	review_id INT(11) AUTO_INCREMENT,
