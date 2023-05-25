@@ -22,8 +22,7 @@ body {
     width: 100%;
     display: flex;
     flex-direction: row;
-   
-    
+    justify-content: space-between;
 }
 
 
@@ -44,7 +43,22 @@ body {
 .ster{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
+
+/*kader*/
+
+.kader{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+}
+
+.gallery{
+    align-self: center;
+}
+
+/*kader eindigt hier*/
 
 
 button {
@@ -74,7 +88,8 @@ h1 {
 }
 
 .staraverage {
-    float: right;
+    align-self: center;
+    justify-self: end;
 }
 
 .checked {
