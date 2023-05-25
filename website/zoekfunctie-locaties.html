@@ -7,21 +7,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zoekfuctie</title>
     <script src="js/zoekfunctie-locaties.js"></script>
+    <link rel="stylesheet" href="css/template.css">
 </head>
 
 <body>
     <form>
-        <label for="searchInput">Search a place:</label>
+        <label for="searchInput">Seach a place:</label>
         <input type="text" id="searchInput">
-      
+       
         <label for="categoryInput">Category:</label>
         <input type="text" id="categoryInput">
-      
+        
+        <label for="minRatingInput">Rating:</label>
+        <input type="number" id="minRatingInput" min="1" max="5">
+    
         <button type="submit" id="searchBtn">Search</button>
       </form>
-      
-      <ul id="resultsContainer"></ul>      
-    </script>
+       
+      <ul id="resultsContainer"></ul>  
+
+<!--Met minRating wordt er bedoelt dat alle ratingen met minimum waarde en er boven worden getoond 
+    bv. '3' ingeven gaat alles van plekken met een rating met 3-5 gaat tonen.     
+-->
+
+<script>
+   const searchForm = document.querySelector('form');
+searchForm.addEventListener('submit', event => {
+  event.preventDefault();
+  searchPlaces();
+});
+//Event Listener die 'searchPlaces' gaat aanspreken wanneer button wordt geklikt. 
+
+async function searchPlaces() {
+  const searchInput = document.getElementById('searchInput');
+  const categoryInput = document.getElementById('categoryInput');
+  const minRatingInput = document.getElementById('minRatingInput');
+  const resultsContainer = document.getElementById('resultsContainer');
+ 
+  const query = searchInput.value;
+  const category = categoryInput.value;
+  const minRating = minRatingInput.value;
+ 
+  const response = await fetch(`/search?query=${query}&category=${category}&minRating=${minRating}`);
+  const results = await response.json();
+ 
+  resultsContainer.innerHTML = '';
+
+  //Gaat asynchrone HTTP-request zenden naar database met zoek queries als parameters
+  //Gaat resultaat assignen aan parameter 'response'
+
+  if (results.length === 0) {
+    resultsContainer.innerHTML = 'No results found.';
+  } else {
+    results.forEach(result => {
+      const item = document.createElement('li');
+      item.innerText = `${result.name} - ${result.category}`;
+      resultsContainer.appendChild(item);
+    });
+  }
+ //Gaat 'No results found' tonen als geen resultaten worden terug gegeven
+ //Anders wordt lijst resultaten vertoont
+} 
+</script>
 </body>
 
 </html>
