@@ -13,18 +13,18 @@
 
     <section class="container">
 
-        <form action="" class="form">
+        <form method="POST" action="/login" class="form">
             <!--Size en maxlenght kunnen we later aanpassen op basis van de database-->
-            <p> <label for="">
+            <p> <label>
 
-                    <input type="text" name="Username" required size="15" maxlength="30" placeholder="Username">
+                    <input type="text" name="name" required size="15" maxlength="30" placeholder="email">
                 </label> </p>
 
-            <p><label for="">
+            <p><label>
                     <input type="password" name="password" required size="15" maxlength="30" placeholder="password">
                 </label></p>
 
-            <p><label for="">
+            <p><label>
                     <input type="submit" value="Login">
                 </label></p>
 
