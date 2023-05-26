@@ -1,7 +1,7 @@
 -- SQL instructions for the wheeladvisor database
 -- made for mariadb
 
-DROP DATABASE padmindb;
+DROP DATABASE IF EXISTS padmindb;
 CREATE DATABASE padmindb;
 use padmindb;
 
