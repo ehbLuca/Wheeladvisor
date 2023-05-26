@@ -1,4 +1,5 @@
 const express = require('express');
+const bcrypt = require('bcrypt');
 const path = require('path');
 
 const {
@@ -36,7 +37,9 @@ app.post('/login', async (req, res) => {
 app.post('/register', async (req, res) => {
 	let name = req.body.name;
 	let email = req.body.email;
-	let password = req.body.password;
+	let salt = bcrypt.genSaltSync(10);
+	let password = bcrypt.hashSync(req.body.password, salt);
+
 	let result = await registerUser([name, email, password])
 	if (result)
 	{

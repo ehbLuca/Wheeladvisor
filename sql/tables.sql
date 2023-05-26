@@ -9,7 +9,7 @@ CREATE TABLE users(
 	user_id INT(11) AUTO_INCREMENT,
 	name VARCHAR(255) NOT NULL,
 	email VARCHAR(255) NOT NULL UNIQUE,
-	password VARCHAR(255) NOT NULL,
+	password VARCHAR(60) NOT NULL,
 	CONSTRAINT pk_user_id PRIMARY KEY(user_id)
 );
 

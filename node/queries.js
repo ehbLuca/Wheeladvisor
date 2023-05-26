@@ -1,4 +1,5 @@
 const mariadb = require('mariadb');
+const bcrypt = require('bcrypt');
 
 // Creates a connection with the database
 async function dbConnect() {
@@ -79,17 +80,19 @@ async function loginUser(values) {
 	try {
 		conn = await dbConnect();
 		let result = await conn.query(`
-			SELECT name, email FROM users
+			SELECT password FROM users
 			WHERE email = ?
-			AND password = ?
-			`, [email, password]);
+			`, [email]);
 		if (result.length == 0)
 			return false;
-		return true;
-	} catch {
-		console.error('Error:', err);
-	} finally {
+
+		result = result[0];
+
+		console.log(`${password}, ${result.password}`);
 		conn.end();
+		return bcrypt.compareSync(password, result.password);
+	} catch(err) {
+		console.error('Error:', err);
 	}
 }
 
