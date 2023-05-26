@@ -1,6 +1,12 @@
+'use strict'
+
+/**
+* Dependencies
+*/
 const express = require('express');
 const bcrypt = require('bcrypt');
 const path = require('path');
+const logger = require('morgan');
 
 const {
 	registerUser, loginUser, queryPlaces
@@ -8,6 +14,9 @@ const {
 
 let app = express();
 let port = 3000;
+
+/* custom logging */
+if (process.env.NODE_ENV !== 'test') app.use(logger(':method :url'))
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
