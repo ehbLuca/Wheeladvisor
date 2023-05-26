@@ -98,14 +98,13 @@ async function loginUser(values) {
 
 // adds an user to the database, returns true if succesful, returns false if an error occurred.
 async function registerUser(values) {
-	let [name, email, password] = values;
 	let conn = null;
 	try {
 		conn = await dbConnect();
 		await conn.query(`
 			INSERT INTO users(name, email, password)
 			VALUES(?, ?, ?)
-		`, [name, email, password]);
+		`, values);
 		return true;
 	} catch(error) {
 		console.log("Caught error:", error.message);
