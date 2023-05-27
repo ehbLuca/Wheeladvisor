@@ -73,22 +73,22 @@ async function queryPlaces(query) {
 	}
 } 
 
-// adds an user to the database, returns true if succesful, returns false if an error occurred.
-async function loginUser(values) {
+// checks credentials of an user returns true if succesful, returns false if an error occurred.
+async function canLogin(values) {
 	let [email, password] = values;
 	let conn = null;
 	try {
 		conn = await dbConnect();
 		let result = await conn.query(`
 			SELECT password FROM users
-			WHERE email = ?
+			WHERE LOWER(email) = ?
 			`, [email]);
 		if (result.length == 0)
 			return false;
 
 		result = result[0];
 
-		console.log(`${password}, ${result.password}`);
+		console.log(`I: (canLogin) password: ${password}, hashed: ${result.password}`);
 		conn.end();
 		return bcrypt.compareSync(password, result.password);
 	} catch(err) {
@@ -103,7 +103,7 @@ async function registerUser(values) {
 		conn = await dbConnect();
 		await conn.query(`
 			INSERT INTO users(name, email, password)
-			VALUES(?, ?, ?)
+			VALUES(?, LOWER(?), ?)
 		`, values);
 		return true;
 	} catch(error) {
@@ -113,6 +113,70 @@ async function registerUser(values) {
 	}
 }
 
+async function hasToken(token)
+{
+	let conn = null;
+	try {
+		conn = await dbConnect();
+		let results = await conn.query(`
+			SELECT LOWER(email) AS email FROM users u
+			JOIN tokens t
+				ON u.user_id = t.user_id
+			WHERE t.value = ?
+			`, [token])
+		conn.end()
+		console.log(`I: (hasToken) results: `, results);
+		return results[0]?.email;
+	} catch(err) {
+		console.error('Error:', err);
+	}
+}
+
+async function storeToken(email, token)
+{
+	console.log('I: (storeToken) token:', token);
+	console.log('I: (storeToken) email:', email);
+	let conn = null;
+	try {
+		conn = await dbConnect();
+
+		let results = await conn.query(`
+			SELECT user_id FROM users
+			WHERE LOWER(email) = LOWER(?)
+			`, [email])
+		let user_id = results[0]?.user_id
+
+		results = await conn.query(`
+			SELECT * FROM tokens t
+			WHERE user_id = ?`, [user_id])
+
+		if (results.length == 0)
+		{
+			console.log("I: (storeToken) user has no token yet.");
+			await conn.query(`
+				INSERT INTO tokens(type, value, user_id)
+				VALUES ('session', ?, ?)
+				`, [token, user_id])
+		} else {
+			console.log("I: (storeToken) user already has a token.");
+			await conn.query(`
+				UPDATE tokens t
+				JOIN users u
+				ON u.user_id = t.user_id
+				SET t.value = ?
+				WHERE LOWER(u.email) = LOWER(?)
+				`, [token, email])
+		}
+
+		conn.end()
+	} catch(err) {
+		console.error('Error:', err);
+	}
+}
+
 module.exports = {
-	queryDB, loginUser, registerUser, insertPlace, queryPlaces
+	queryDB, 
+	canLogin, registerUser, 
+	hasToken, storeToken,
+	insertPlace, queryPlaces
 };
