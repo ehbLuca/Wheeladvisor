@@ -30,6 +30,16 @@ app.get('/', (req, res) => {
 	res.redirect('/start.html')
 });
 
+// returns the user's email if he is signed in
+app.get('/loggedIn', async(req, res) => {
+	let {authToken} = req.cookies;
+	let email = null;
+	if(authToken && (email = await hasToken(authToken)))
+		res.send(email);
+	else
+		res.send(null)
+});
+
 // route for logging in with credentials or with a token in the cookies
 app.post('/login', async (req, res) => {
 	let {authToken} = req.cookies;
