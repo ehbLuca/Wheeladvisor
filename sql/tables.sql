@@ -13,6 +13,16 @@ CREATE TABLE users(
 	CONSTRAINT pk_user_id PRIMARY KEY(user_id)
 );
 
+CREATE TABLE tokens(
+	token_id INT(11) AUTO_INCREMENT,
+	type ENUM('session', 'api') NOT NULL,
+	value VARCHAR(255) NOT NULL,
+	user_id INT(11),
+	CONSTRAINT pk_token_id PRIMARY KEY(token_id),
+	CONSTRAINT fk_token_user_id
+		FOREIGN KEY(user_id) REFERENCES users(user_id)
+);
+
 CREATE TABLE places(
 	place_id INT(11) AUTO_INCREMENT,
 	name VARCHAR(255) NOT NULL UNIQUE,
