@@ -81,7 +81,7 @@ async function loginUser(values) {
 		conn = await dbConnect();
 		let result = await conn.query(`
 			SELECT password FROM users
-			WHERE email = ?
+			WHERE LOWER(email) = ?
 			`, [email]);
 		if (result.length == 0)
 			return false;
@@ -103,7 +103,7 @@ async function registerUser(values) {
 		conn = await dbConnect();
 		await conn.query(`
 			INSERT INTO users(name, email, password)
-			VALUES(?, ?, ?)
+			VALUES(?, LOWER(?), ?)
 		`, values);
 		return true;
 	} catch(error) {
@@ -118,14 +118,14 @@ async function hasToken(token)
 	let conn = null;
 	try {
 		conn = await dbConnect();
-		let result = await conn.query(`
-			SELECT email FROM users u
+		let email = await conn.query(`
+			SELECT LOWER(email) FROM users u
 			JOIN tokens t
 				ON u.user_id = t.user_id
 			WHERE t.value = ?
 			`, [token])
 		conn.end()
-		return result;
+		return email;
 	} catch(err) {
 		console.error('Error:', err);
 	}
