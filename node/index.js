@@ -48,10 +48,15 @@ app.post('/login', async (req, res) => {
 // route for registering
 // expects a name, email and password
 app.post('/register', async (req, res) => {
-	let name = req.body.name;
-	let email = req.body.email;
+	let {name, email, password} = req.body;
+	if (!(name && email && password))
+	{
+		res.redirect('/register-error.html');
+		return;
+	}
+	email = email.toLowerCase();
 	let salt = bcrypt.genSaltSync(10);
-	let password = bcrypt.hashSync(req.body.password, salt);
+	password = bcrypt.hashSync(password, salt);
 
 	let result = await registerUser([name, email, password])
 	if (result)
