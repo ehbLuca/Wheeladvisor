@@ -3,23 +3,27 @@
 /**
 * Dependencies
 */
-const express = require('express');
 const bcrypt = require('bcrypt');
-const path = require('path');
+const cookieParser = require('cookie-parser');
+const crypto = require('crypto');
+const express = require('express');
 const logger = require('morgan');
+const path = require('path');
 
 const {
-	registerUser, loginUser, queryPlaces
+	registerUser, loginUser, queryPlaces, hasToken, storeToken
 } = require('./queries.js');
 
 let app = express();
-let port = 3000;
+const port = 3000;
+const cookieSecret = 'SECRET';
 
 /* custom logging */
 if (process.env.NODE_ENV !== 'test') app.use(logger(':method :url'))
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cookieParser(cookieSecret));
 app.use('/', express.static(path.join(__dirname, 'website')));
 
 app.get('/', (req, res) => {
