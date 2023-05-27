@@ -33,11 +33,10 @@ app.get('/', (req, res) => {
 // returns the user's email if he is signed in
 app.get('/loggedIn', async(req, res) => {
 	let {authToken} = req.cookies;
-	let email = null;
-	if(authToken && (email = await hasToken(authToken)))
-		res.send(email);
+	if(authToken && await hasToken(authToken))
+		res.send(JSON.stringify(1));
 	else
-		res.send(null)
+		res.send(JSON.stringify(null))
 });
 
 // route for logging in with credentials or with a token in the cookies
@@ -54,7 +53,7 @@ app.post('/login', async (req, res) => {
 		else
 		{
 			res.clearCookie('authToken');
-			res.redirect('/login-error.html')
+			res.redirect('/login.html')
 		}
 		return;
 	}
@@ -79,6 +78,12 @@ app.post('/login', async (req, res) => {
 		console.error("E: (/login) Incorrect credentials");
 		res.redirect('/login-error.html');
 	}
+});
+
+app.get('/logout', (req, res) => {
+	if (req.cookies.authToken)
+		res.clearCookie('authToken');
+	res.redirect('/start.html')
 });
 
 // route for registering
