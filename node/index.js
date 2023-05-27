@@ -19,7 +19,7 @@ const cookieSecret = 'SECRET';
 /* custom logging */
 if (process.env.NODE_ENV !== 'test') app.use(logger(':method :url'))
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser(cookieSecret));
 app.use('/', express.static(path.join(__dirname, 'website')));
