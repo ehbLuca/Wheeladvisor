@@ -175,7 +175,6 @@ async function storeToken(email, token)
 }
 
 module.exports = {
-	queryDB, 
 	canLogin, registerUser, 
 	hasToken, storeToken,
 	insertPlace, queryPlaces

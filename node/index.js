@@ -10,9 +10,7 @@ const express = require('express');
 const logger = require('morgan');
 const path = require('path');
 
-const {
-	registerUser, canLogin, queryPlaces, hasToken, storeToken
-} = require('./queries.js');
+const queries = require('./queries.js');
 
 let app = express();
 const port = 3000;
@@ -33,7 +31,7 @@ app.get('/', (req, res) => {
 // returns the user's email if he is signed in
 app.get('/loggedIn', async(req, res) => {
 	let {authToken} = req.cookies;
-	if(authToken && await hasToken(authToken))
+	if(authToken && await queries.hasToken(authToken))
 		res.send(JSON.stringify(1));
 	else
 		res.send(JSON.stringify(null))
@@ -46,7 +44,7 @@ app.post('/login', async (req, res) => {
 	{
 		console.log(`I: (/login) Trying to login with token.`);
 		console.log(`I: (/login) Finding user with token = ${authToken}`);
-		let email = await hasToken(authToken);
+		let email = await queries.hasToken(authToken);
 		console.log('I: (/login) email:', email);
 		if (email)
 			res.redirect("/start.html")
@@ -68,11 +66,11 @@ app.post('/login', async (req, res) => {
 	email = email.toLowerCase();
 	console.log(`I: (/login) Logging in ${email} and ${password}`);
 	
-	if (await canLogin([email, password]))
+	if (await queries.canLogin([email, password]))
 	{
 		let token = crypto.randomBytes(32).toString('hex');
 		res.cookie('authToken', token, {maxAge: 24 * 60 * 60 * 1000});
-		storeToken(email, token);
+		queries.storeToken(email, token);
 		res.redirect('/start.html');
 	} else {
 		console.error("E: (/login) Incorrect credentials");
@@ -99,7 +97,7 @@ app.post('/register', async (req, res) => {
 	let salt = bcrypt.genSaltSync(10);
 	password = bcrypt.hashSync(password, salt);
 
-	let result = await registerUser([name, email, password])
+	let result = await queries.registerUser([name, email, password])
 	if (result)
 	{
 		res.redirect('/start.html');
@@ -111,7 +109,7 @@ app.post('/register', async (req, res) => {
 app.post('/search', async (req, res) => {
 	let query = req.body.q;
 	console.error(`I: (/search) Searching for places matching '${query}'.`);
-	let result = await queryPlaces(query);
+	let result = await queries.queryPlaces(query);
 	res.send(result);
 });
 
