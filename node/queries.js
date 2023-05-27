@@ -113,6 +113,46 @@ async function registerUser(values) {
 	}
 }
 
+async function hasToken(token)
+{
+	let conn = null;
+	try {
+		conn = await dbConnect();
+		let result = await conn.query(`
+			SELECT email FROM users u
+			JOIN tokens t
+				ON u.user_id = t.user_id
+			WHERE t.value = ?
+			`, [token])
+		conn.end()
+		return result;
+	} catch(err) {
+		console.error('Error:', err);
+	}
+}
+
+async function storeToken(email, token)
+{
+	console.log(`storing token: ${token}\nfor ${email}`);
+	let conn = null;
+	try {
+		conn = await dbConnect();
+		conn.query(`
+			UPDATE tokens t
+			JOIN users u
+				ON u.user_id = t.user_id
+			SET t.value = ?
+			WHERE LOWER(u.email) = LOWER(?)
+			`, [token, email])
+		conn.end()
+	} catch(err) {
+		console.error('Error:', err);
+	}
+}
+
 module.exports = {
-	queryDB, loginUser, registerUser, insertPlace, queryPlaces
+	queryDB, 
+	loginUser, registerUser, 
+	hasToken, storeToken,
+	insertPlace, queryPlaces
 };
