@@ -35,6 +35,12 @@ app.get('/', (req, res) => {
 app.post('/login', async (req, res) => {
 
 	let {email, password} = req.body;
+	if (!(email && password))
+	{
+		res.redirect('/login-error.html');
+		return;
+	}
+	email = email.toLowerCase();
 	console.log(`Logging in ${email} and ${password}`);
 	
 	if (await loginUser([email, password]))
