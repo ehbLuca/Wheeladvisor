@@ -35,9 +35,10 @@ app.post('/login', async (req, res) => {
 	let {authToken} = req.cookies;
 	if (authToken)
 	{
-		console.log(`I: Finding user with token = ${authToken}`);
+		console.log(`I: (/login) Trying to login with token.`);
+		console.log(`I: (/login) Finding user with token = ${authToken}`);
 		let email = await hasToken(authToken);
-		console.log('I: email: ', email);
+		console.log('I: (/login) email:', email);
 		if (email)
 			res.redirect("/start.html")
 		else
@@ -51,12 +52,12 @@ app.post('/login', async (req, res) => {
 	let {email, password} = req.body;
 	if (!(email && password))
 	{
-		console.error("E: Missing password or email");
-		res.redirect('/login-error.html');
+		console.error("E: (/login) Missing password or email");
+		res.redirect('/login.html');
 		return;
 	}
 	email = email.toLowerCase();
-	console.log(`I: Logging in ${email} and ${password}`);
+	console.log(`I: (/login) Logging in ${email} and ${password}`);
 	
 	if (await canLogin([email, password]))
 	{
@@ -65,7 +66,7 @@ app.post('/login', async (req, res) => {
 		storeToken(email, token);
 		res.redirect('/start.html');
 	} else {
-		console.error("E: Incorrect credentials");
+		console.error("E: (/login) Incorrect credentials");
 		res.redirect('/login-error.html');
 	}
 });
@@ -94,7 +95,7 @@ app.post('/register', async (req, res) => {
 
 app.post('/search', async (req, res) => {
 	let query = req.body.q;
-	console.error(`I: Searching for places matching '${query}'.`);
+	console.error(`I: (/search) Searching for places matching '${query}'.`);
 	let result = await queryPlaces(query);
 	res.send(result);
 });
