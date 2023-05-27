@@ -37,16 +37,18 @@ app.post('/login', async (req, res) => {
 	let {email, password} = req.body;
 	if (!(email && password))
 	{
+		console.error("E: Missing password or email");
 		res.redirect('/login-error.html');
 		return;
 	}
 	email = email.toLowerCase();
-	console.log(`Logging in ${email} and ${password}`);
+	console.log(`I: Logging in ${email} and ${password}`);
 	
 	if (await canLogin([email, password]))
 	{
 		res.redirect('/start.html');
 	} else {
+		console.error("E: Incorrect credentials");
 		res.redirect('/login-error.html');
 	}
 });
@@ -75,7 +77,7 @@ app.post('/register', async (req, res) => {
 
 app.post('/search', async (req, res) => {
 	let query = req.body.q;
-	console.error(`Searching for places matching '${query}'.`);
+	console.error(`I: Searching for places matching '${query}'.`);
 	let result = await queryPlaces(query);
 	res.send(result);
 });

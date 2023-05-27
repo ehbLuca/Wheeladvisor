@@ -88,7 +88,7 @@ async function canLogin(values) {
 
 		result = result[0];
 
-		console.log(`${password}, ${result.password}`);
+		console.log(`I: password: ${password}, hashed: ${result.password}`);
 		conn.end();
 		return bcrypt.compareSync(password, result.password);
 	} catch(err) {
@@ -125,6 +125,7 @@ async function hasToken(token)
 			WHERE t.value = ?
 			`, [token])
 		conn.end()
+		console.log(`I: (hasToken) email: `, email);
 		return email;
 	} catch(err) {
 		console.error('Error:', err);
@@ -133,7 +134,7 @@ async function hasToken(token)
 
 async function storeToken(email, token)
 {
-	console.log(`storing token: ${token}\nfor ${email}`);
+	console.log(`I: storing token: ${token}\nI: for ${email}`);
 	let conn = null;
 	try {
 		conn = await dbConnect();
