@@ -73,8 +73,8 @@ async function queryPlaces(query) {
 	}
 } 
 
-// adds an user to the database, returns true if succesful, returns false if an error occurred.
-async function loginUser(values) {
+// checks credentials of an user returns true if succesful, returns false if an error occurred.
+async function canLogin(values) {
 	let [email, password] = values;
 	let conn = null;
 	try {
@@ -152,7 +152,7 @@ async function storeToken(email, token)
 
 module.exports = {
 	queryDB, 
-	loginUser, registerUser, 
+	canLogin, registerUser, 
 	hasToken, storeToken,
 	insertPlace, queryPlaces
 };

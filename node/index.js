@@ -11,7 +11,7 @@ const logger = require('morgan');
 const path = require('path');
 
 const {
-	registerUser, loginUser, queryPlaces, hasToken, storeToken
+	registerUser, canLogin, queryPlaces, hasToken, storeToken
 } = require('./queries.js');
 
 let app = express();
@@ -43,7 +43,7 @@ app.post('/login', async (req, res) => {
 	email = email.toLowerCase();
 	console.log(`Logging in ${email} and ${password}`);
 	
-	if (await loginUser([email, password]))
+	if (await canLogin([email, password]))
 	{
 		res.redirect('/start.html');
 	} else {
