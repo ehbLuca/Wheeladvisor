@@ -29,11 +29,11 @@ app.get('/', (req, res) => {
 // route for logging in
 // expects an email and password
 app.post('/login', async (req, res) => {
-	let email = req.body.email;
-	let password = req.body.password;
+
+	let {email, password} = req.body;
 	console.log(`Logging in ${email} and ${password}`);
-	let result = await loginUser([email, password])
-	if (result)
+	
+	if (await loginUser([email, password]))
 	{
 		res.redirect('/start.html');
 	} else {
