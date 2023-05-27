@@ -88,7 +88,7 @@ async function canLogin(values) {
 
 		result = result[0];
 
-		console.log(`I: password: ${password}, hashed: ${result.password}`);
+		console.log(`I: (canLogin) password: ${password}, hashed: ${result.password}`);
 		conn.end();
 		return bcrypt.compareSync(password, result.password);
 	} catch(err) {
@@ -134,17 +134,40 @@ async function hasToken(token)
 
 async function storeToken(email, token)
 {
-	console.log(`I: storing token: ${token}\nI: for ${email}`);
+	console.log('I: (storeToken) token:', token);
+	console.log('I: (storeToken) email:', email);
 	let conn = null;
 	try {
 		conn = await dbConnect();
-		conn.query(`
-			UPDATE tokens t
-			JOIN users u
+
+		let results = await conn.query(`
+			SELECT user_id FROM users
+			WHERE LOWER(email) = LOWER(?)
+			`, [email])
+		let user_id = results[0]?.user_id
+
+		results = await conn.query(`
+			SELECT * FROM tokens t
+			WHERE user_id = ?`, [user_id])
+
+		if (results.length == 0)
+		{
+			console.log("I: (storeToken) user has no token yet.");
+			await conn.query(`
+				INSERT INTO tokens(type, value, user_id)
+				VALUES ('session', ?, ?)
+				`, [token, user_id])
+		} else {
+			console.log("I: (storeToken) user already has a token.");
+			await conn.query(`
+				UPDATE tokens t
+				JOIN users u
 				ON u.user_id = t.user_id
-			SET t.value = ?
-			WHERE LOWER(u.email) = LOWER(?)
-			`, [token, email])
+				SET t.value = ?
+				WHERE LOWER(u.email) = LOWER(?)
+				`, [token, email])
+		}
+
 		conn.end()
 	} catch(err) {
 		console.error('Error:', err);

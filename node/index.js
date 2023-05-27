@@ -30,9 +30,23 @@ app.get('/', (req, res) => {
 	res.redirect('/start.html')
 });
 
-// route for logging in
-// expects an email and password
+// route for logging in with credentials or with a token in the cookies
 app.post('/login', async (req, res) => {
+	let {authToken} = req.cookies;
+	if (authToken)
+	{
+		console.log(`I: Finding user with token = ${authToken}`);
+		let email = await hasToken(authToken);
+		console.log('I: email: ', email);
+		if (email)
+			res.redirect("/start.html")
+		else
+		{
+			res.clearCookie('authToken');
+			res.redirect('/login-error.html')
+		}
+		return;
+	}
 
 	let {email, password} = req.body;
 	if (!(email && password))
@@ -46,6 +60,9 @@ app.post('/login', async (req, res) => {
 	
 	if (await canLogin([email, password]))
 	{
+		let token = crypto.randomBytes(32).toString('hex');
+		res.cookie('authToken', token, {maxAge: 24 * 60 * 60 * 1000});
+		storeToken(email, token);
 		res.redirect('/start.html');
 	} else {
 		console.error("E: Incorrect credentials");
