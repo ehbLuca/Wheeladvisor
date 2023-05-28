@@ -1,0 +1,33 @@
+@import "colors.css";
+
+*
+{
+    box-sizing: border-box;
+}
+
+body{
+    background-color: var(--bg-color);
+    width:auto;
+	margin: 0.5em;
+	padding: 0;
+    color: white;
+    
+}
+
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form a{
+    color: white;
+    text-decoration: none;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

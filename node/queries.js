@@ -1,50 +1,37 @@
 const mariadb = require('mariadb');
 
-// Error that should be thrown if a value already exists in a column.
-class ValueAlreadyUsedError extends Error {
-	constructor([column, value]) {
-		const message = `${column}: '${value}' was already used.`;
-		super(message);
-		this.name = 'ValueAlreadyUsedError';
-		this.column = column;
-		this.value = value;
+// Creates a connection with the database
+async function dbConnect() {
+	let conn = null;
+	try {
+		conn = await mariadb.createConnection({
+			// database connection details
+			host: '10.3.50.5',
+			user: 'padmin',
+			password: 'bulbizarre',
+			database: 'padmindb'
+		});
+		return conn;
+	} catch (err) {
+		console.error('Error creating connection:', err);
 	}
-}
-
-// Checks if a value is already used in the users table
-async function valueUsed(values) {
-	const [column, value] = values;
-	let res = await queryDB(`
-		SELECT * FROM users 
-		WHERE ${column} IN("${value}")
-	`);
-	if (res.length > 0)
-		throw new ValueAlreadyUsedError([column, value]);
 }
 
 // Wrapper function that will make queries
 // Later this shouldn't be exported
 async function queryDB(query) {
-
-	let conn, res;
+	let conn = null;
+	let result;
 	try {
-		conn = await mariadb.createConnection({
-			// database connection details
-			host: '0.0.0.0',
-			port: 4033,
-			user: 'padmin',
-			password: 'bulbizarre',
-			database: 'padmindb'
-		});
-		// the query itself
-		res = await conn.query(query);
+		conn = await dbConnect();
+		result = await conn.query(query);
 	} catch (err) {
 		throw err;
 	} finally {
 		if (conn) {
 			try {
 				await conn.end();
-				if (res) return res;
+				if (result) return result;
 			} catch (err) {
 				console.error('Error closing connection:', err);
 			}
@@ -52,29 +39,70 @@ async function queryDB(query) {
 	}
 }
 
+async function insertPlace(place) {
+	let {name, coordinates, category} = place;
+	let conn = null;
+	try {
+		conn = await dbConnect();
+		res = await conn.query(`
+			INSERT INTO places(name, address, category)
+			VALUES(?,?, ?)
+			`, [name, `${coordinates.latitude} ${coordinates.longitude}`, category]);
+	} catch (err) {
+		console.error('Error while doing query:', err);
+	} finally {
+		conn.end()
+	}
+}
+
+async function queryPlaces(query) {
+	let conn = null;
+	let results = null;
+	try {
+		conn = await dbConnect();
+		results = await conn.query(`
+		SELECT * FROM places
+		WHERE UPPER(name) LIKE UPPER(?)
+		`, [`%${query}%`]);
+	} catch (err) {
+		console.error(`Error while searching for'${query}'`, err);
+	} finally {
+		conn.end();
+		return results;
+	}
+} 
+
 // adds an user to the database, returns true if succesful, returns false if an error occurred.
 async function loginUser(values) {
-	let [name, password] = values;
-	let result = await queryDB(`
-		SELECT name, email FROM users
-		WHERE email = '${name}'
-			AND password = '${password}'
-	`);
-	if (result.length == 0)
-		return false;
-	return true;
+	let [email, password] = values;
+	let conn = null;
+	try {
+		conn = await dbConnect();
+		let result = await conn.query(`
+			SELECT name, email FROM users
+			WHERE email = ?
+			AND password = ?
+			`, [email, password]);
+		if (result.length == 0)
+			return false;
+		return true;
+	} catch {
+		console.error('Error:', err);
+	} finally {
+		conn.end();
+	}
 }
 
 // adds an user to the database, returns true if succesful, returns false if an error occurred.
 async function registerUser(values) {
 	let [name, email, password] = values;
+	let conn = null;
 	try {
-		await valueUsed(["name", name]);
-		await valueUsed(["email", email]);
-		queryDB(`
+		conn = await dbConnect();
+		await conn.query(`
 			INSERT INTO users(name, email, password)
-			VALUES('${name}', '${email}', '${password}')
-		`);
+			VALUES(?, ?, ?)
+		`, [name, email, password]);
 		return true;
 	} catch(error) {
 		console.log("Caught error:", error.message);
@@ -84,5 +112,5 @@ async function registerUser(values) {
 }
 
 module.exports = {
-	queryDB, loginUser, registerUser
+	queryDB, loginUser, registerUser, insertPlace, queryPlaces
 };

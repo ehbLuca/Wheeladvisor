@@ -1,3 +1,4 @@
+
 @import "colors.css";
 
 *
@@ -8,7 +9,7 @@
 body{
     background-color: var(--bg-color);
     width:auto;
-	margin: 0;
+	margin: 0.5em;
 	padding: 0;
 }
 
@@ -21,30 +22,58 @@ body{
     align-items: center;
 }
 
-/*cantainer1 is rond de login en zoek optie*/
-.login_zoek a{
+/*loginbalk is rond de login*/
+.loginbalk a{
     color: white;
     text-decoration: none;
     text-align: center;
-    padding: 2em;
+    padding: 2%;
     background-color: var(--fg-color);
     border-radius: 1rem;
-	margin-top: 1em;
+	margin-top: 2em;
+   
 }
 
-.login_zoek{
-   display: grid;
-   grid-template-rows: 50% 50%;  
+.loginbalk h1{
+    text-align: center;
+    color: white;
+    margin-bottom: 0;
+
 }
 
-.login_zoek input {
+.loginbalk{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+
+
+
+/*loginbalk eindig hier*/
+
+
+/*zoek balk begint hier*/
+
+
+.zoekbalk input {
     padding: 1em;
     border-radius: 5rem;
-    margin-top: 10%;
-    margin-bottom: 20%;
+    margin-top: 5%;
+    margin-bottom: 10%;
+    width: 100%;
+    
 }
 
-/*login_zoek eindig hier*/
+
+.zoekbalk{   
+    width: 90%;
+}
+
+/*zoek balk eindig hier*/
+
+
 
 
 /*categorie categorieën*/
@@ -66,10 +95,7 @@ body{
 }
 
 
-.categorie li {
-    list-style: none;
-   color: white;
-}
+
 
 /*categorie eindig hier*/
 
@@ -114,3 +140,42 @@ ul {
 }
 
 /*Kader eindig hier*/
+
+/*Grote schermen*/
+
+@media screen and (min-width:1000px ){
+
+    body{
+        background-color: var(--bg-color);
+    }
+
+    .loginbalk{
+       display: flex;
+       flex-direction: row;
+     }
+
+     .loginbalk form{
+        align-self: flex-end;
+     }
+
+     .flex{
+        background-color: var(--fg-color);
+    }
+
+    .categorie button{
+        background-color: var(--fg-color);
+    }
+
+    .loginbalk a{
+        padding: 2em;
+        background-color: var(--fg-color);
+        background-image: url("../icons/icons8-login.svg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+
+    
+}}
+
+
+
