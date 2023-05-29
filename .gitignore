@@ -1,5 +1,7 @@
 .gitignore
 node/node_modules/
 node/package-lock.json
-node/website
-website/images
+src/node/node_modules/
+src/node/package-lock.json
+src/node/website
+src/website/images/

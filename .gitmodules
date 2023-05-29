@@ -1,0 +1,3 @@
+[submodule "ElScraper"]
+	path = ElScraper
+	url = git@github.com:EhbLuca/ElScraper.git
