@@ -34,6 +34,7 @@ window.addEventListener('DOMContentLoaded', async function() {
 		  var imageElement = document.createElement('img');
 
 		  imageElement.src = `images/places/${place.place_id}`;
+      anchorElement.href="ProfielPagina.html"+`?id=${place.place_id}`;
 		  imageElement.classList.add('post-image');
 		  postElement.classList.add('post');
 		  postElement.textContent = place.name;
