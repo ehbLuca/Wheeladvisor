@@ -6,37 +6,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="register.html">
-    <link rel="stylesheet" href="css/styleRegister.css">
+    <link rel="stylesheet" href="css/register.css">
 </head>
 
 <body>
-    <section class="form">
+    <section class="container">
 
-        <form action="">
+        <form method="POST" action="/register" class="form">
             <!--Size en maxlenght kunnen we later aanpassen op basis van de database-->
+            <a href="start.html">Start</a>
 
             <p>
-                <label for="" class="label1">
-                    <input type="text" name="Username" required size="15" maxlength="30" placeholder="Username">
+                <label class="label1">
+                    <input type="text" name="name" required size="15" maxlength="30" placeholder="Username">
                 </label>
             </p>
 
             <p>
-                <label for="" class="label">
-                    <input type="text" name="email" required size="15" maxlength="30" placeholder="Email">
+                <label class="label">
+                    <input type="email" name="email" required size="15" maxlength="30" placeholder="Email">
                 </label>
             </p>
 
 
             <p>
-                <label for="" class="label">
-                    <input type="password" name="password" required size="15" maxlength="30" placeholder="password">
+                <label class="label">
+                    <input type="password" name="password" required size="15" maxlength="30" placeholder="wachtwoord">
                 </label>
             </p>
 
             <p>
-                <label for="" class="label">
+                <label class="label">
                     <input type="submit" value="register">
                 </label>
             </p>
@@ -44,7 +44,6 @@
 
             <a href="login.html">Ik heb al een accounnt</a>
 
-            </div>
         </form>
 
     </section>

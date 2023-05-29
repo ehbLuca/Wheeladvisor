@@ -6,7 +6,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Document</title>
-		<link rel="stylesheet" href="css/template.css">
+		<link rel="stylesheet" href="css/start.css">
 	</head>
 
 	<body>
@@ -16,7 +16,9 @@
 
 				<H1>WheelAdvisor</H1>
 
-				<a href="login.html" id="login">Login/Register</a>
+				<form id="login-form" method="POST" action="/login">
+					<input id="login" type="submit" value="Login/Register">
+				</form>
 			</header>
 
 			<form action="zoek.html" class="zoekbalk">
@@ -61,6 +63,7 @@
 
 		</section>
 
+		<script src="js/login.js"></script>
 	</body>
 
 </html>

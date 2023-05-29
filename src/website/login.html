@@ -6,25 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
 </head>
 
 <body>
 
-    <section id="container">
+    <section class="container">
+            <a href="start.html">Start</a>
 
-        <form action="">
+        <form method="POST" action="/login" class="form">
             <!--Size en maxlenght kunnen we later aanpassen op basis van de database-->
-            <p> <label for="">
+            <p> <label>
 
-                    <input type="text" name="Username" required size="15" maxlength="30" placeholder="Username">
+                    <input type="email" name="email" required size="15" maxlength="30" placeholder="email">
                 </label> </p>
 
-            <p><label for="">
-                    <input type="password" name="password" required size="15" maxlength="30" placeholder="password">
+            <p><label>
+                    <input type="password" name="password" required size="15" maxlength="30" placeholder="wachtwoord">
                 </label></p>
 
-            <p><label for="">
+            <p><label>
                     <input type="submit" value="Login">
                 </label></p>
 
