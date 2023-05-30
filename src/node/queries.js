@@ -119,14 +119,14 @@ async function hasToken(token)
 	try {
 		conn = await dbConnect();
 		let results = await conn.query(`
-			SELECT LOWER(email) AS email FROM users u
+			SELECT t.user_id FROM users u
 			JOIN tokens t
 				ON u.user_id = t.user_id
 			WHERE t.value = ?
 			`, [token])
 		conn.end()
 		console.log(`I: (hasToken) results: `, results);
-		return results[0]?.email;
+		return results[0]?.user_id;
 	} catch(err) {
 		console.error('Error:', err);
 	}
