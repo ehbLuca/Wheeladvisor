@@ -36,7 +36,10 @@ body{
   border: 1px;
 }
 #fil{
-  width: 20%;
+  width: auto;
+  border-radius: 5rem;
+  border: 1px;
+  text-align: center;
 }
 
 #zoek{
