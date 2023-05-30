@@ -56,7 +56,7 @@ async function insertPlace(place) {
 	}
 }
 
-async function queryPlaces(query) {
+async function queryPlaces(query, category, adres) {
 	let conn = null;
 	let results = null;
 	try {
@@ -64,7 +64,9 @@ async function queryPlaces(query) {
 		results = await conn.query(`
 		SELECT * FROM places
 		WHERE UPPER(name) LIKE UPPER(?)
-		`, [`%${query}%`]);
+		AND UPPER(category) LIKE UPPER(?)
+		AND UPPER(address) LIKE UPPER(?)
+		`, [`%${query}%`,`%${category}%`,`%${adres}%`]);
 	} catch (err) {
 		console.error(`Error while searching for'${query}'`, err);
 	} finally {
@@ -72,6 +74,12 @@ async function queryPlaces(query) {
 		return results;
 	}
 } 
+
+async function getCoordinates(coordinate) {
+	let conn = null;
+	let re
+}
+
 
 // checks credentials of an user returns true if succesful, returns false if an error occurred.
 async function canLogin(values) {

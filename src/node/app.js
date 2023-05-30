@@ -9,6 +9,7 @@ const crypto = require('crypto');
 const express = require('express');
 const logger = require('morgan');
 const path = require('path');
+const { isNull } = require('util');
 
 const queries = require('./queries.js');
 
@@ -107,9 +108,28 @@ app.post('/register', async (req, res) => {
 });
 
 app.post('/search', async (req, res) => {
-	let query = req.body.q;
+	let category = req.body.category;
+	let adres = req.body.adres;
+	let query = req.body.query;
 	console.error(`I: (/search) Searching for places matching '${query}'.`);
-	let result = await queries.queryPlaces(query);
+	let result = await queries.queryPlaces(query,category,adres);
+	res.send(result);
+	console.log(query, category, adres);
+});
+
+app.post('/search', async (req, res) => {
+	let coordinate = req.body.coordinate;
+	if (coordinate === undefined) {
+        return;
+    }
+	let result = await queries.getCoordinates(coordinate);
+	if (result === undefined) {
+        res.redirect('/search-error.html');
+        return;
+    }
+	let [latitude, longitude] = 
+	let places = await 
+
 	res.send(result);
 });
 
