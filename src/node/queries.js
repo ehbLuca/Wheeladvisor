@@ -75,6 +75,12 @@ async function queryPlaces(query, category, adres) {
 	}
 } 
 
+async function getCoordinates(coordinate) {
+	let conn = null;
+	let re
+}
+
+
 // checks credentials of an user returns true if succesful, returns false if an error occurred.
 async function canLogin(values) {
 	let [email, password] = values;
