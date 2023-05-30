@@ -75,9 +75,22 @@ async function queryPlaces(query, category, adres) {
 	}
 } 
 
+
 async function getCoordinates(coordinate) {
 	let conn = null;
-	let re
+	let results = null;
+	try {
+		conn = await dbConnect();
+		results = await conn.query(`
+		SELECT * FROM places
+		WHERE UPPER(coordinate) LIKE UPPER(?)
+		`, [`%${coordinate}%`]);
+	} catch (err) {
+		console.error(`Error while searching for'${coordinate}'`, err);
+	} finally {
+		conn.end();
+		return results;
+	}
 }
 
 
@@ -185,5 +198,5 @@ async function storeToken(email, token)
 module.exports = {
 	canLogin, registerUser, 
 	hasToken, storeToken,
-	insertPlace, queryPlaces
+	insertPlace, queryPlaces, getCoordinates
 };
