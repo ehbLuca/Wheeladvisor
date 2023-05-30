@@ -22,18 +22,6 @@ body{
     align-items: center;
 }
 
-/*loginbalk is rond de login*/
-.loginbalk a{
-    color: white;
-    text-decoration: none;
-    text-align: center;
-    padding: 2%;
-    background-color: var(--fg-color);
-    border-radius: 1rem;
-	margin-top: 2em;
-   
-}
-
 .loginbalk h1{
     text-align: center;
     color: white;
@@ -165,17 +153,4 @@ ul {
     .categorie button{
         background-color: var(--fg-color);
     }
-
-    .loginbalk a{
-        padding: 2em;
-        background-color: var(--fg-color);
-        background-image: url("../icons/icons8-login.svg");
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center center;
-
-    
-}}
-
-
-
+}

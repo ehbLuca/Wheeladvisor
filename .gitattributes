@@ -1,1 +1,2 @@
 *.js text eol=lf filter=cleanAPIKEY
+queries.js text eol=lf filter=cleanIP
