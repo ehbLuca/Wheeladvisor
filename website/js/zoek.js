@@ -7,7 +7,7 @@ async function getPlaces(query, category, adres) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      q: query,
+      query: query,
       category: category,
       adres: adres,
     })
@@ -50,43 +50,6 @@ window.addEventListener('DOMContentLoaded', async function () {
     contentContainer.appendChild(anchorElement);
     anchorElement.appendChild(postElement);
   }
-
-
-
-
-  /* Unused code (ter illustration):
-  async function searchPlaces() {
-    const searchInput = document.getElementById('searchInput');
-    const categoryInput = document.getElementById('categoryInput');
-    const minRatingInput = document.getElementById('minRatingInput');
-    const resultsContainer = document.getElementById('resultsContainer');
-
-    const query = searchInput.value;
-    const category = categoryInput.value;
-    const minRating = minRatingInput.value;
-
-    const response = await fetch(`/search?query=${place.name}&category=${categories.name}&minRating=${reviews.rating}`);
-    const results = await response.json();
-
-    resultsContainer.innerHTML = '';
-
-    //Gaat asynchrone HTTP-request zenden naar database met zoek queries als parameters
-    //Gaat resultaat assignen aan parameter 'response'
-
-    if (results.length === 0) {
-      resultsContainer.innerHTML = 'No results found.';
-    } else {
-      results.forEach(result => {
-        const item = document.createElement('li');
-        item.innerText = `${result.name} - ${result.category}`;
-        resultsContainer.appendChild(item);
-      });
-    }
-    //Gaat 'No results found' tonen als geen resultaten worden terug gegeven
-    //Anders wordt lijst resultaten vertoont
-  }*/
-
-
 
 
   // isLoading = false;
