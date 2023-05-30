@@ -1,14 +1,16 @@
 'use strict'
 async function getPlaces() {
   const urlParams = new URLSearchParams(window.location.search);
-  const query = urlParams.get("q");
+  const query = urlParams.get("q","category","coordinate");
   return fetch("/search", {
     method: "POST",
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      q: query
+      q: query,
+      category: category,
+      coordinate: coordinate,
     })
   }).then(
     result => result.json()
@@ -43,6 +45,9 @@ window.addEventListener('DOMContentLoaded', async function () {
     anchorElement.appendChild(postElement);
   }
 
+
+
+  /*
   async function searchPlaces() {
     const searchInput = document.getElementById('searchInput');
     const categoryInput = document.getElementById('categoryInput');
@@ -72,7 +77,9 @@ window.addEventListener('DOMContentLoaded', async function () {
     }
     //Gaat 'No results found' tonen als geen resultaten worden terug gegeven
     //Anders wordt lijst resultaten vertoont
-  }
+  }*/
+
+
 
 
   // isLoading = false;
