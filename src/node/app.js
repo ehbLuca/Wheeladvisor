@@ -31,8 +31,12 @@ app.get('/', (req, res) => {
 // returns the user's email if he is signed in
 app.get('/loggedIn', async(req, res) => {
 	let {authToken} = req.cookies;
-	if(authToken && await queries.hasToken(authToken))
-		res.send(JSON.stringify(1));
+	let user_id;
+	if(authToken){
+		user_id = await queries.hasToken(authToken)
+		res.send(JSON.stringify(user_id));
+		console.log(user_id);
+	}
 	else
 		res.send(JSON.stringify(null))
 });
