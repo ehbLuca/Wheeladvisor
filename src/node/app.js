@@ -9,6 +9,7 @@ const crypto = require('crypto');
 const express = require('express');
 const logger = require('morgan');
 const path = require('path');
+const { isNull } = require('util');
 
 const queries = require('./queries.js');
 
@@ -116,6 +117,21 @@ app.post('/search', async (req, res) => {
 	console.log(query, category, adres);
 });
 
+app.post('/search', async (req, res) => {
+	let coordinate = req.body.coordinate;
+	if (coordinate === undefined) {
+        return;
+    }
+	let result = await queries.getCoordinates(coordinate);
+	if (result === undefined) {
+        res.redirect('/search-error.html');
+        return;
+    }
+	let [latitude, longitude] = 
+	let places = await 
+
+	res.send(result);
+});
 
 app.listen(port, () => {
 	console.log(`http://localhost:${port}`);
