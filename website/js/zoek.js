@@ -1,7 +1,9 @@
 'use strict'
 async function getPlaces() {
   const urlParams = new URLSearchParams(window.location.search);
-  const query = urlParams.get("q","category","coordinate");
+  const query = urlParams.get("q");
+  const category = urlParams.get("category");
+  const adres = urlParams.get("adres");
   return fetch("/search", {
     method: "POST",
     headers: {
@@ -27,7 +29,7 @@ window.addEventListener('DOMContentLoaded', async function () {
   // async function fetchData(page) {
   //   isLoading = true;
 
-  let places = await getPlaces();
+  let places = await getPlaces(query, category, adres);
 
   for (let place of places) {
     console.log(place)
