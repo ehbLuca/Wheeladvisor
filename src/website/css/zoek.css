@@ -31,10 +31,12 @@ body{
   background-color: var(--bg-color);
 }
 #loc{
-  width: 10%;
+  width: 20%;
+  border-radius: 5rem;
+  border: 1px;
 }
 #fil{
-  width: 10%;
+  width: 20%;
 }
 
 #zoek{
