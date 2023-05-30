@@ -1,9 +1,6 @@
 'use strict'
-async function getPlaces() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const query = urlParams.get("q");
-  const category = urlParams.get("category");
-  const adres = urlParams.get("adres");
+async function getPlaces(query, category, adres) {
+
   return fetch("/search", {
     method: "POST",
     headers: {
@@ -12,7 +9,7 @@ async function getPlaces() {
     body: JSON.stringify({
       q: query,
       category: category,
-      coordinate: coordinate,
+      adres: adres,
     })
   }).then(
     result => result.json()
@@ -22,6 +19,13 @@ async function getPlaces() {
 }
 
 window.addEventListener('DOMContentLoaded', async function () {
+  const urlParams = new URLSearchParams(window.location.search);
+  const query = urlParams.get("q");
+  const category = urlParams.get("category");
+  const adres = urlParams.get("adres");
+  document.getElementById('zoek-query').value = query;
+  document.getElementById('zoek-category').value = category;
+  document.getElementById('zoek-adres').value = adres;
   var contentContainer = document.getElementById('contentContainer');
   // var isLoading = false;
   // var page = 1;
@@ -49,7 +53,8 @@ window.addEventListener('DOMContentLoaded', async function () {
 
 
 
-  /*
+
+  /* Unused code (ter illustration):
   async function searchPlaces() {
     const searchInput = document.getElementById('searchInput');
     const categoryInput = document.getElementById('categoryInput');
