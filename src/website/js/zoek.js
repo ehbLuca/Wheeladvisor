@@ -51,6 +51,20 @@ window.addEventListener('DOMContentLoaded', async function () {
     anchorElement.appendChild(postElement);
   }
 
+  const submitBtn = document.getElementById('submit-btn');
+
+  submitBtn.addEventListener('click', () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords;
+        const coordinates = { latitude, longitude };
+      });
+    }
+  });
+
+  console.log(coordinates);
+  
+
 
   // isLoading = false;
   // page++;
