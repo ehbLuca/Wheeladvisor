@@ -21,5 +21,6 @@ async function func() {
 		formElement.method = 'GET';
 		formElement.action = '/logout';
 	}
+	console.log(result);
 }
 func();
