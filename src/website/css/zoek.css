@@ -30,12 +30,12 @@ body{
   width: 100%;
   background-color: var(--bg-color);
 }
-#loc{
-  width: 20%;
+#submit-btn{
+  width: auto;
   border-radius: 5rem;
   border: 1px;
 }
-#fil{
+#zoek-category{
   width: auto;
   border-radius: 5rem;
   border: 1px;
@@ -45,6 +45,9 @@ body{
 #zoek{
 padding: 15px;
 width: 90%;
+border-radius: 5rem;
+border: 1px;
+text-align: center;
 
 }
 

@@ -23,9 +23,8 @@ window.addEventListener('DOMContentLoaded', async function () {
   const query = urlParams.get("q");
   const category = urlParams.get("category");
   const adres = urlParams.get("adres");
-  document.getElementById('zoek-query').value = query;
+  document.getElementById('zoek').value = query;
   document.getElementById('zoek-category').value = category;
-  document.getElementById('zoek-adres').value = adres;
   var contentContainer = document.getElementById('contentContainer');
   // var isLoading = false;
   // var page = 1;
