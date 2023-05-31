@@ -56,14 +56,13 @@ window.addEventListener('DOMContentLoaded', async function () {
   submitBtn.addEventListener('click', () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (position) => {
-        const { latitude, longitude } = position.coords;
-        const coordinates = { latitude, longitude };
-        const response = await fetch('/search', {
+
+        const response = await fetch('/search-coordinates', {
           method: "POST",
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ coordinate: coordinates })
+          body: JSON.stringify({ coordinate: position.coords })
         });
         const data = await response.json();
         // Do something with the search results
