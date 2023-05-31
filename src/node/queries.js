@@ -82,7 +82,6 @@ async function getCoordinates(coordinate) {
 		conn = await dbConnect();
 		results = await conn.query(`
 		SELECT * FROM places
-	
 		`);
 	} catch (err) {
 		console.error(`Error while searching for'${coordinate}'`, err);

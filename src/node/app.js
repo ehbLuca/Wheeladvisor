@@ -138,7 +138,7 @@ app.post('/search-coordinates', async (req, res) => {
 	}
 	let rankedPlaces = [];
 	for (let place of places) {
-		let [placeLat, placeLng] = place.coordinate.split(' ');
+		let {latitude: placeLat, longitude: placeLng} = place.coordinate;
 		let distance = calculateDistance(latitude, longitude, placeLat, placeLng);
 		place.distances = [];
 		place.distance.push(distance);
