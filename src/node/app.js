@@ -117,21 +117,47 @@ app.post('/search', async (req, res) => {
 	console.log(query, category, adres);
 });
 
+const earthRadius = 6371;
+
+function calculateDistance(lat1, lon1, lat2, lon2) {
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const distance = earthRadius * c;
+  return distance;
+}
+
 app.post('/search', async (req, res) => {
 	let coordinate = req.body.coordinate;
-	if (coordinate === undefined) {
-        return;
-    }
+	if (coordinate == null) {
+		return;
+	 }
 	let result = await queries.getCoordinates(coordinate);
 	if (result === undefined) {
         res.redirect('/search-error.html');
         return;
     }
-	let [latitude, longitude] = 
-	let places = await 
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition((position) => {
+			userLgn = position.coords.longitude;
+			userLat = position.coords.latitude;
+		});
+	}
+	let places = await Promise.all(result.map(async (place) => {
+		let [placeLat, placeLng] = place.coordinate.split(',');
+		let distance = calculateDistance(userLat, userLon, placeLat, placeLng);
+		return { ...place, distance };
+	  }));
+	  places.sort((a, b) => a.distance - b.distance);
+	  res.send(places);
+	});
 
-	res.send(result);
-});
+
+
 
 app.listen(port, () => {
 	console.log(`http://localhost:${port}`);
