@@ -75,17 +75,18 @@ async function queryPlaces(query) {
 
 // Get favourite places from database
 
-async function queryFavouritePlaces(query) {
+async function queryFavouritePlaces(user_id) {
 	let conn = null;
 	let results = null;
 	try {
 		conn = await dbConnect();
 		results = await conn.query(`
-		SELECT * FROM favorites
-		WHERE user_id = ?
-		`, [user_id]);
+		SELECT p.place_id, p.name, p.category, p.address FROM favorites f
+		JOIN places p
+			ON p.place_id = f.place_id
+		WHERE f.user_id = 1`);
 	} catch (err) {
-		console.error(`Error while searching for'${query}'`, err);
+		console.error(`Error while searching for'${user_id}'`, err);
 	} finally {
 		conn.end();
 		return results;
@@ -94,13 +95,14 @@ async function queryFavouritePlaces(query) {
 
 // to save place to favourite
 
-async function saveFavourite (place_id,user_id){
+async function saveFavourite (place_id, user_id){
 	let conn = null;
 	let results = null;
 	try{
 		conn = await dbConnect();
 		results = await conn.query(`INSERT INTO favorites(place_id, user_id)
-		VALUES(?, ?);`);
+		VALUES(?, ?);`, [place_id, user_id]);
+		console.log('results:', results);
 
 	}catch(err){
 		console.error('Error:', err);

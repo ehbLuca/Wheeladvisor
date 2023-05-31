@@ -119,7 +119,7 @@ app.post('/search', async (req, res) => {
 
 
 app.post('/favourite', async (req, res) => {
-	let user_id = req.body.id;
+	let user_id = req.body.user_id;
 	console.error(`I: (/favourite) Searching for places matching '${user_id}'.`);
 	let result = await queries.queryFavouritePlaces(user_id);
 	res.send(result);
@@ -128,18 +128,13 @@ app.post('/favourite', async (req, res) => {
 //for to save favourite
 app.post('/saveFavourite', async(req, res) =>{
 
-	let user_id = req.body.id;
-	let place_id = req.body.id;
+	let user_id = req.body.user_id;
+	let place_id = req.body.place_id;
 	console.error(`I: (/saveFavourite) Saving favourite`);
-	let result = await queries.saveFavourite(place_id, user_id);
-
-	res.send(result);
-
+	await queries.saveFavourite(place_id, user_id);
+	res.send();
 })
 
 app.listen(port, () => {
 	console.log(`http://localhost:${port}`);
 });
-
-
-
