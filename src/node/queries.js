@@ -73,6 +73,26 @@ async function queryPlaces(query) {
 	}
 } 
 
+// Get favourite places from database
+
+async function queryFavouritePlaces(query) {
+	let conn = null;
+	let results = null;
+	try {
+		conn = await dbConnect();
+		results = await conn.query(`
+		SELECT * FROM favorites
+		WHERE user_id = ?
+		`, [user_id]);
+	} catch (err) {
+		console.error(`Error while searching for'${query}'`, err);
+	} finally {
+		conn.end();
+		return results;
+	}
+}
+
+
 // checks credentials of an user returns true if succesful, returns false if an error occurred.
 async function canLogin(values) {
 	let [email, password] = values;
@@ -177,5 +197,6 @@ async function storeToken(email, token)
 module.exports = {
 	canLogin, registerUser, 
 	hasToken, storeToken,
-	insertPlace, queryPlaces
+	insertPlace, queryPlaces,
+	queryFavouritePlaces
 };
