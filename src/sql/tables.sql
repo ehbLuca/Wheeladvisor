@@ -34,12 +34,6 @@ CREATE TABLE places(
 	CONSTRAINT pk_place_id PRIMARY KEY(place_id)
 );
 
-CREATE TABLE categories(
-	category_id INT(11) AUTO_INCREMENT,
-	name VARCHAR(255) NOT NULL,
-	CONSTRAINT pk_category_id PRIMARY KEY(category_id)
-);
-
 CREATE TABLE reviews(
 	review_id INT(11) AUTO_INCREMENT,
 	name VARCHAR(255) NOT NULL,
