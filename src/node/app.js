@@ -132,31 +132,28 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 }
 
 app.post('/search-coordinates', async (req, res) => {
-	let coordinate = req.body.coordinate;
-	if (coordinate == null) {
+	let {latitude,longitude} = req.body.coordinate;
+	if (latitude == null && longitude == null) {
+		res.send()
 		return;
 	 }
-	let result = await queries.getCoordinates(coordinate);
-	if (result === undefined) {
+	let places = await queries.getCoordinates(req.body.coordinate);
+	if (places.length == 0) {
         res.redirect('/search-coordinates-error.html');
         return;
     }
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition((position) => {
-			userLgn = position.coords.longitude;
-			userLat = position.coords.latitude;
-		});
+	for (let place of places) {
+		let [placeLat, placeLng] = place.coordinate.split(' ')
+		let distance = calculateDistance(latitude, longitude, placeLat, placeLng);
+		
 	}
-	let places = await Promise.all(result.map(async (place) => {
-		let [placeLat, placeLng] = place.coordinate.split(',');
-		let distance = calculateDistance(userLat, userLon, placeLat, placeLng);
-		return { ...place, distance };
-	  }));
-	  places.sort((a, b) => a.distance - b.distance);
-	  res.send(places);
-	});
+	places.sort((a, b) => a.distance - b.distance);
+	res.send(places);
+});
 
-/* */
+// bij te houden per plaats
+
+/*Dit is voor één plek, kan */
 
 app.listen(port, () => {
 	console.log(`http://localhost:${port}`);
