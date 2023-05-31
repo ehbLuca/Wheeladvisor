@@ -92,6 +92,27 @@ async function queryFavouritePlaces(query) {
 	}
 }
 
+// to save place to favourite
+
+async function saveFavourite (place_id,user_id){
+	let conn = null;
+	let results = null;
+	try{
+		conn = await dbConnect();
+		results = await conn.query(`INSERT INTO favorites(place_id, user_id)
+		VALUES(?, ?);`);
+
+	}catch(err){
+		console.error('Error:', err);
+	}
+
+}
+
+
+
+
+
+
 
 // checks credentials of an user returns true if succesful, returns false if an error occurred.
 async function canLogin(values) {
@@ -198,5 +219,5 @@ module.exports = {
 	canLogin, registerUser, 
 	hasToken, storeToken,
 	insertPlace, queryPlaces,
-	queryFavouritePlaces
+	queryFavouritePlaces, saveFavourite
 };
