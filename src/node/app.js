@@ -129,6 +129,21 @@ app.post('/favourite', async (req, res) => {
 	res.send(result);
 });
 
+//for to save favourite
+app.post('/saveFavourite', async(req, res) =>{
+
+	let user_id = req.body.id;
+	let place_id = req.body.id;
+	console.error(`I: (/saveFavourite) Saving favourite`);
+	let result = await queries.saveFavourite(place_id, user_id);
+
+	res.send(result);
+
+})
+
 app.listen(port, () => {
 	console.log(`http://localhost:${port}`);
 });
+
+
+
