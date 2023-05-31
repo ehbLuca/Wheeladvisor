@@ -41,14 +41,14 @@ async function queryDB(query) {
 }
 
 async function insertPlace(place) {
-	let {name, coordinate, category} = place;
+	let {name, coordinates, category} = place;
 	let conn = null;
 	try {
 		conn = await dbConnect();
 		res = await conn.query(`
-			INSERT INTO places(name, latitude, longitude, category)
-			VALUES(?, ?, ?, ?)
-			`, [name, coordinate.latitude, coordinate.longitude, category]);
+			INSERT INTO places(name, coordinate, category)
+			VALUES(?, ?, ?)
+			`, [name, `${coordinates.latitude} ${coordinates.longitude}`, category]);
 	} catch (err) {
 		console.error('Error while doing query:', err);
 	} finally {
@@ -104,6 +104,9 @@ async function saveFavourite (place_id,user_id){
 
 	}catch(err){
 		console.error('Error:', err);
+	}finally{
+		conn.end();
+		return results;
 	}
 
 }
