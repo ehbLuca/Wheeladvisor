@@ -55,15 +55,22 @@ window.addEventListener('DOMContentLoaded', async function () {
 
   submitBtn.addEventListener('click', () => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
+      navigator.geolocation.getCurrentPosition(async (position) => {
         const { latitude, longitude } = position.coords;
         const coordinates = { latitude, longitude };
+        const response = await fetch('/search', {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ coordinate: coordinates })
+        });
+        const data = await response.json();
+        // Do something with the search results
       });
     }
   });
 
-  console.log(coordinates);
-  
 
 
   // isLoading = false;
