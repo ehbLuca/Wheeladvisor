@@ -33,6 +33,7 @@ window.addEventListener('DOMContentLoaded', async function() {
 		  var postElement = document.createElement('div');
 		  var imageElement = document.createElement('img');
 
+		  anchorElement.href = `plekpagina.html?id=${place.place_id}`
 		  imageElement.src = `images/places/${place.place_id}`;
 		  imageElement.classList.add('post-image');
 		  postElement.classList.add('post');
