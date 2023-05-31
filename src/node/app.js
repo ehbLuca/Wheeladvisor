@@ -123,9 +123,9 @@ app.listen(port, () => {
 
 
 app.post('/favourite', async (req, res) => {
-	let query = req.body.q;
-	console.error(`I: (/favourite) Searching for places matching '${query}'.`);
-	let result = await queries.queryFavouritePlaces(query);
+	let user_id = req.body.id;
+	console.error(`I: (/favourite) Searching for places matching '${user_id}'.`);
+	let result = await queries.queryFavouritePlaces(user_id);
 	res.send(result);
 });
 
