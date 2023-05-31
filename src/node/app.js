@@ -131,14 +131,14 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
   return distance;
 }
 
-app.post('/search', async (req, res) => {
+app.post('/search-coordinates', async (req, res) => {
 	let coordinate = req.body.coordinate;
 	if (coordinate == null) {
 		return;
 	 }
 	let result = await queries.getCoordinates(coordinate);
 	if (result === undefined) {
-        res.redirect('/search-error.html');
+        res.redirect('/search-coordinates-error.html');
         return;
     }
 	if (navigator.geolocation) {
@@ -156,8 +156,7 @@ app.post('/search', async (req, res) => {
 	  res.send(places);
 	});
 
-
-
+/* */
 
 app.listen(port, () => {
 	console.log(`http://localhost:${port}`);
