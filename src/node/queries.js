@@ -75,7 +75,6 @@ async function queryPlaces(query, category, adres) {
 	}
 } 
 
-
 async function getCoordinates(coordinate) {
 	let conn = null;
 	let results = null;
@@ -83,8 +82,8 @@ async function getCoordinates(coordinate) {
 		conn = await dbConnect();
 		results = await conn.query(`
 		SELECT * FROM places
-		WHERE UPPER(coordinate) LIKE UPPER(?)
-		`, [`%${coordinate}%`]);
+	
+		`);
 	} catch (err) {
 		console.error(`Error while searching for'${coordinate}'`, err);
 	} finally {
@@ -92,7 +91,6 @@ async function getCoordinates(coordinate) {
 		return results;
 	}
 }
-
 
 // checks credentials of an user returns true if succesful, returns false if an error occurred.
 async function canLogin(values) {
