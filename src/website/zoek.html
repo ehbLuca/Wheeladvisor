@@ -14,7 +14,7 @@
 				<a id="back" href="start.html"><img src="icons/arrow.svg" alt="img" ></a>
 
 				<form action="zoek.html" id="zoek">
-					<input type="text" id="zoek-query" name="q" placeholder="Naam van plaats" value="">
+					<input type="text" id="zoek-query" name="q" placeholder="ZOEKEN?" value="">
 					<!--<input type="text" id="zoek-category" name="category" placeholder="Wat is deze plaats?" value="">
 					<input type="text" id="zoek-adres" name="adres" placeholder="Waar is deze plaats?" value="">
 					<button type="submit" value="Submit">Zoeken!</button>-->
@@ -23,14 +23,14 @@
 				<a id="login" href="login.html"><img src="icons/icons8-login.svg" alt="img" ></a>
 			</section>
 			<section2 id="sec2">
-				<select name="FILTER" id="zoek-category">
-					<option value="">NONE</option>
-					<option value="store">STORE</option>
+				<select name="category" id="zoek-category">
+					<option value="NULL">NONE</option>
+					<option value="shop">SHOP</option>
 					<option value="hotel">HOTEL</option>
 					<option value="restaurant">RESTAURANT</option>
 					<option value="public_transport">PUBLIC TRANSPORT</option>
 				</select>
-				<button id="loc"></button>
+				<button id="submit-btn">Find Nearest Place</button>
 			</section2>
 		</header>
 

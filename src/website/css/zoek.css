@@ -37,7 +37,8 @@ body{
   top: 80px;
 }
 
-#loc{
+#submit-btn{
+  text-align: center;
   width: 20%;
   border-radius: 5rem;
   border: 1px;
@@ -61,15 +62,16 @@ body{
   border: 1px;
   text-align: center;
   padding: 15px;
+  
 }
 
-#request{
+/*#request{
   border-radius: 5rem;
   text-align: center;
   padding: 17px;
   width: 100%;
   border: 1px;
-}
+}*/
 
 #login{
   margin: 10px;
