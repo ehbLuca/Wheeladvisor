@@ -117,10 +117,6 @@ app.post('/search', async (req, res) => {
 	res.send(result);
 });
 
-app.listen(port, () => {
-	console.log(`http://localhost:${port}`);
-});
-
 
 app.post('/favourite', async (req, res) => {
 	let user_id = req.body.id;
