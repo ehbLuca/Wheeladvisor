@@ -1,13 +1,22 @@
-console.log("Test");
+async function getLogin() {
+    return await fetch('/loggedIn').then(
+		result =>  result.json()
+	).catch(
+		error => console.error('Error:', error)
+	);
+}
 
 /*Favorite button aanspreken*/
 const favButton = document.querySelector('.favbutton');
 
-favButton.addEventListener('click', () => {
+favButton.addEventListener('click', async () => {
+	const urlParams = new URLSearchParams(window.location.search);
+	const place_id = urlParams.get("id");
+	const user_id = await getLogin();
 /*Sends an HTTP POST request to the server with the current page URL as the payload*/
-  fetch('/favorites', {
+  fetch('/saveFavourite', {
     method: 'POST',
-    body: JSON.stringify({url: window.location.href}),
+    body: JSON.stringify({place_id, user_id}),
     headers: {
       'Content-Type': 'application/json'
     }
@@ -24,9 +33,3 @@ favButton.addEventListener('click', () => {
 
   });
 });
-
-
-
-
-
-
