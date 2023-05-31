@@ -114,6 +114,13 @@ app.post('/search', async (req, res) => {
 	res.send(result);
 });
 
+app.post('/getplace', async (req, res) => {
+	let place_id = req.body.place_id;
+	let result = await queries.getPlace(place_id);
+	res.send(result);
+});
+
+
 app.listen(port, () => {
 	console.log(`http://localhost:${port}`);
 });
