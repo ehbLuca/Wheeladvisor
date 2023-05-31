@@ -26,7 +26,8 @@ CREATE TABLE tokens(
 CREATE TABLE places(
 	place_id INT(11) AUTO_INCREMENT,
 	name VARCHAR(255) NOT NULL UNIQUE,
-	coordinate VARCHAR(64) NOT NULL,
+	latitdue FLOAT(32) NOT NULL,
+	longitude FLOAT(32) NOT NULL,
 	address VARCHAR(255) NULL,
 	category VARCHAR(255) NOT NULL,
 	description TEXT NULL,
