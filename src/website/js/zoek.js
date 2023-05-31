@@ -32,8 +32,8 @@ window.addEventListener('DOMContentLoaded', async function() {
 		var anchorElement = document.createElement('a');
 		var postElement = document.createElement('div');
 		var imageElement = document.createElement('img');
-		let fileUrl = `images/places/${place.place_id}`;
-		let imageExist = await fetch (fileUrl, { method: 'HEAD' })
+		let fileURL = `images/places/${place.place_id}`;
+		let imageExist = await fetch (fileURL, { method: 'HEAD' })
 			.then(response => {
 				return response.ok; // Returns true if the file exists, false otherwise
 			})
