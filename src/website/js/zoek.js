@@ -33,7 +33,20 @@ window.addEventListener('DOMContentLoaded', async function() {
 		  var postElement = document.createElement('div');
 		  var imageElement = document.createElement('img');
 
-		  imageElement.src = `images/places/${place.place_id}`;
+      
+		 let fileUrl = `images/places/${place.place_id}`;
+       let imageExist = await fetch (fileUrl, { method: 'HEAD' })
+          .then(response => {
+            return response.ok; // Returns true if the file exists, false otherwise
+          })
+          .catch(() => {
+            return false; // Error occurred, file does not exist
+          });
+      
+      if (imageExist) 
+        imageElement.src = fileURL;
+      else
+        imageElement.src = 'images/fallbackfoto.png';
 		  imageElement.classList.add('post-image');
 		  postElement.classList.add('post');
 		  postElement.textContent = place.name;
@@ -41,7 +54,7 @@ window.addEventListener('DOMContentLoaded', async function() {
 		  postElement.appendChild(imageElement);
 		  contentContainer.appendChild(anchorElement);
 		  anchorElement.appendChild(postElement);
-      }
+    }
   
       // isLoading = false;
       // page++;
