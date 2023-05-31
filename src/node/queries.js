@@ -100,7 +100,7 @@ async function saveFavourite (place_id,user_id){
 	try{
 		conn = await dbConnect();
 		results = await conn.query(`INSERT INTO favorites(place_id, user_id)
-		VALUES(?, ?);`);
+		VALUES(?, ?);`, [place_id, user_id]);
 
 	}catch(err){
 		console.error('Error:', err);
