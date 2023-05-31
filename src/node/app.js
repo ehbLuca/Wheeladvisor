@@ -121,3 +121,14 @@ app.listen(port, () => {
 	console.log(`http://localhost:${port}`);
 });
 
+
+app.post('/favourite', async (req, res) => {
+	let query = req.body.q;
+	console.error(`I: (/favourite) Searching for places matching '${query}'.`);
+	let result = await queries.queryFavouritePlaces(query);
+	res.send(result);
+});
+
+app.listen(port, () => {
+	console.log(`http://localhost:${port}`);
+});
