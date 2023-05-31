@@ -11,6 +11,33 @@
 </head>
 
 <body>
+<script>
+async function getPlace() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const place_id = urlParams.get("place_id");
+	return fetch("/getplace", {
+		method: "POST",
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			place_id
+		})
+	}).then(
+		result => result.json()
+	).catch(
+		err => console.error('Error:', err)
+	)
+}
+
+window.addEventListener('DOMContentLoaded', async function() {
+        
+      let place = await getPlace();
+console.log(place)
+});
+
+
+</script>
 
     <section class="container">
 
