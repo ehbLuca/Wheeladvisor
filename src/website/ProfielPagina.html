@@ -11,33 +11,32 @@
 </head>
 
 <body>
-<script>
-async function getPlace() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const place_id = urlParams.get("place_id");
-	return fetch("/getplace", {
-		method: "POST",
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({
-			place_id
-		})
-	}).then(
-		result => result.json()
-	).catch(
-		err => console.error('Error:', err)
-	)
-}
+    <script>
+        async function getPlace() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const place_id = urlParams.get("place_id");
+            return fetch("/getplace", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    place_id
+                })
+            }).then(
+                result => result.json()
+            ).catch(
+                err => console.error('Error:', err)
+            )
+        }
 
-window.addEventListener('DOMContentLoaded', async function() {
-        
-      let place = await getPlace();
-console.log(place)
-});
+        window.addEventListener('DOMContentLoaded', async function () {
+            let place = await getPlace();
+            console.log(place)
+        });
 
 
-</script>
+    </script>
 
     <section class="container">
 
@@ -52,7 +51,7 @@ console.log(place)
                     </button>
                 </form>
 
-              
+
             </div>
 
 
@@ -60,13 +59,13 @@ console.log(place)
 
             <div class="ster">
 
-               
+
 
                 <div class="save">
-                    
+
 
                     &nbsp;
-    
+
                     <div class="staraverage">
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
@@ -74,21 +73,21 @@ console.log(place)
                         <span class="fa fa-star"></span>
                         <span class="fa fa-star"></span>
                     </div>
-                <button type="button" class="sharebutton">Share</button>
+                    <button type="button" class="sharebutton">Share</button>
 
-                <form class="share">
-                    <button type="button" class="favbutton"><img src="images/favorite.png" alt="buttonpng" width="25"
-                            height="40" /></button>
-                </form>
-              </div>  
+                    <form class="share">
+                        <button type="button" class="favbutton"><img src="images/favorite.png" alt="buttonpng"
+                                width="25" height="40" /></button>
+                    </form>
+                </div>
 
-              <h1>Name place</h1>
-              
-            <div class="gallery">
-                <img src="images/img1.jpg" alt="Image 1 of place">
-               
-            </div>
-    
+                <h1>Name place</h1>
+
+                <div class="gallery">
+                    <img src="images/img1.jpg" alt="Image 1 of place">
+
+                </div>
+
 
             </div>
 
@@ -98,7 +97,7 @@ console.log(place)
             &nbsp;
 
 
-            
+
 
             &nbsp;
 
