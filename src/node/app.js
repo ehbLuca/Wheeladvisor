@@ -161,7 +161,7 @@ app.get('/deleteFavorite/user_id/:user_id/place_id/:place_id', async (req, res) 
 app.get('/mostFavorite', function (req, res) {
 
 	let result = queries.mostFavorite();
-	console.log
+	console.log(result);
 	res.send(result);
 
 })
