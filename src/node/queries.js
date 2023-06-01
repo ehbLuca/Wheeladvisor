@@ -41,14 +41,14 @@ async function queryDB(query) {
 }
 
 async function insertPlace(place) {
-	let {name, coordinate, category} = place;
+	let {name, coordinates, category} = place;
 	let conn = null;
 	try {
 		conn = await dbConnect();
 		res = await conn.query(`
-			INSERT INTO places(name, latitude, longitude, category)
-			VALUES(?, ?, ?, ?)
-			`, [name, coordinate.latitude, coordinate.longitude, category]);
+			INSERT INTO places(name, coordinate, category)
+			VALUES(?, ?, ?)
+			`, [name, `${coordinates.latitude} ${coordinates.longitude}`, category]);
 	} catch (err) {
 		console.error('Error while doing query:', err);
 	} finally {
@@ -89,6 +89,64 @@ async function getPlaces() {
 		conn.end();
 		return places;
 	}
+}
+
+// Get favourite places from database
+
+async function queryFavouritePlaces(user_id) {
+	let conn = null;
+	let results = null;
+	try {
+		conn = await dbConnect();
+		results = await conn.query(`
+		SELECT p.place_id, p.name, p.category, p.address FROM favorites f
+		JOIN places p
+			ON p.place_id = f.place_id
+		WHERE f.user_id = ?`, [user_id]);
+	} catch (err) {
+		console.error(`Error while searching for'${user_id}'`, err);
+	} finally {
+		conn.end();
+		return results;
+	}
+}
+
+// to save place to favourite
+
+async function saveFavourite (place_id, user_id){
+	let conn = null;
+	let results = null;
+	try{
+		conn = await dbConnect();
+		results = await conn.query(`INSERT INTO favorites(place_id, user_id)
+		VALUES(?, ?);`, [place_id, user_id]);
+
+	}catch(err){
+		console.error('Error:', err);
+	}finally{
+		conn.end();
+		return results;
+	}
+
+}
+
+
+// to delete favourite place
+
+async function deleteFavourite (place_id, user_id){
+	let conn = null;
+	let results = null;
+	try{
+		conn = await dbConnect();
+		results = await conn.query(`DELETE FROM favorites 
+		where place_id =? AND user_id=?;`, [place_id, user_id]);
+	}catch(err){
+		console.error('Error:', err);
+	}finally{
+		conn.end();
+		return results;
+	}
+
 }
 
 // checks credentials of an user returns true if succesful, returns false if an error occurred.
@@ -137,16 +195,36 @@ async function hasToken(token)
 	try {
 		conn = await dbConnect();
 		let results = await conn.query(`
-			SELECT LOWER(email) AS email FROM users u
+			SELECT t.user_id FROM users u
 			JOIN tokens t
 				ON u.user_id = t.user_id
 			WHERE t.value = ?
 			`, [token])
 		conn.end()
 		console.log(`I: (hasToken) results: `, results);
-		return results[0]?.email;
+		return results[0]?.user_id;
 	} catch(err) {
 		console.error('Error:', err);
+	}
+}
+
+async function getPlace(place_id) {
+	let conn = null;
+	let place = null;
+	try {
+		conn = await dbConnect();
+		let results = await conn.query(`
+		SELECT * FROM places
+		WHERE place_id = ?
+		`, [place_id]);
+		if (results.length > 0)
+			place = results[0];
+	} catch(err) {
+		console.error('Error:', err);
+	} finally {
+		conn.end()
+		console.log('I: (getPlace)) place:', place);
+		return place;
 	}
 }
 
@@ -195,5 +273,7 @@ async function storeToken(email, token)
 module.exports = {
 	canLogin, registerUser, 
 	hasToken, storeToken,
-	insertPlace, queryPlaces, getPlaces
+	insertPlace, queryPlaces, getPlace,
+	queryFavouritePlaces, saveFavourite,
+	deleteFavourite
 };

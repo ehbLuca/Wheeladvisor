@@ -4,6 +4,8 @@ body {
     background-color: var(--bg-color);
 }
 
+#map { height: 180px; }
+
 
 /*container om flex aan te passen*/
 
