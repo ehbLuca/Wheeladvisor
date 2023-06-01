@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="css/ProfielPagina.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Profiel Plaats</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 </head>
 
 <body>
@@ -34,20 +36,36 @@
             let place = await getPlace();
             console.log(place)
             document.querySelector('h1').textContent = place.name;
-});       
+            initMap();
+        });
 
-function share() {
-  if (navigator.share) {
-    navigator.share({
-      title: document.title,
-      url: window.location.href
-    })
-      .then(() => console.log('Shared successfully'))
-      .catch(error => console.error('Error sharing:', error));
-  } else {
-    console.warn('Web Share API not supported');
-  }
-}
+        function share() {
+            if (navigator.share) {
+                navigator.share({
+                    title: document.title,
+                    url: window.location.href
+                })
+                    .then(() => console.log('Shared successfully'))
+                    .catch(error => console.error('Error sharing:', error));
+            } else {
+                console.warn('Web Share API not supported');
+            }
+        }
+
+
+        function initMap() {
+            const latitude = place.latitude;
+            const longitude = place.longitude;
+            const map = L.map('map').setView([latitude, longitude], 13);
+            const osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+            const osmAttrib = 'Map data © OpenStreetMap contributors';
+            const osmLayer = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib });
+            osmLayer.addTo(map);
+            const marker = L.marker([latitude, longitude]).addTo(map);
+            marker.bindPopup('<b>' + place.name + '</b><br>' + place.address);
+            const googleMapsLink = '<a href="https://www.google.com/maps?q=' + latitude + ',' + longitude + '" target="_blank">View on Google Maps</a>';
+            document.querySelector('.Adress').innerHTML += googleMapsLink;
+        }
     </script>
 
     <section class="container">
@@ -87,7 +105,7 @@ function share() {
                     </div>
                     <button type="button" class="sharebutton" onclick="share()">Share</button>
 
-                    
+
 
                     <form class="share">
                         <button type="button" class="favbutton"><img src="images/favorite.png" alt="buttonpng"
@@ -164,6 +182,8 @@ function share() {
                 Here comes adress.<br>
                 XXXX Stad
             </p>
+
+            <div id="map"></div>
 
             <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
                 src="https://www.openstreetmap.org/export/embed.html?bbox=3.025360107421875%2C50.45575537567455%2C4.791412353515625%2C50.993878771898764&amp;layer=mapnik"
