@@ -49,7 +49,7 @@ window.addEventListener('DOMContentLoaded', async function() {
 		// desing for delete button
 			var deleteElement = document.createElement('a');
      	  var buttonElement = document.createElement('button');
-		  buttonElement.value = 'delete';
+		  buttonElement.innerText = 'delete';
 	  
 		  let place_id = place.place_id;
 		  let user_id = await getLogin();
