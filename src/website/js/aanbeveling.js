@@ -11,8 +11,6 @@ async function getPlaces() {
 		body: JSON.stringify(result)
 	}).then(
 		result => result.json()
-	).catch(
-		err => console.error('Error:', err)
 	)
 }
 
@@ -24,7 +22,7 @@ window.addEventListener('DOMContentLoaded', async function() {
 	let place = await getPlaces();
 
 	
-		console.log(place)
+		
 		var anchorElement = document.createElement('a');
 		var postElement = document.createElement('div');
 		var imageElement = document.createElement('img');
