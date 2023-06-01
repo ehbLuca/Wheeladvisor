@@ -4,7 +4,7 @@ async function getPlaces() {
 	const urlParams = new URLSearchParams(window.location.search);
 	const user_id = urlParams.get("id");
 	return fetch("/mostFavorite", {
-		method: "POST",
+		method: "GET",
 		headers: {
 			'Content-Type': 'application/json'
 		},
