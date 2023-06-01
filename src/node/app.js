@@ -32,8 +32,12 @@ app.get('/', (req, res) => {
 // returns the user's email if he is signed in
 app.get('/loggedIn', async(req, res) => {
 	let {authToken} = req.cookies;
-	if(authToken && await queries.hasToken(authToken))
-		res.send(JSON.stringify(1));
+	let user_id;
+	if(authToken){
+		user_id = await queries.hasToken(authToken)
+		res.send(JSON.stringify(user_id));
+		console.log(user_id);
+	}
 	else
 		res.send(JSON.stringify(null))
 });
@@ -132,6 +136,44 @@ app.post('/search', async (req, res) => {
 
 	res.send(result);
 });
+
+
+
+app.post('/favourite', async (req, res) => {
+	let user_id = req.body.user_id;
+	console.error(`I: (/favourite) Searching for places matching '${user_id}'.`);
+	let result = await queries.queryFavouritePlaces(user_id);
+	res.send(result);
+});
+
+//for to save favourite
+app.post('/saveFavourite', async(req, res) =>{
+
+	let user_id = req.body.user_id;
+	let place_id = req.body.place_id;
+	console.error(`I: (/saveFavourite) Saving favourite`);
+	await queries.saveFavourite(place_id, user_id);
+	res.send();
+})
+
+//to delete favorite
+app.get('/deleteFavorite/user_id/:userId/place_id/:place_id', async (req, res) => {
+
+    let {user_id, place_id} = req.params;
+    if (!(user_id && place_id))
+    {
+        res.send(false)
+        return
+    }
+    let result = await queries.deleteFavorite(user_id, place_id);
+    if (result)
+    {
+        res.send(true)
+        return
+    }
+    res.send(false)
+});
+
 
 app.listen(port, () => {
 	console.log(`http://localhost:${port}`);
