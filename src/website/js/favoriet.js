@@ -30,8 +30,6 @@ async function getLogin() {
 
 
 
-
-
 window.addEventListener('DOMContentLoaded', async function() {
 
   var contentContainer = document.getElementById('contentContainer');
@@ -48,27 +46,33 @@ window.addEventListener('DOMContentLoaded', async function() {
 		  var anchorElement = document.createElement('a');
 		  var postElement = document.createElement('div');
 		  var imageElement = document.createElement('img');
+		// desing for delete button
+			var deleteElement = document.createElement('a');
      	  var buttonElement = document.createElement('button');
-
-      buttonElement.addEventListener("click", async () => {
-		const urlParams = new URLSearchParams (this.window.location.search);
-		const place_id = urlParams.get("id");
-		const user_id = await getLogin();
-		
-
+		  buttonElement.value = 'delete';
+	  
+		  let place_id = place.place_id;
+		  let user_id = await getLogin();
 		if (user_id){
 
-			buttonElement.action = '/deleteFavorite/user_id/:userId/place_id/:place_id' + `${place_id, user_id}`;
-			buttonElement.style.display = 'none';
+			deleteElement.href = `/deleteFavorite/user_id/${user_id}/place_id/${place_id}`;
 		}
      
-      })
+		console.log(user_id, place_id);
+ 
 
-		  imageElement.src = `images/places/${place.place_id}`;
+		 
 		  imageElement.classList.add('post-image');
 		  postElement.classList.add('post');
 		  postElement.textContent = place.name;
-
+		  let fileURL = `images/places/${place.place_id}`;
+		  let imageExist = await fetch (fileURL, { method: 'HEAD' })
+			  .then(response => {
+				  return response.ok; // Returns true if the file exists, false otherwise
+			  })
+			  .catch(() => {
+				  return false; // Error occurred, file does not exist
+			  });
 
 		if (imageExist) 
 			imageElement.src = fileURL;
@@ -79,8 +83,11 @@ window.addEventListener('DOMContentLoaded', async function() {
 		postElement.classList.add('post');
 		postElement.textContent = place.name;
 
-		postElement.appendChild(imageElement);
-		contentContainer.appendChild(anchorElement);
-		anchorElement.appendChild(postElement);
+		
+		postElement.appendChild(anchorElement);
+		postElement.appendChild(deleteElement);
+		deleteElement.appendChild(buttonElement);
+		anchorElement.appendChild(imageElement);
+		contentContainer.appendChild(postElement);
 	}
 });
