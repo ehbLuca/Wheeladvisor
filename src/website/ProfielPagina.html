@@ -33,9 +33,21 @@
         window.addEventListener('DOMContentLoaded', async function () {
             let place = await getPlace();
             console.log(place)
-        });
+            document.querySelector('h1').textContent = place.name;
+});       
 
-
+function share() {
+  if (navigator.share) {
+    navigator.share({
+      title: document.title,
+      url: window.location.href
+    })
+      .then(() => console.log('Shared successfully'))
+      .catch(error => console.error('Error sharing:', error));
+  } else {
+    console.warn('Web Share API not supported');
+  }
+}
     </script>
 
     <section class="container">
@@ -73,7 +85,9 @@
                         <span class="fa fa-star"></span>
                         <span class="fa fa-star"></span>
                     </div>
-                    <button type="button" class="sharebutton">Share</button>
+                    <button type="button" class="sharebutton" onclick="share()">Share</button>
+
+                    
 
                     <form class="share">
                         <button type="button" class="favbutton"><img src="images/favorite.png" alt="buttonpng"
