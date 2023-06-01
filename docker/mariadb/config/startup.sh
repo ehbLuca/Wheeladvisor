@@ -1,7 +1,5 @@
 #!/bin/sh
 
-nginx
-
 # start mariadbd in background
 mariadb-server &
 
@@ -13,9 +11,6 @@ done
 
 mariadb < /tmp/setup.sql
 shred -uz /tmp/setup.sql
-
-npm install
-npm start
 
 # This will keep the container running
 tail -f /dev/null
