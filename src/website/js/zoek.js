@@ -1,14 +1,14 @@
 'use strict'
-async function getPlaces() {
-	const urlParams = new URLSearchParams(window.location.search);
-	const query = urlParams.get("q");
+
+async function searchPlaces(query, category, address) {
+
 	return fetch("/search", {
 		method: "POST",
 		headers: {
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify({
-			q: query
+			query, category, address,
 		})
 	}).then(
 		result => result.json()
@@ -17,10 +17,10 @@ async function getPlaces() {
 	)
 }
 
-window.addEventListener('DOMContentLoaded', async function() {
+async function createPlaces(places)
+{
 	var contentContainer = document.getElementById('contentContainer');
-
-	let places = await getPlaces();
+	contentContainer.innerHTML = ''
 
 	for (let place of places) {
 		console.log(place)
@@ -48,5 +48,71 @@ window.addEventListener('DOMContentLoaded', async function() {
 		postElement.appendChild(imageElement);
 		contentContainer.appendChild(anchorElement);
 		anchorElement.appendChild(postElement);
+	}
+}
+
+async function findNearestPlace(position) {
+	const latitude = position.coords.latitude;
+	const longitude = position.coords.longitude;
+
+	const data = {
+		latitude: latitude,
+		longitude: longitude
+	};
+
+	const requestOptions = {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(data)
+	};
+
+	let places =  await fetch('/search-coordinates', requestOptions)
+		.then(
+			response => response.json()
+		)
+		.catch(
+			err => console.error('Error:', err)
+		)
+	createPlaces(places);
+}
+window.addEventListener('DOMContentLoaded', async function () {
+	const urlParams = new URLSearchParams(window.location.search);
+	const query = urlParams.get("q");
+	const category = urlParams.get("category");
+	const address = urlParams.get("address");
+	document.getElementById('zoek-query').value = query;
+	document.getElementById('zoek-category').value = category;
+	document.getElementById('zoek-address').value = address;
+	let places = await searchPlaces(query, category, address);
+	createPlaces(places)
+});
+
+function handleError(error) {
+	switch (error.code) {
+		case error.PERMISSION_DENIED:
+			console.log("User denied the request for Geolocation.");
+			break;
+		case error.POSITION_UNAVAILABLE:
+			console.log("Location information is unavailable.");
+			break;
+		case error.TIMEOUT:
+			console.log("The request to get user location timed out.");
+			break;
+		case error.UNKNOWN_ERROR:
+			console.log("An unknown error occurred.");
+			break;
+	}
+}
+
+const submitBtn = document.getElementById('submit-btn');
+submitBtn.addEventListener('click', function(event) {
+	event.preventDefault();
+
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(findNearestPlace, handleError);
+	} else {
+		console.log("Geolocation is not supported by this browser.");
 	}
 });
