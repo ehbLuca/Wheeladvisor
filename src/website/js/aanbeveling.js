@@ -8,9 +8,7 @@ async function getPlaces() {
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify({
-			user_id
-		})
+		body: JSON.stringify(result)
 	}).then(
 		result => result.json()
 	).catch(
