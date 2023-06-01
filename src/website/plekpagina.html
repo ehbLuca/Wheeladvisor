@@ -16,16 +16,22 @@
 
 
 
-        <section class="kader">
+        
 
             <div class="header">
-                <form>
-                    <button type="button" class="backbutton" value="Back" onclick="history.back()">
-                        <img src="images/back-button.png" alt="buttonpng" width="30" height="30" />
-                    </button>
-                </form>
+                
+                <button type="button" class="backbutton" value="Back" onclick="history.back()">
+                    <img src="icons/arrow.svg" alt="backpng" width="30" height="30" />
+                </button>
 
-              
+                
+                <h1>Name place</h1>
+                
+                <button type="button" class="login" value="Login" onclick="location.href('login.html')">
+                    <img src="icons/icons8-login.svg" alt="loginpng" width="50" height="50" />
+                </button>
+
+                    
             </div>
 
 
@@ -33,12 +39,14 @@
 
             <div class="ster">
 
+                <div class="gallery">
+                    <img src="images/img1.jpg" alt="Image 1 of place">
                
+                </div>
 
                 <div class="save">
                     
 
-                    &nbsp;
     
                     <div class="staraverage">
                         <span class="fa fa-star checked"></span>
@@ -47,20 +55,16 @@
                         <span class="fa fa-star"></span>
                         <span class="fa fa-star"></span>
                     </div>
-                <button type="button" class="sharebutton">Share</button>
+                    <div class="legeDoos">
+                        <button type="button" class="sharebutton"><img src="icons/SHARE.png"></button>
 
-                <form class="share">
-                    <button type="button" class="favbutton"><img src="images/favorite.png" alt="buttonpng" width="25"
-                            height="40" /></button>
-                </form>
-              </div>  
+                        <form class="share">
+                            <button type="button" class="favbutton"><img src="images/favorite.png" alt="buttonpng" width="25" height="40" /></button>
+                        </form>
 
-              <h1>Name place</h1>
-              
-            <div class="gallery">
-                <img src="images/img1.jpg" alt="Image 1 of place">
-               
-            </div>
+                    </div>
+                    
+                </div> 
     
 
             </div>
@@ -120,12 +124,9 @@
 
             &nbsp;
 
-            <p class="Adress">
-                Here comes adress.<br>
-                XXXX Stad
-            </p>
+            <p class="Adress">adress</p>
 
-            <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+            <iframe width=80% height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
                 src="https://www.openstreetmap.org/export/embed.html?bbox=3.025360107421875%2C50.45575537567455%2C4.791412353515625%2C50.993878771898764&amp;layer=mapnik"
                 style="border: 1px solid black"></iframe><br /><small><a
                     href="https://www.openstreetmap.org/#map=10/50.7256/3.9084">Map bigger size?</a></small>
@@ -171,7 +172,7 @@
                 </form>
             </div>
 
-        </section>
+        
 
 
     </section>

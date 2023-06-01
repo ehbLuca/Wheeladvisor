@@ -2,6 +2,7 @@
 
 body {
     background-color: var(--bg-color);
+    color: white;
 }
 
 
@@ -10,7 +11,8 @@ body {
 .container{
     display: flex;
     flex-direction: column;
-    justify-items: center;
+    align-items: center;
+    
 }
  
 /*container eindig hier*/
@@ -42,28 +44,24 @@ body {
 
 .ster{
     display: flex;
+    width: 100%;
     flex-direction: column;
     justify-content: space-between;
 }
 
 /*kader*/
 
-.kader{
-    display: flex;
-    flex-direction: column;
-    justify-items: center;
-}
-
 .gallery{
     align-self: center;
+    width: 100%;
     
 }
 
 .save{
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 /*kader eindigt hier*/
@@ -72,23 +70,60 @@ body {
 button {
     background-color: inherit;
     cursor: pointer;
+    border: none;
+}
+.legeDoos{
+    display: flex;
+    flex-direction: row;
 }
 
 .backbutton {
-    border: none;
   padding: 15px;
   float: left;
 }
-
-.sharebutton {
-    background-color: lightskyblue;
-    float: right;
-  padding: 5px;
+.backbutton img{
+    filter: invert();
+}
+.backbutton :hover{
+    filter: none;
 }
 
+.login{
+    padding: 15px;
+    
+}
+.login img{
+    display: flex;
+    width: 100%;
+    filter: invert();
+    
+}
+.login :hover{
+    filter: none;
+}
+
+.sharebutton {
+  padding: 5px;
+  margin-right: 0;
+  width: 45px;
+  display: block;
+}
+.sharebutton img{
+    display: block;
+    width: 100%;
+    filter: invert();
+}
+.sharebutton :hover{
+    filter: none;    
+}
 .favbutton {
-    border: none;
     float: right;
+}
+.favbutton img{
+    filter: invert();
+}
+.favbutton :hover{
+    filter: none;
 }
 
 h1 {
@@ -97,35 +132,34 @@ h1 {
 
 .staraverage {
     align-self: center;
-    justify-self: end;
 }
 
 .checked {
     color: orange;
- }
+}
 
 .gallery {
     text-align: center;
     border: 3px solid black;
     margin-top: 10px;
     padding: 80px;
-    background-color: whitesmoke;
     overflow: auto;
     white-space: nowrap;
-    padding: 10px;
+    padding: 0px;
+    margin-bottom: 10px;
     width: 60%;
-    }
+}
       
- div.gallery img {
-        padding: 10px;
-        width: 350px;
-        height: 360px;
- }
+div.gallery img {
+    display: block;
+    width: 100%;
+}
 
 .description {
     border: 2px outset black;
     width: 45%;
     padding: 20px;
+    align-self: center;
 }
 
 .positives {
