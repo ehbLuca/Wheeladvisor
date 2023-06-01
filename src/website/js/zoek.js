@@ -1,38 +1,38 @@
 'use strict'
 async function getPlaces(query, category, address) {
 
-  return fetch("/search", {
-    method: "POST",
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      query: query,
-      category: category,
-      address: address,
-    })
-  }).then(
-    result => result.json()
-  ).catch(
-    err => console.error('Error:', err)
-  )
+	return fetch("/search", {
+		method: "POST",
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			query: query,
+			category: category,
+			address: address,
+		})
+	}).then(
+		result => result.json()
+	).catch(
+		err => console.error('Error:', err)
+	)
 }
 
 window.addEventListener('DOMContentLoaded', async function () {
-  const urlParams = new URLSearchParams(window.location.search);
-  const query = urlParams.get("q");
-  const category = urlParams.get("category");
-  const address = urlParams.get("address");
-  document.getElementById('zoek-query').value = query;
-  document.getElementById('zoek-category').value = category;
-  document.getElementById('zoek-address').value = address;
-  var contentContainer = document.getElementById('contentContainer');
+	const urlParams = new URLSearchParams(window.location.search);
+	const query = urlParams.get("q");
+	const category = urlParams.get("category");
+	const address = urlParams.get("address");
+	document.getElementById('zoek-query').value = query;
+	document.getElementById('zoek-category').value = category;
+	document.getElementById('zoek-address').value = address;
+	var contentContainer = document.getElementById('contentContainer');
 
-  let places = await getPlaces(query, category, address);
+	let places = await getPlaces(query, category, address);
 
-  for (let place of places) {
-    console.log(place)
-    var anchorElement = document.createElement('a');
+	for (let place of places) {
+		console.log(place)
+		var anchorElement = document.createElement('a');
 		var postElement = document.createElement('div');
 		var imageElement = document.createElement('img');
 		let fileURL = `images/places/${place.place_id}`;
@@ -53,25 +53,27 @@ window.addEventListener('DOMContentLoaded', async function () {
 		postElement.classList.add('post');
 		postElement.textContent = place.name;
 
-    postElement.appendChild(imageElement);
-    contentContainer.appendChild(anchorElement);
-    anchorElement.appendChild(postElement);
-  }});
+		postElement.appendChild(imageElement);
+		contentContainer.appendChild(anchorElement);
+		anchorElement.appendChild(postElement);
+	}
+});
 
-  const submitBtn = document.getElementById('submit-btn');
+const submitBtn = document.getElementById('submit-btn');
 
-  submitBtn.addEventListener('click', () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(async (position) => {
+submitBtn.addEventListener('click', () => {
+	console.log('click')
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(async (position) => {
 
-        const response = await fetch('/search-coordinates', {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ coordinate: position.coords })
-        });
-        const data = await response.json();
-      });
-    }
-  });
+			const response = await fetch('/search-coordinates', {
+				method: "POST",
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ coordinate: position.coords })
+			});
+			const data = await response.json();
+		});
+	}
+})
