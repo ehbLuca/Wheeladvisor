@@ -32,7 +32,11 @@ window.addEventListener('DOMContentLoaded', async function() {
 		  var anchorElement = document.createElement('a');
 		  var postElement = document.createElement('div');
 		  var imageElement = document.createElement('img');
+      var buttonElement = document.createElement('button');
 
+      buttonElement.addEventListener("click", async function (){
+        
+      })
 		  imageElement.src = `images/places/${place.place_id}`;
 		  imageElement.classList.add('post-image');
 		  postElement.classList.add('post');
