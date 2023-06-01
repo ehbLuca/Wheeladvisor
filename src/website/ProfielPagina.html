@@ -8,15 +8,18 @@
     <link rel="stylesheet" href="css/ProfielPagina.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Profiel Plaats</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
 
 <body>
     <script>
         async function getPlace() {
             const urlParams = new URLSearchParams(window.location.search);
-            const place_id = urlParams.get("place_id");
+            const place_id = urlParams.get("id");
             return fetch("/getplace", {
                 method: "POST",
                 headers: {
@@ -34,9 +37,10 @@
 
         window.addEventListener('DOMContentLoaded', async function () {
             let place = await getPlace();
-            console.log(place)
+            console.log(place);
             document.querySelector('h1').textContent = place.name;
-            initMap();
+            document.querySelector('.description').textContent = place.description;
+            document.querySelector('.address').textContent = place.address;
         });
 
         function share() {
@@ -53,19 +57,8 @@
         }
 
 
-        function initMap() {
-            const latitude = place.latitude;
-            const longitude = place.longitude;
-            const map = L.map('map').setView([latitude, longitude], 13);
-            const osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-            const osmAttrib = 'Map data © OpenStreetMap contributors';
-            const osmLayer = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib });
-            osmLayer.addTo(map);
-            const marker = L.marker([latitude, longitude]).addTo(map);
-            marker.bindPopup('<b>' + place.name + '</b><br>' + place.address);
-            const googleMapsLink = '<a href="https://www.google.com/maps?q=' + latitude + ',' + longitude + '" target="_blank">View on Google Maps</a>';
-            document.querySelector('.Adress').innerHTML += googleMapsLink;
-        }
+
+
     </script>
 
     <section class="container">
@@ -176,14 +169,23 @@
 
             <div style="clear:both;"></div>
 
+            <div id="map"></div>
+
+            <script>var map = L.map('map').setView([50.8455965, 4.3822632], 13);
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                }).addTo(map);
+                var marker = L.marker([50.8455965, 4.3822632]).addTo(map);</script>
+
             &nbsp;
 
-            <p class="Adress">
+            <p class="address">
                 Here comes adress.<br>
                 XXXX Stad
             </p>
 
-            <div id="map"></div>
+
 
             <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
                 src="https://www.openstreetmap.org/export/embed.html?bbox=3.025360107421875%2C50.45575537567455%2C4.791412353515625%2C50.993878771898764&amp;layer=mapnik"
