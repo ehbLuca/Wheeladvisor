@@ -169,14 +169,7 @@
 
             <div style="clear:both;"></div>
 
-            <div id="map"></div>
 
-            <script>var map = L.map('map').setView([50.8455965, 4.3822632], 13);
-                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 19,
-                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                }).addTo(map);
-                var marker = L.marker([50.8455965, 4.3822632]).addTo(map);</script>
 
             &nbsp;
 
@@ -185,16 +178,24 @@
                 XXXX Stad
             </p>
 
+            <div id="map"></div>
+
+            <script>
+                window.addEventListener('DOMContentLoaded', async function () {
+            let place = await getPlace();
+            var map = L.map('map').setView([place.latitude, place.longitude], 13);
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                }).addTo(map);
+                var marker = L.marker([place.latitude, place.longitude]).addTo(map);
+        });
+
+            </script>
 
 
-            <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=3.025360107421875%2C50.45575537567455%2C4.791412353515625%2C50.993878771898764&amp;layer=mapnik"
-                style="border: 1px solid black"></iframe><br /><small><a
-                    href="https://www.openstreetmap.org/#map=10/50.7256/3.9084">Map bigger size?</a></small>
 
-            <form action="https://www.google.be/maps">
-                <input type="submit" value="Open in Google Maps" />
-            </form>
+        
 
             &nbsp;
 
