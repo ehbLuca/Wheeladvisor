@@ -113,6 +113,16 @@ app.post('/search', async (req, res) => {
 	res.send(result);
 });
 
+app.post('/getplace', async (req, res) => {
+	let place_id = req.body.place_id;
+	let place = await queries.getPlace(place_id);
+	if (!place) {
+		res.redirect("/zoek.html")
+		return
+	}
+	res.send(place);
+});
+
 app.listen(port, () => {
 	console.log(`http://localhost:${port}`);
 });
