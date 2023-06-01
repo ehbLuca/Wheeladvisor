@@ -9,7 +9,7 @@ CREATE TABLE users(
 	user_id INT(11) AUTO_INCREMENT,
 	name VARCHAR(16) NOT NULL,
 	email VARCHAR(32) NOT NULL UNIQUE,
-	password VARCHAR(16) NOT NULL,
+	password VARCHAR(64) NOT NULL,
 	CONSTRAINT pk_user_id PRIMARY KEY(user_id)
 );
 
@@ -29,7 +29,7 @@ CREATE TABLE places(
 	latitude DOUBLE NOT NULL,
 	longitude DOUBLE NOT NULL,
 	address VARCHAR(255) NULL,
-	category VARCHAR(16) NOT NULL,
+	category VARCHAR(18) NOT NULL,
 	description TEXT NULL,
 	proscons TEXT NULL,
 	CONSTRAINT pk_place_id PRIMARY KEY(place_id)
@@ -58,5 +58,6 @@ CREATE TABLE favorites(
 	CONSTRAINT fk_favorite_place_id 
 		FOREIGN KEY(place_id) REFERENCES places(place_id),
 	CONSTRAINT fk_favorite_user_id 
-		FOREIGN KEY(user_id) REFERENCES users(user_id)
+		FOREIGN KEY(user_id) REFERENCES users(user_id),
+	CONSTRAINT unique_favorite UNIQUE(place_id, user_id)
 );
