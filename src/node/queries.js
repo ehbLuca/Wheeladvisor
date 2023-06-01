@@ -75,19 +75,19 @@ async function queryPlaces(query, category, adres) {
 	}
 } 
 
-async function getCoordinates(coordinate) {
+async function getPlaces() {
 	let conn = null;
-	let results = null;
+	let places = null;
 	try {
 		conn = await dbConnect();
-		results = await conn.query(`
+		places = await conn.query(`
 		SELECT * FROM places
 		`);
 	} catch (err) {
 		console.error(`Error while searching for'${coordinate}'`, err);
 	} finally {
 		conn.end();
-		return results;
+		return places;
 	}
 }
 
@@ -195,5 +195,5 @@ async function storeToken(email, token)
 module.exports = {
 	canLogin, registerUser, 
 	hasToken, storeToken,
-	insertPlace, queryPlaces, getCoordinates
+	insertPlace, queryPlaces, getPlaces
 };

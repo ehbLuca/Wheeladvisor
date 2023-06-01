@@ -126,25 +126,25 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 }
 
 app.post('/search-coordinates', async (req, res) => {
-	let { latitude, longitude } = req.body.coordinate;
+	let {latitude} = req.body.latitude;
+	let {longitude} = req.body.longitude;
 	if (latitude === null && longitude === null) {
 		res.send()
 		return;
 	}
-	let places = await queries.getCoordinates(req.body.coordinate);
-	if (places.length == 0) {
-		res.redirect('/search-coordinates-error.html');
-		return;
-	}
+	let places = await queries.getPlaces();
 	let rankedPlaces = [];
 	for (let place of places) {
-		let {latitude: placeLat, longitude: placeLng} = place.coordinate;
+		let {latitude: placeLat} = place.latitude;
+		let {longitude: placeLng} = place.longitude;
 		let distance = calculateDistance(latitude, longitude, placeLat, placeLng);
-		place.distances = [];
-		place.distance.push(distance);
 		rankedPlaces.push({
+			place_id: place.place_id,
 			name: place.name,
-			coordinate: place.coordinate,
+			coordinate: {
+				latitude: place.latitude,
+				longitude: place.longitude
+			},
 			distance: distance
 		  });	
 	}
