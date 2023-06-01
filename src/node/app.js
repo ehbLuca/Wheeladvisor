@@ -110,7 +110,6 @@ app.post('/search', async (req, res) => {
 	let query = req.body.q;
 	console.error(`I: (/search) Searching for places matching '${query}'.`);
 	let result = await queries.queryPlaces(query);
-	//let result = [{ place_id: 248, name: "Martin's Brussels EU", coordinate: "50.8455965 4.3822632", address: "1000, Boulevard Charlemagne - Karel de Grotelaan", category: "hotel", description: null, proscons: null }]
 	res.send(result);
 });
 
