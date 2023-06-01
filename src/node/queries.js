@@ -134,17 +134,21 @@ async function hasToken(token)
 
 async function getPlace(place_id) {
 	let conn = null;
+	let place = null;
 	try {
 		conn = await dbConnect();
 		let results = await conn.query(`
 		SELECT * FROM places
 		WHERE place_id = ?
 		`, [place_id]);
-		conn.end()
-		console.log(`I: (getPlace)) results: `, results);
-		return results[0];
+		if (results.length > 0)
+			place = results[0];
 	} catch(err) {
 		console.error('Error:', err);
+	} finally {
+		conn.end()
+		console.log('I: (getPlace)) place:', place);
+		return place;
 	}
 }
 
