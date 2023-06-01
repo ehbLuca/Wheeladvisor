@@ -140,12 +140,13 @@ app.post('/saveFavourite', async(req, res) =>{
 app.get('/deleteFavorite/user_id/:userId/place_id/:place_id', async (req, res) => {
 
     let {user_id, place_id} = req.params;
+	console.log(user_id,place_id);
     if (!(user_id && place_id))
     {
         res.send(false)
         return
     }
-    let result = await queries.deleteFavorite(user_id, place_id);
+    let result = await queries.deleteFavourite(user_id, place_id);
     if (result)
     {
         res.send(true)
