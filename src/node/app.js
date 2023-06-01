@@ -118,6 +118,7 @@ app.post('/search', async (req, res) => {
 });
 
 
+
 app.post('/favourite', async (req, res) => {
 	let user_id = req.body.id;
 	console.error(`I: (/favourite) Searching for places matching '${user_id}'.`);
@@ -136,6 +137,25 @@ app.post('/saveFavourite', async(req, res) =>{
 	res.send(result);
 
 })
+
+//to delete favorite
+app.get('/deleteFavorite/user_id/:userId/place_id/:place_id', async (req, res) => {
+
+    let {user_id, place_id} = req.params;
+    if (!(user_id && place_id))
+    {
+        res.send(false)
+        return
+    }
+    let result = await queries.deleteFavorite(user_id, place_id);
+    if (result)
+    {
+        res.send(true)
+        return
+    }
+    res.send(false)
+});
+
 
 app.listen(port, () => {
 	console.log(`http://localhost:${port}`);
