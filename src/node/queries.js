@@ -131,6 +131,33 @@ async function deleteFavourite (place_id, user_id){
 
 }
 
+// to get most saved favorite from the database
+
+async function mostFavorite (){
+
+	let conn = null;
+	let results = null;
+
+	try{
+
+		conn = await dbConnect();
+		results = await conn.query(`SELECT category, COUNT(category) 
+		FROM places GROUP BY category 
+		ORDER BY COUNT(category) DESC;`)
+
+	}catch(err){
+
+		console.error('Error:', err);
+
+	}finally{
+
+		conn.end();
+		return results;
+
+	}
+
+
+}
 
 
 
@@ -260,5 +287,5 @@ module.exports = {
 	hasToken, storeToken,
 	insertPlace, queryPlaces, getPlace,
 	queryFavouritePlaces, saveFavourite,
-	deleteFavourite
+	deleteFavourite, mostFavorite
 };
