@@ -112,7 +112,23 @@ async function saveFavourite (place_id,user_id){
 }
 
 
+// to delete favourite place
 
+async function deleteFavourite (place_id, user_id){
+	let conn = null;
+	let results = null;
+	try{
+		conn = await dbConnect();
+		results = await conn.query(`DELETE FROM favorites 
+		where place_id =? AND user_id=?;`, [place_id, user_id]);
+	}catch(err){
+		console.error('Error:', err);
+	}finally{
+		conn.end();
+		return results;
+	}
+
+}
 
 
 
@@ -222,5 +238,6 @@ module.exports = {
 	canLogin, registerUser, 
 	hasToken, storeToken,
 	insertPlace, queryPlaces,
-	queryFavouritePlaces, saveFavourite
+	queryFavouritePlaces, saveFavourite,
+	deleteFavourite
 };
