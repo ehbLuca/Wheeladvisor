@@ -41,14 +41,14 @@ async function queryDB(query) {
 }
 
 async function insertPlace(place) {
-	let {name, coordinates, category} = place;
+	let {name, coordinate, category} = place;
 	let conn = null;
 	try {
 		conn = await dbConnect();
 		res = await conn.query(`
-			INSERT INTO places(name, coordinate, category)
-			VALUES(?, ?, ?)
-			`, [name, `${coordinates.latitude} ${coordinates.longitude}`, category]);
+			INSERT INTO places(name, latitude, longitude, category)
+			VALUES(?, ?, ?, ?)
+			`, [name, coordinate.latitude, coordinate.longitude, category]);
 	} catch (err) {
 		console.error('Error while doing query:', err);
 	} finally {

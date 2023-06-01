@@ -38,18 +38,30 @@ window.addEventListener('DOMContentLoaded', async function () {
   for (let place of places) {
     console.log(place)
     var anchorElement = document.createElement('a');
-    var postElement = document.createElement('div');
-    var imageElement = document.createElement('img');
+		var postElement = document.createElement('div');
+		var imageElement = document.createElement('img');
+		let fileURL = `images/places/${place.place_id}`;
+		let imageExist = await fetch (fileURL, { method: 'HEAD' })
+			.then(response => {
+				return response.ok; // Returns true if the file exists, false otherwise
+			})
+			.catch(() => {
+				return false; // Error occurred, file does not exist
+			});
 
-    imageElement.src = `images/places/${place.place_id}`;
-    imageElement.classList.add('post-image');
-    postElement.classList.add('post');
-    postElement.textContent = place.name;
+		if (imageExist) 
+			imageElement.src = fileURL;
+		else
+			imageElement.src = 'images/fallbackfoto.png';
+		anchorElement.href = `plekpagina.html?id=${place.place_id}`
+		imageElement.classList.add('post-image');
+		postElement.classList.add('post');
+		postElement.textContent = place.name;
 
     postElement.appendChild(imageElement);
     contentContainer.appendChild(anchorElement);
     anchorElement.appendChild(postElement);
-  }
+  }});
 
   const submitBtn = document.getElementById('submit-btn');
 
@@ -69,8 +81,6 @@ window.addEventListener('DOMContentLoaded', async function () {
       });
     }
   });
-
-
 
   // isLoading = false;
   // page++;
@@ -92,4 +102,4 @@ window.addEventListener('DOMContentLoaded', async function () {
 
   // // Initial data fetching
   // fetchData(page);
-});
+
