@@ -52,13 +52,13 @@ window.addEventListener('DOMContentLoaded', async function() {
 
       buttonElement.addEventListener("click", async () => {
 		const urlParams = new URLSearchParams (this.window.location.search);
-		const place_id = urlParams.get("place_id");
+		const place_id = urlParams.get("id");
 		const user_id = await getLogin();
-		const result = user_id;
+		
 
-		if (result){
+		if (user_id){
 
-			buttonElement.action = '/deleteFavorite/user_id/:userId/place_id/:place_id';
+			buttonElement.action = '/deleteFavorite/user_id/:userId/place_id/:place_id' + `${place_id, user_id}`;
 			buttonElement.style.display = 'none';
 		}
      
