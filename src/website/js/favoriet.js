@@ -19,7 +19,7 @@ async function getPlaces() {
 }
 
 window.addEventListener('DOMContentLoaded', async function() {
-<<<<<<< HEAD
+
   var contentContainer = document.getElementById('contentContainer');
   // var isLoading = false;
   // var page = 1;
@@ -36,33 +36,25 @@ window.addEventListener('DOMContentLoaded', async function() {
 		  var imageElement = document.createElement('img');
       var buttonElement = document.createElement('button');
 
-      buttonElement.addEventListener("click", async function (){
-        
+      buttonElement.addEventListener("click", async () => {
+		const urlParams = new URLSearchParams (this.window.location.search);
+		const place_id = urlParams.get("place_id");
+		const user_id = await getLogin();
+		const result = user_id;
+
+		if (result){
+
+			buttonElement.action = '/deleteFavorite/user_id/:userId/place_id/:place_id';
+			buttonElement.style.display = 'none';
+		}
+     
       })
+
 		  imageElement.src = `images/places/${place.place_id}`;
 		  imageElement.classList.add('post-image');
 		  postElement.classList.add('post');
 		  postElement.textContent = place.name;
-=======
-	var contentContainer = document.getElementById('contentContainer');
-	let places = await getPlaces();
-	if (!places)
-		return
 
-	for (let place of places) {
-		console.log(place)
-		var anchorElement = document.createElement('a');
-		var postElement = document.createElement('div');
-		var imageElement = document.createElement('img');
-		let fileURL = `images/places/${place.place_id}`;
-		let imageExist = await fetch (fileURL, { method: 'HEAD' })
-			.then(response => {
-				return response.ok; // Returns true if the file exists, false otherwise
-			})
-			.catch(() => {
-				return false; // Error occurred, file does not exist
-			});
->>>>>>> 44e7cedbdead13f830f95338c64f69d60119690e
 
 		if (imageExist) 
 			imageElement.src = fileURL;
