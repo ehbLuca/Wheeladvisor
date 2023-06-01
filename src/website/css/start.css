@@ -8,7 +8,7 @@
 
 body{
     background-color: var(--bg-color);
-    width:auto;
+    width: auto;
 	margin: 0.5em;
 	padding: 0;
 }
@@ -25,14 +25,13 @@ body{
 .loginbalk h1{
     text-align: center;
     color: white;
-    margin-bottom: 0;
-    width: 80%;
-    top: 0;
+    width: 90%;
+    font-size:xx-large;
 
 }
 
 .loginbalk{
-    width: 100%;
+    width: 90%;
     display: flex;
     justify-content: space-around;
     
@@ -63,8 +62,6 @@ body{
     padding: 1em;
     border-radius: 5rem;
     border: 1px;
-    margin-top: 5%;
-    margin-bottom: 10%;
     width: 100%;
     
 }
@@ -73,7 +70,9 @@ body{
 .zoekbalk{   
     width: 90%;
 }
-
+#search{
+    text-align: center;
+}
 /*zoek balk eindig hier*/
 
 
@@ -82,18 +81,22 @@ body{
 /*categorie categorieën*/
 
 .categorie{
-   display: grid;
-   grid-template-columns: 50% 50%;  
+   display: flex;
+   justify-content: center;
+   flex-wrap: wrap; 
+   margin-bottom: 50px;
+   width: 100%;
   
 }
 
 
 .categorie button{
+
   color: white;
   background-color: var(--fg-color);
   border: none;
   border-radius: 1em;
-  padding: 2em; 
+  padding: 1em; 
   margin: 1em;
 }
 
@@ -105,18 +108,19 @@ body{
 
 /*Alles die met Kader te maken heeft zit hier*/
 
-ul {
-    margin: 0;
-}
 
 .Kader img {
     display: block;
-    width: 50%;
+    width: 95%;
+}
+
+.Kader{
+    text-align: center;
+    width: 90%;
 }
 
 .flex{
-    margin-top: 5%;
-	margin-bottom: 5%;
+    
     color: white;
     display: flex;
     flex-direction: column;
@@ -125,22 +129,6 @@ ul {
     border-radius: 3rem;
 }
 
-.ul_list{
-    display: flex;
-    flex-direction: row;
-    width: 50%;
-}
-
-.ul_list li{
-    align-self: flex-end;
-    list-style: none;
-    margin: 5%;
-}
-
-
-.flex h3 {
-    width: 80%;
-}
 
 /*Kader eindig hier*/
 
