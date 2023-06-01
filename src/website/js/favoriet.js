@@ -18,6 +18,20 @@ async function getPlaces() {
 	)
 }
 
+
+// to controle if user is logged in for deleting place from favourite
+async function getLogin() {
+    return await fetch('/loggedIn').then(
+		result =>  result.json()
+	).catch(
+		error => console.error('Error:', error)
+	);
+}
+
+
+
+
+
 window.addEventListener('DOMContentLoaded', async function() {
 
   var contentContainer = document.getElementById('contentContainer');
@@ -34,7 +48,7 @@ window.addEventListener('DOMContentLoaded', async function() {
 		  var anchorElement = document.createElement('a');
 		  var postElement = document.createElement('div');
 		  var imageElement = document.createElement('img');
-      var buttonElement = document.createElement('button');
+     	  var buttonElement = document.createElement('button');
 
       buttonElement.addEventListener("click", async () => {
 		const urlParams = new URLSearchParams (this.window.location.search);
