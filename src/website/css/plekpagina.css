@@ -1,0 +1,192 @@
+@import"colors.css";
+
+body {
+    background-color: var(--bg-color);
+}
+
+
+/*container om flex aan te passen*/
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+}
+ 
+/*container eindig hier*/
+
+/*header*/
+
+.header{
+
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+
+/*header eindigt hier*/
+
+
+/*Voordelen*/
+
+.voordelen{
+    display: flex;
+    flex-direction: row;
+}
+
+/*voordelen eindig*/
+
+
+.ster{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/*kader*/
+
+.kader{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+}
+
+.gallery{
+    align-self: center;
+    
+}
+
+.save{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/*kader eindigt hier*/
+
+
+button {
+    background-color: inherit;
+    cursor: pointer;
+}
+
+.backbutton {
+    border: none;
+  padding: 15px;
+  float: left;
+}
+
+.sharebutton {
+    background-color: lightskyblue;
+    float: right;
+  padding: 5px;
+}
+
+.favbutton {
+    border: none;
+    float: right;
+}
+
+h1 {
+    text-align: center;
+}
+
+.staraverage {
+    align-self: center;
+    justify-self: end;
+}
+
+.checked {
+    color: orange;
+ }
+
+.gallery {
+    text-align: center;
+    border: 3px solid black;
+    margin-top: 10px;
+    padding: 80px;
+    background-color: whitesmoke;
+    overflow: auto;
+    white-space: nowrap;
+    padding: 10px;
+    width: 60%;
+    }
+      
+ div.gallery img {
+        padding: 10px;
+        width: 350px;
+        height: 360px;
+ }
+
+.description {
+    border: 2px outset black;
+    width: 45%;
+    padding: 20px;
+}
+
+.positives {
+    color: rgb(22, 206, 16);
+    float: left;
+    
+    margin: auto;
+    padding: 15px;
+}
+
+.negatives {
+    color: rgb(253, 79, 79);
+    float: left;
+    margin: auto;
+    padding: 15px;
+}
+
+.filterbutton {
+    float: left;
+    background-color: lightskyblue;
+}
+
+.userreview {
+    float: left;
+    border: 2px solid black;
+    border-radius: 25px;
+    padding: 30px;
+    margin: 15px;
+}
+
+
+.star-rating {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.star-rating:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.star-rating:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:darkslategrey;
+}
+.star-rating:not(:checked) > label:before {
+    content: '★ ';
+}
+.star-rating > input:checked ~ label {
+    color: #ffc700;    
+}
+
+.star-rating:not(:checked) > label:hover,
+.star-rating:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+
+.star-rating > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
