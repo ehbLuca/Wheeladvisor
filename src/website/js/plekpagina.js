@@ -78,3 +78,6 @@ window.addEventListener('DOMContentLoaded', async function () {
 	document.querySelector('.description').textContent = place.description;
 	document.querySelector('.address').textContent = place.address;
 });
+
+let share_button = document.getElementById("share-button")
+share_button.addEventListener("click", share);
