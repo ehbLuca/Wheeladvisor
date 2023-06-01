@@ -1,5 +1,5 @@
 'use strict'
-async function getPlaces(query, category, adres) {
+async function getPlaces(query, category, address) {
 
   return fetch("/search", {
     method: "POST",
@@ -9,7 +9,7 @@ async function getPlaces(query, category, adres) {
     body: JSON.stringify({
       query: query,
       category: category,
-      adres: adres,
+      address: address,
     })
   }).then(
     result => result.json()
@@ -22,18 +22,13 @@ window.addEventListener('DOMContentLoaded', async function () {
   const urlParams = new URLSearchParams(window.location.search);
   const query = urlParams.get("q");
   const category = urlParams.get("category");
-  const adres = urlParams.get("adres");
+  const address = urlParams.get("address");
   document.getElementById('zoek-query').value = query;
   document.getElementById('zoek-category').value = category;
-  document.getElementById('zoek-adres').value = adres;
+  document.getElementById('zoek-address').value = address;
   var contentContainer = document.getElementById('contentContainer');
-  // var isLoading = false;
-  // var page = 1;
 
-  // async function fetchData(page) {
-  //   isLoading = true;
-
-  let places = await getPlaces(query, category, adres);
+  let places = await getPlaces(query, category, address);
 
   for (let place of places) {
     console.log(place)
@@ -77,29 +72,6 @@ window.addEventListener('DOMContentLoaded', async function () {
           body: JSON.stringify({ coordinate: position.coords })
         });
         const data = await response.json();
-        // Do something with the search results
       });
     }
   });
-
-  // isLoading = false;
-  // page++;
-  // }
-
-  // function isScrollAtBottom() {
-  // var windowHeight = window.innerHeight;
-  // var documentHeight = document.documentElement.scrollHeight;
-  // var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-  // return (windowHeight + 50 + scrollTop >= documentHeight);
-  // }
-
-  // window.addEventListener('scroll', function() {
-  // if (!isLoading && isScrollAtBottom()) {
-  // fetchData(page);
-  // }
-  // });
-
-  // // Initial data fetching
-  // fetchData(page);
-

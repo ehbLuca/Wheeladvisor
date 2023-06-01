@@ -103,12 +103,12 @@ app.post('/register', async (req, res) => {
 
 app.post('/search', async (req, res) => {
 	let category = req.body.category;
-	let adres = req.body.adres;
+	let address = req.body.address;
 	let query = req.body.query;
 	console.error(`I: (/search) Searching for places matching '${query}'.`);
-	let result = await queries.queryPlaces(query, category, adres);
-	res.send(result);
-	console.log(query, category, adres);
+	let places = await queries.queryPlaces(query, category, address);
+	res.send(places);
+	console.log(query, category, address);
 });
 
 const earthRadius = 6371;
@@ -150,7 +150,7 @@ app.post('/search-coordinates', async (req, res) => {
 	}
 	rankedPlaces.sort((a, b) => a.distance - b.distance);
 	res.send(rankedPlaces);
-	});
+});
 
 // bij te houden per plaats in array
 
