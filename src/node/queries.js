@@ -193,6 +193,26 @@ async function hasToken(token)
 	}
 }
 
+async function getPlace(place_id) {
+	let conn = null;
+	let place = null;
+	try {
+		conn = await dbConnect();
+		let results = await conn.query(`
+		SELECT * FROM places
+		WHERE place_id = ?
+		`, [place_id]);
+		if (results.length > 0)
+			place = results[0];
+	} catch(err) {
+		console.error('Error:', err);
+	} finally {
+		conn.end()
+		console.log('I: (getPlace)) place:', place);
+		return place;
+	}
+}
+
 async function storeToken(email, token)
 {
 	console.log('I: (storeToken) token:', token);
@@ -238,7 +258,7 @@ async function storeToken(email, token)
 module.exports = {
 	canLogin, registerUser, 
 	hasToken, storeToken,
-	insertPlace, queryPlaces,
+	insertPlace, queryPlaces, getPlace,
 	queryFavouritePlaces, saveFavourite,
 	deleteFavourite
 };

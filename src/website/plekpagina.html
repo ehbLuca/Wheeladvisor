@@ -7,7 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/plekpagina.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Plek Pagina</title>
+    <title>Profiel Plaats</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
 
 <body>
@@ -25,7 +30,7 @@
                     </button>
                 </form>
 
-              
+
             </div>
 
 
@@ -33,13 +38,13 @@
 
             <div class="ster">
 
-               
+
 
                 <div class="save">
-                    
+
 
                     &nbsp;
-    
+
                     <div class="staraverage">
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
@@ -47,21 +52,23 @@
                         <span class="fa fa-star"></span>
                         <span class="fa fa-star"></span>
                     </div>
-                <button type="button" class="sharebutton">Share</button>
+                    <button type="button" class="sharebutton" onclick="share()">Share</button>
 
-                <form class="share">
-                    <button type="button" class="favbutton"><img src="images/favorite.png" alt="buttonpng" width="25"
-                            height="40" /></button>
-                </form>
-              </div>  
 
-              <h1>Name place</h1>
-              
-            <div class="gallery">
-                <img src="images/img1.jpg" alt="Image 1 of place">
-               
-            </div>
-    
+
+                    <form class="share">
+                        <button type="button" class="favbutton"><img src="images/favorite.png" alt="buttonpng"
+                                width="25" height="40" /></button>
+                    </form>
+                </div>
+
+                <h1>Name place</h1>
+
+                <div class="gallery">
+                    <img src="images/img1.jpg" alt="Image 1 of place">
+
+                </div>
+
 
             </div>
 
@@ -71,7 +78,7 @@
             &nbsp;
 
 
-            
+
 
             &nbsp;
 
@@ -118,21 +125,21 @@
 
             <div style="clear:both;"></div>
 
+
+
             &nbsp;
 
-            <p class="Adress">
+            <p class="address">
                 Here comes adress.<br>
                 XXXX Stad
             </p>
 
-            <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=3.025360107421875%2C50.45575537567455%2C4.791412353515625%2C50.993878771898764&amp;layer=mapnik"
-                style="border: 1px solid black"></iframe><br /><small><a
-                    href="https://www.openstreetmap.org/#map=10/50.7256/3.9084">Map bigger size?</a></small>
+            <div id="map"></div>
 
-            <form action="https://www.google.be/maps">
-                <input type="submit" value="Open in Google Maps" />
-            </form>
+
+
+
+        
 
             &nbsp;
 

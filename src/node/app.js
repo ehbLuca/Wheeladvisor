@@ -117,10 +117,6 @@ app.post('/search', async (req, res) => {
 	res.send(result);
 });
 
-
-
-
-
 // to get places for favoriet from the data base 
 app.post('/favourite', async (req, res) => {
 	let user_id = req.body.user_id;
@@ -159,6 +155,16 @@ app.get('/deleteFavorite/user_id/:user_id/place_id/:place_id', async (req, res) 
     res.send(false)
 });
 
+
+app.post('/getplace', async (req, res) => {
+	let place_id = req.body.place_id;
+	let place = await queries.getPlace(place_id);
+	if (!place) {
+		res.redirect("/zoek.html")
+		return
+	}
+	res.send(place);
+});
 
 app.listen(port, () => {
 	console.log(`http://localhost:${port}`);
