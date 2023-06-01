@@ -22,7 +22,7 @@ async function getPlaces() {
 
 
 
-let place = await getPlaces();
+    let place = getPlaces();
 
 
     console.log(place)
@@ -50,7 +50,7 @@ let place = await getPlaces();
 		postElement.appendChild(imageElement);
 		contentContainer.appendChild(anchorElement);
 		anchorElement.appendChild(postElement);
-        
+    
 
 
 
