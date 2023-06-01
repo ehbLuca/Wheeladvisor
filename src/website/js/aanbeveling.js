@@ -20,25 +20,26 @@ async function getPlaces() {
 
 
 
+window.addEventListener('DOMContentLoaded', async function() {
+	var contentContainer = document.getElementById('contentContainer');
 
+	let place = await getPlaces();
 
-    let place = getPlaces();
+	
+		console.log(place)
+		var anchorElement = document.createElement('a');
+		var postElement = document.createElement('div');
+		var imageElement = document.createElement('img');
+		let fileURL = `images/places/${place.place_id}`;
+		let imageExist = await fetch (fileURL, { method: 'HEAD' })
+			.then(response => {
+				return response.ok; // Returns true if the file exists, false otherwise
+			})
+			.catch(() => {
+				return false; // Error occurred, file does not exist
+			});
 
-
-    console.log(place)
-    var anchorElement = document.createElement('a');
-    var postElement = document.createElement('div');
-    var imageElement = document.createElement('img');
-    let fileURL = `images/places/${place.place_id}`;
-    let imageExist = await fetch (fileURL, { method: 'HEAD' })
-        .then(response => {
-        return response.ok; // Returns true if the file exists, false otherwise
-     })
-        .catch(() => {
-        return false; // Error occurred, file does not exist
-        });
-
-        if (imageExist) 
+		if (imageExist) 
 			imageElement.src = fileURL;
 		else
 			imageElement.src = 'images/fallbackfoto.png';
@@ -50,6 +51,10 @@ async function getPlaces() {
 		postElement.appendChild(imageElement);
 		contentContainer.appendChild(anchorElement);
 		anchorElement.appendChild(postElement);
+	
+});
+
+    
     
 
 
