@@ -7,16 +7,16 @@ use padmindb;
 
 CREATE TABLE users(
 	user_id INT(11) AUTO_INCREMENT,
-	name VARCHAR(255) NOT NULL,
-	email VARCHAR(255) NOT NULL UNIQUE,
-	password VARCHAR(60) NOT NULL,
+	name VARCHAR(16) NOT NULL,
+	email VARCHAR(32) NOT NULL UNIQUE,
+	password VARCHAR(16) NOT NULL,
 	CONSTRAINT pk_user_id PRIMARY KEY(user_id)
 );
 
 CREATE TABLE tokens(
 	token_id INT(11) AUTO_INCREMENT,
 	type ENUM('session', 'api') NOT NULL,
-	value VARCHAR(255) NOT NULL,
+	value VARCHAR(64) NOT NULL,
 	user_id INT(11),
 	CONSTRAINT pk_token_id PRIMARY KEY(token_id),
 	CONSTRAINT fk_token_user_id
@@ -26,18 +26,18 @@ CREATE TABLE tokens(
 CREATE TABLE places(
 	place_id INT(11) AUTO_INCREMENT,
 	name VARCHAR(255) NOT NULL UNIQUE,
-	latitdue FLOAT(32) NOT NULL,
-	longitude FLOAT(32) NOT NULL,
+	latitude DOUBLE NOT NULL,
+	longitude DOUBLE NOT NULL,
 	address VARCHAR(255) NULL,
-	category VARCHAR(255) NOT NULL,
+	category VARCHAR(16) NOT NULL,
 	description TEXT NULL,
-	proscons VARCHAR(255) NULL,
+	proscons TEXT NULL,
 	CONSTRAINT pk_place_id PRIMARY KEY(place_id)
 );
 
 CREATE TABLE reviews(
 	review_id INT(11) AUTO_INCREMENT,
-	name VARCHAR(255) NOT NULL,
+	name VARCHAR(16) NOT NULL,
 	rating INT(11) NOT NULL DEFAULT 0,
 	likes INT(11) NOT NULL DEFAULT 0,
 	text TEXT NOT NULL,
