@@ -67,6 +67,7 @@ function share() {
 
 window.addEventListener('DOMContentLoaded', async function () {
 	let place = await getPlace();
+
 	var map = L.map('map').setView([place.latitude, place.longitude], 13);
 	L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		maxZoom: 19,
@@ -77,4 +78,23 @@ window.addEventListener('DOMContentLoaded', async function () {
 	document.querySelector('h1').textContent = place.name;
 	document.querySelector('.description').textContent = place.description;
 	document.querySelector('.address').textContent = place.address;
+
+	let imageElement = document.getElementById("plek-foto");
+	let fileURL = `images/places/${place.place_id}`;
+	let imageExist = await fetch (fileURL, { method: 'HEAD' })
+		.then(response => {
+			return response.ok; // Returns true if the file exists, false otherwise
+		})
+		.catch(() => {
+			return false; // Error occurred, file does not exist
+		});
+
+	if (imageExist) 
+		imageElement.src = fileURL;
+	else
+		imageElement.src = 'images/fallbackfoto.png';
+	imageElement.insertBefore(anchorElement, imageElement);
 });
+
+let share_button = document.getElementById("share-button");
+share_button.addEventListener("click", share);
