@@ -2,24 +2,27 @@
 
 body {
     background-color: var(--bg-color);
+    color: white;
+
 }
 
-#map { height: 180px; }
-
+#map {
+    height: 280px;
+}
 
 /*container om flex aan te passen*/
 
-.container{
+.container {
     display: flex;
     flex-direction: column;
     justify-items: center;
 }
- 
+
 /*container eindig hier*/
 
 /*header*/
 
-.header{
+.header {
 
     width: 100%;
     display: flex;
@@ -34,7 +37,7 @@ body {
 
 /*Voordelen*/
 
-.voordelen{
+.voordelen {
     display: flex;
     flex-direction: row;
 }
@@ -42,7 +45,7 @@ body {
 /*voordelen eindig*/
 
 
-.ster{
+.ster {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -50,18 +53,18 @@ body {
 
 /*kader*/
 
-.kader{
+.kader {
     display: flex;
     flex-direction: column;
     justify-items: center;
 }
 
-.gallery{
+.gallery {
     align-self: center;
-    
+
 }
 
-.save{
+.save {
     width: 80%;
     display: flex;
     flex-direction: row;
@@ -74,24 +77,54 @@ body {
 button {
     background-color: inherit;
     cursor: pointer;
+    border: none;
 }
 
 .backbutton {
-    border: none;
-  padding: 15px;
-  float: left;
+    margin: 20px;
+    margin-right: 0%;
+}
+
+.backbutton img {
+    display: block;
+    width: 40px;
+    filter: invert(100%);
+}
+
+.backbutton :hover {
+    filter: none;
 }
 
 .sharebutton {
-    background-color: lightskyblue;
-    float: right;
-  padding: 5px;
+    color: white;
+    background-color: var(--fg-color);
+    padding: 2em;
+    margin: 1em;
+    border-radius: 1em;
 }
 
 .favbutton {
     border: none;
-    float: right;
+    padding: 2em;
+    margin: 1em;
+    border-radius: 1em;
+    background-color: transparent;
 }
+
+.favbutton img {
+    display: block;
+    width: 40px;
+    filter: invert(100%);
+}
+
+.favbutton :hover {
+    filter: none;
+}
+
+.favbutton.favorite img {
+    filter: hue-rotate(45deg) brightness(1.2);
+}
+
 
 h1 {
     text-align: center;
@@ -104,7 +137,7 @@ h1 {
 
 .checked {
     color: orange;
- }
+}
 
 .gallery {
     text-align: center;
@@ -116,13 +149,13 @@ h1 {
     white-space: nowrap;
     padding: 10px;
     width: 60%;
-    }
-      
- div.gallery img {
-        padding: 10px;
-        width: 350px;
-        height: 360px;
- }
+}
+
+div.gallery img {
+    padding: 10px;
+    width: 350px;
+    height: 360px;
+}
 
 .description {
     border: 2px outset black;
@@ -133,7 +166,6 @@ h1 {
 .positives {
     color: rgb(22, 206, 16);
     float: left;
-    
     margin: auto;
     padding: 15px;
 }
@@ -147,7 +179,7 @@ h1 {
 
 .filterbutton {
     float: left;
-    background-color: lightskyblue;
+    background-color: var(--fg-color);
 }
 
 .userreview {
@@ -164,31 +196,35 @@ h1 {
     height: 46px;
     padding: 0 10px;
 }
-.star-rating:not(:checked) > input {
-    position:absolute;
-    top:-9999px;
+
+.star-rating:not(:checked)>input {
+    position: absolute;
+    top: -9999px;
 }
-.star-rating:not(:checked) > label {
-    float:right;
-    width:1em;
-    overflow:hidden;
-    white-space:nowrap;
-    cursor:pointer;
-    font-size:30px;
-    color:darkslategrey;
+
+.star-rating:not(:checked)>label {
+    float: right;
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 30px;
+    color: darkslategrey;
 }
-.star-rating:not(:checked) > label:before {
+
+.star-rating:not(:checked)>label:before {
     content: '★ ';
 }
-.star-rating > input:checked ~ label {
-    color: #ffc700;    
+
+.star-rating>input:checked~label {
+    color: #ffc700;
 }
 
-.star-rating:not(:checked) > label:hover,
-.star-rating:not(:checked) > label:hover ~ label {
-    color: #deb217;  
+.star-rating:not(:checked)>label:hover,
+.star-rating:not(:checked)>label:hover~label {
+    color: #deb217;
 }
 
-.star-rating > label:hover ~ input:checked ~ label {
+.star-rating>label:hover~input:checked~label {
     color: #c59b08;
 }
