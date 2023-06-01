@@ -7,9 +7,7 @@ async function getPlaces(query, category, address) {
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify({
-			query: query,
-			category: category,
-			address: address,
+			query, category, address,
 		})
 	}).then(
 		result => result.json()
