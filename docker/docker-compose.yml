@@ -1,11 +1,20 @@
 version: '3'
 services:
-  wheelie1:
-    image: wheelie
-    ports: 
-      - 4032:80
-      - 4033:3306
-    container_name: wheelie1
+  wheeladvisor:
+    image: wheeladvisor:latest
+    container_name: wheeladvisor
+    ports:
+      - 80:3000
     volumes:
-      - ../node:/app
-      - ../website:/app/website
+      - ../src/node/:/app/
+      - ../src/website:/app/website
+    restart: unless-stopped
+    depends_on:
+      - mariadb
+
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    ports:
+      - 3306:3306
+    restart: unless-stopped
