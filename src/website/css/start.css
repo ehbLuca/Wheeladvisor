@@ -78,7 +78,7 @@ body{
 
 
 .categorie button{
-
+cursor: pointer;
   color: white;
   background-color: var(--fg-color);
   border: none;
@@ -114,6 +114,7 @@ body{
     align-items: center;
     background-color: var(--fg-color);
     border-radius: 3rem;
+	cursor: pointer;
 }
 
 
