@@ -1,0 +1,14 @@
+#login-form{
+    margin: 10px;
+    margin-left: 0%;
+}
+#login-form img{
+    display: block;
+    width: 100%;
+	cursor: pointer; 
+}
+.logged-in {
+	background-color: var(--color-fg);
+	border: white 3px solid;
+	border-radius: 5px;
+}

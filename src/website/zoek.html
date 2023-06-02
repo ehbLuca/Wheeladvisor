@@ -20,7 +20,9 @@
 					<button type="submit" value="Submit">Zoeken!</button>-->
 				</form>
 
-				<a id="login" href="login.html"><img src="icons/icons8-login.svg" alt="img" ></a>
+				<form id="login-form" method="POST" action="/login">
+					<img id="login" src="icons/icons8-login.svg" alt="img" value="a" onclick="document.getElementById('login-form').submit()">
+				</form>
 			</section>
 			<section2 id="sec2">
 				<select name="category" id="zoek-category">
@@ -40,6 +42,7 @@
 		<!--<button id="submit-btn">Find Nearest Place</button>-->
 
 		<script src="js/zoek.js"></script>
+		<script src="js/login.js"></script>
 	</body>
 
 </html>

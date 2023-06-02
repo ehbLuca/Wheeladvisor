@@ -5,7 +5,7 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Document</title>
+		<title>WheelAdvisor</title>
 		<link rel="stylesheet" href="css/start.css">
 	</head>
 
@@ -16,14 +16,14 @@
 
 				<H1>WheelAdvisor</H1>
 
-				<!--<form id="login-form" method="POST" action="/login">
-					<input id="login" type="submit" value="Login/Register">
-				</form>-->
-				<a id="login-form" href="login.html"><img src="icons/icons8-login.svg" alt="img" style="cursor: pointer;"></a>
+				<form id="login-form" method="POST" action="/login">
+					<img id="login" src="icons/icons8-login.svg" alt="img" value="a" onclick="document.getElementById('login-form').submit()">
+				</form>
+
 			</header>
 
 			<form action="zoek.html" class="zoekbalk">
-				<input type="text" id="search" name="q" placeholder="zoeken">
+				<input type="search" id="search" name="q" placeholder="zoeken">
 			</form>
 
 			<section class="categorie">

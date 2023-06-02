@@ -27,11 +27,10 @@
                 
                 <h1>Name place</h1>
                 
-                <button type="button" class="login" value="Login" onclick="location.href('login.html')">
-                    <img src="icons/icons8-login.svg" alt="loginpng" width="50" height="50" />
-                </button>
+				<form id="login-form" method="POST" action="/login">
+					<img id="login" src="icons/icons8-login.svg" alt="img" value="a" onclick="document.getElementById('login-form').submit()">
+				</form>
 
-                    
             </div>
 
 
@@ -178,6 +177,7 @@
     </section>
 
     <script src="js/plekpagina.js"></script>
+	<script src="js/login.js"></script>
 </body>
 
 </html>

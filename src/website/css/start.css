@@ -1,5 +1,6 @@
 
 @import "colors.css";
+@import "loginform.css";
 
 *
 {
@@ -36,20 +37,6 @@ body{
     justify-content: space-around;
     
 }
-
-#login-form{
-    margin: 10px;
-    margin-left: 0%;
-}
-#login-form img{
-    display: block;
-    width: 100%;
-    filter: invert(100%);
-}
-#login-form :hover{
-    filter: none;
-}
-
 
 
 /*loginbalk eindig hier*/
