@@ -28,3 +28,6 @@ For setting up the project checkout:
 
 ## API
 [API Documentation](https://github.com/EHB-TI/programming-project-groep-1-wheeladvisor/wiki/API-Documentation)
+
+
+Images come from Google Maps, we are not affiliated or endorsed by Google in any way.
