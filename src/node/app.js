@@ -32,10 +32,10 @@ app.get('/', (req, res) => {
 // returns the user's email if he is signed in
 app.get('/loggedIn', async(req, res) => {
 	let {authToken} = req.cookies;
-	if(authToken && await queries.hasToken(authToken))
-		res.send(JSON.stringify(1));
-	else
-		res.send(JSON.stringify(null))
+	let user_id = null;
+	if(authToken)
+		user_id = await queries.hasToken(authToken)
+	res.send(JSON.stringify(user_id))
 });
 
 // route for logging in with credentials or with a token in the cookies
@@ -102,13 +102,12 @@ app.post('/register', async (req, res) => {
 });
 
 app.post('/search', async (req, res) => {
-	let category = req.body.category;
-	let adres = req.body.adres;
-	let query = req.body.query;
+	let {q: query, category, address} = req.body;
+	console.log('query:', query);
 	console.error(`I: (/search) Searching for places matching '${query}'.`);
-	let result = await queries.queryPlaces(query, category, adres);
-	res.send(result);
-	console.log(query, category, adres);
+	let places = await queries.queryPlaces(query, category, address);
+	res.send(places);
+	console.log(query, category, address);
 });
 
 const earthRadius = 6371;
@@ -126,31 +125,81 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 }
 
 app.post('/search-coordinates', async (req, res) => {
-	let { latitude, longitude } = req.body.coordinate;
+	let {latitude} = req.body.latitude;
+	let {longitude} = req.body.longitude;
 	if (latitude === null && longitude === null) {
 		res.send()
 		return;
 	}
-	let places = await queries.getCoordinates(req.body.coordinate);
-	if (places.length == 0) {
-		res.redirect('/search-coordinates-error.html');
-		return;
-	}
+	let places = await queries.getPlaces();
 	let rankedPlaces = [];
 	for (let place of places) {
-		let {latitude: placeLat, longitude: placeLng} = place.coordinate;
+		let {latitude: placeLat} = place.latitude;
+		let {longitude: placeLng} = place.longitude;
 		let distance = calculateDistance(latitude, longitude, placeLat, placeLng);
-		place.distances = [];
-		place.distance.push(distance);
 		rankedPlaces.push({
+			place_id: place.place_id,
 			name: place.name,
-			coordinate: place.coordinate,
+			coordinate: {
+				latitude: place.latitude,
+				longitude: place.longitude
+			},
 			distance: distance
 		  });	
 	}
 	rankedPlaces.sort((a, b) => a.distance - b.distance);
 	res.send(rankedPlaces);
-	});
+});
+
+// bij te houden per plaats in array
+// to get places for favoriet from the data base 
+app.post('/favourite', async (req, res) => {
+	let user_id = req.body.user_id;
+	console.error(`I: (/favourite) Searching for places matching '${user_id}'.`);
+	let result = await queries.queryFavouritePlaces(user_id);
+	res.send(result);
+});
+
+//for to save favourite
+app.post('/saveFavourite', async(req, res) =>{
+
+	let user_id = req.body.user_id;
+	let place_id = req.body.place_id;
+	console.error(`I: (/saveFavourite) Saving favourite`);
+	await queries.saveFavourite(place_id, user_id);
+	res.send();
+})
+
+//to delete favorite
+app.get('/deleteFavorite/user_id/:user_id/place_id/:place_id', async (req, res) => {
+
+    let {user_id, place_id} = req.params;
+	console.log(req.params);
+	console.log(user_id,place_id);
+    if (!(user_id && place_id))
+    {
+        res.send(false)
+        return
+    }
+    let result = await queries.deleteFavourite(place_id, user_id);
+    if (result)
+    {
+        res.redirect('/favoriete.html?id=' + user_id)
+        return
+    }
+    res.send(false)
+});
+
+
+app.post('/getplace', async (req, res) => {
+	let place_id = req.body.place_id;
+	let place = await queries.getPlace(place_id);
+	if (!place) {
+		res.redirect("/zoek.html")
+		return
+	}
+	res.send(place);
+});
 
 app.listen(port, () => {
 	console.log(`http://localhost:${port}`);

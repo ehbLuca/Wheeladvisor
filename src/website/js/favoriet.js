@@ -18,8 +18,20 @@ async function getPlaces() {
 	)
 }
 
+
+// to controle if user is logged in for deleting place from favourite
+async function getLogin() {
+    return await fetch('/loggedIn').then(
+		result =>  result.json()
+	).catch(
+		error => console.error('Error:', error)
+	);
+}
+
+
+
 window.addEventListener('DOMContentLoaded', async function() {
-<<<<<<< HEAD
+
   var contentContainer = document.getElementById('contentContainer');
   // var isLoading = false;
   // var page = 1;
@@ -34,35 +46,33 @@ window.addEventListener('DOMContentLoaded', async function() {
 		  var anchorElement = document.createElement('a');
 		  var postElement = document.createElement('div');
 		  var imageElement = document.createElement('img');
-      var buttonElement = document.createElement('button');
+		// desing for delete button
+			var deleteElement = document.createElement('a');
+     	  var buttonElement = document.createElement('button');
+		  buttonElement.innerText = 'delete';
+	  
+		  let place_id = place.place_id;
+		  let user_id = await getLogin();
+		if (user_id){
 
-      buttonElement.addEventListener("click", async function (){
-        
-      })
-		  imageElement.src = `images/places/${place.place_id}`;
+			deleteElement.href = `/deleteFavorite/user_id/${user_id}/place_id/${place_id}`;
+		}
+     
+		console.log(user_id, place_id);
+ 
+
+		 
 		  imageElement.classList.add('post-image');
 		  postElement.classList.add('post');
 		  postElement.textContent = place.name;
-=======
-	var contentContainer = document.getElementById('contentContainer');
-	let places = await getPlaces();
-	if (!places)
-		return
-
-	for (let place of places) {
-		console.log(place)
-		var anchorElement = document.createElement('a');
-		var postElement = document.createElement('div');
-		var imageElement = document.createElement('img');
-		let fileURL = `images/places/${place.place_id}`;
-		let imageExist = await fetch (fileURL, { method: 'HEAD' })
-			.then(response => {
-				return response.ok; // Returns true if the file exists, false otherwise
-			})
-			.catch(() => {
-				return false; // Error occurred, file does not exist
-			});
->>>>>>> 44e7cedbdead13f830f95338c64f69d60119690e
+		  let fileURL = `images/places/${place.place_id}`;
+		  let imageExist = await fetch (fileURL, { method: 'HEAD' })
+			  .then(response => {
+				  return response.ok; // Returns true if the file exists, false otherwise
+			  })
+			  .catch(() => {
+				  return false; // Error occurred, file does not exist
+			  });
 
 		if (imageExist) 
 			imageElement.src = fileURL;
@@ -73,8 +83,11 @@ window.addEventListener('DOMContentLoaded', async function() {
 		postElement.classList.add('post');
 		postElement.textContent = place.name;
 
-		postElement.appendChild(imageElement);
-		contentContainer.appendChild(anchorElement);
-		anchorElement.appendChild(postElement);
+		
+		postElement.appendChild(anchorElement);
+		postElement.appendChild(deleteElement);
+		deleteElement.appendChild(buttonElement);
+		anchorElement.appendChild(imageElement);
+		contentContainer.appendChild(postElement);
 	}
 });

@@ -1,14 +1,12 @@
 'use strict'
-async function getPlaces() {
-	const urlParams = new URLSearchParams(window.location.search);
-	const query = urlParams.get("q");
+async function searchPlaces(query, category, address) {
 	return fetch("/search", {
 		method: "POST",
 		headers: {
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify({
-			q: query
+			q: query, category, address,
 		})
 	}).then(
 		result => result.json()
@@ -17,12 +15,13 @@ async function getPlaces() {
 	)
 }
 
-window.addEventListener('DOMContentLoaded', async function() {
+async function createPlaces(places)
+{
 	var contentContainer = document.getElementById('contentContainer');
-
-	let places = await getPlaces();
+	contentContainer.innerHTML = ''
 
 	for (let place of places) {
+		console.log("logging")
 		console.log(place)
 		var anchorElement = document.createElement('a');
 		var postElement = document.createElement('div');
@@ -45,44 +44,75 @@ window.addEventListener('DOMContentLoaded', async function() {
 		postElement.classList.add('post');
 		postElement.textContent = place.name;
 
-    postElement.appendChild(imageElement);
-    contentContainer.appendChild(anchorElement);
-    anchorElement.appendChild(postElement);
-  }
+		postElement.appendChild(imageElement);
+		contentContainer.appendChild(anchorElement);
+		anchorElement.appendChild(postElement);
+	}
+}
 
-  const submitBtn = document.getElementById('submit-btn');
+async function findNearestPlace(position) {
+	const latitude = position.coords.latitude;
+	const longitude = position.coords.longitude;
 
-  submitBtn.addEventListener('click', () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const { latitude, longitude } = position.coords;
-        const coordinates = { latitude, longitude };
-      });
-    }
-  });
+	const data = {
+		latitude: latitude,
+		longitude: longitude
+	};
 
-  console.log(coordinates);
-  
+	const requestOptions = {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(data)
+	};
 
+	let places =  await fetch('/search-coordinates', requestOptions)
+		.then(
+			response => response.json()
+		)
+		.catch(
+			err => console.error('Error:', err)
+		)
+	createPlaces(places);
+}
 
-  // isLoading = false;
-  // page++;
-  // }
+window.addEventListener('DOMContentLoaded', async function () {
+	const urlParams = new URLSearchParams(window.location.search);
+	const query = urlParams.get("q");
+	const category = urlParams.get("category");
+	const address = urlParams.get("address");
+	document.getElementById('zoek-query').value = query;
+	document.getElementById('zoek-category').value = category;
+	document.getElementById('zoek-address').value = address;
+	let places = await searchPlaces(query, category, address);
+	createPlaces(places)
+});
 
-  // function isScrollAtBottom() {
-  // var windowHeight = window.innerHeight;
-  // var documentHeight = document.documentElement.scrollHeight;
-  // var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+function handleError(error) {
+	switch (error.code) {
+		case error.PERMISSION_DENIED:
+			console.log("User denied the request for Geolocation.");
+			break;
+		case error.POSITION_UNAVAILABLE:
+			console.log("Location information is unavailable.");
+			break;
+		case error.TIMEOUT:
+			console.log("The request to get user location timed out.");
+			break;
+		case error.UNKNOWN_ERROR:
+			console.log("An unknown error occurred.");
+			break;
+	}
+}
 
-  // return (windowHeight + 50 + scrollTop >= documentHeight);
-  // }
+const submitBtn = document.getElementById('submit-btn');
+submitBtn.addEventListener('click', function(event) {
+	event.preventDefault();
 
-  // window.addEventListener('scroll', function() {
-  // if (!isLoading && isScrollAtBottom()) {
-  // fetchData(page);
-  // }
-  // });
-
-  // // Initial data fetching
-  // fetchData(page);
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(findNearestPlace, handleError);
+	} else {
+		console.log("Geolocation is not supported by this browser.");
+	}
 });

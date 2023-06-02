@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="css/plekpagina.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<title>Plek Pagina</title>
-	</head>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/plekpagina.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Profiel Plaats</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
 	<body>
 		<section class="container">
-
 			<div class="header">
 
 				<button type="button" class="backbutton" value="Back" onclick="history.back()">
@@ -18,6 +22,7 @@
 				</button>
 
 				<h1>Name place</h1>
+
 
 				<form id="login-form" method="POST" action="/login">
 					<img id="login" src="icons/icons8-login.svg" alt="img" value="a" onclick="document.getElementById('login-form').submit()">
@@ -49,7 +54,6 @@
 			</div>
 			&nbsp;
 
-			&nbsp;
 			<form action="/action_page.php">
 				<input type="file" id="myFile" name="filename">
 				<input type="submit" value="upload file">

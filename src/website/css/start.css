@@ -4,38 +4,39 @@
 
 *
 {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body{
-    background-color: var(--bg-color);
-    width: auto;
+	background-color: var(--bg-color);
+	width: auto;
 	margin: 0.5em;
 	padding: 0;
+	font-family: Arial, sans-serif;
 }
 
 
 
 /*container is rond de andere containers*/
 .container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .loginbalk h1{
-    text-align: center;
-    color: white;
-    width: 90%;
-    font-size:xx-large;
+	text-align: center;
+	color: white;
+	width: 90%;
+	font-size:xx-large;
 
 }
 
 .loginbalk{
-    width: 90%;
-    display: flex;
-    justify-content: space-around;
-    
+	width: 90%;
+	display: flex;
+	justify-content: space-around;
+
 }
 
 
@@ -46,19 +47,19 @@ body{
 
 
 .zoekbalk input {
-    padding: 1em;
-    border-radius: 5rem;
-    border: 1px;
-    width: 100%;
-    
+	padding: 1em;
+	border-radius: 5rem;
+	border: 1px;
+	width: 100%;
+
 }
 
 
 .zoekbalk{   
-    width: 90%;
+	width: 90%;
 }
 #search{
-    text-align: center;
+	text-align: center;
 }
 /*zoek balk eindig hier*/
 
@@ -68,23 +69,24 @@ body{
 /*categorie categorieën*/
 
 .categorie{
-   display: flex;
-   justify-content: center;
-   flex-wrap: wrap; 
-   margin-bottom: 50px;
-   width: 100%;
-  
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap; 
+	margin-bottom: 50px;
+	width: 100%;
+
 }
 
 
-.categorie button{
-cursor: pointer;
-  color: white;
-  background-color: var(--fg-color);
-  border: none;
-  border-radius: 1em;
-  padding: 1em; 
-  margin: 1em;
+.categorie a{
+	text-decoration: none;
+	cursor: pointer;
+	color: white;
+	background-color: var(--fg-color);
+	border: none;
+	border-radius: 1em;
+	padding: 1em; 
+	margin: 1em;
 }
 
 
@@ -97,23 +99,23 @@ cursor: pointer;
 
 
 .Kader img {
-    display: block;
-    width: 95%;
+	display: block;
+	width: 95%;
 }
 
 .Kader{
-    text-align: center;
-    width: 90%;
+	text-align: center;
+	width: 90%;
 }
 
 .flex{
-    
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: var(--fg-color);
-    border-radius: 3rem;
+
+	color: white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: var(--fg-color);
+	border-radius: 3rem;
 	cursor: pointer;
 }
 
@@ -124,24 +126,24 @@ cursor: pointer;
 
 @media screen and (min-width:1000px ){
 
-    body{
-        background-color: var(--bg-color);
-    }
+	body{
+		background-color: var(--bg-color);
+	}
 
-    .loginbalk{
-       display: flex;
-       flex-direction: row;
-     }
+	.loginbalk{
+		display: flex;
+		flex-direction: row;
+	}
 
-     .loginbalk form{
-        align-self: flex-end;
-     }
+	.loginbalk form{
+		align-self: flex-end;
+	}
 
-     .flex{
-        background-color: var(--fg-color);
-    }
+	.flex{
+		background-color: var(--fg-color);
+	}
 
-    .categorie button{
-        background-color: var(--fg-color);
-    }
+	.categorie a{
+		background-color: var(--fg-color);
+	}
 }

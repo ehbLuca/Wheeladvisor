@@ -56,24 +56,41 @@ async function insertPlace(place) {
 	}
 }
 
-async function queryPlaces(query, category, adres) {
+async function queryPlaces(query, category, address) {
 	let conn = null;
-	let results = null;
+	let results = [];
+	let variables = [query, category, address]
 	try {
 		conn = await dbConnect();
-		results = await conn.query(`
-		SELECT * FROM places
-		WHERE UPPER(name) LIKE UPPER(?)
-		AND UPPER(category) LIKE UPPER(?)
-		AND UPPER(address) LIKE UPPER(?)
-		`, [`%${query}%`,`%${category}%`,`%${adres}%`]);
+		for (let variable of variables)
+			if (variable)
+				results = results.concat(await conn.query(`
+				SELECT * FROM places
+				WHERE UPPER(name) LIKE UPPER(?)
+				`, [`%${variable}%`]))
 	} catch (err) {
-		console.error(`Error while searching for'${query}'`, err);
+		console.error(`Error while searching for '${query}'`, err);
 	} finally {
 		conn.end();
 		return results;
 	}
 } 
+
+async function getPlaces() {
+	let conn = null;
+	let places = null;
+	try {
+		conn = await dbConnect();
+		places = await conn.query(`
+		SELECT * FROM places
+		`);
+	} catch (err) {
+		console.error(`Error while searching for'${coordinate}'`, err);
+	} finally {
+		conn.end();
+		return places;
+	}
+}
 
 // Get favourite places from database
 
@@ -86,7 +103,7 @@ async function queryFavouritePlaces(user_id) {
 		SELECT p.place_id, p.name, p.category, p.address FROM favorites f
 		JOIN places p
 			ON p.place_id = f.place_id
-		WHERE f.user_id = 1`);
+		WHERE f.user_id = ?`, [user_id]);
 	} catch (err) {
 		console.error(`Error while searching for'${user_id}'`, err);
 	} finally {
@@ -132,9 +149,6 @@ async function deleteFavourite (place_id, user_id){
 	}
 
 }
-
-
-
 
 // checks credentials of an user returns true if succesful, returns false if an error occurred.
 async function canLogin(values) {
@@ -195,6 +209,26 @@ async function hasToken(token)
 	}
 }
 
+async function getPlace(place_id) {
+	let conn = null;
+	let place = null;
+	try {
+		conn = await dbConnect();
+		let results = await conn.query(`
+		SELECT * FROM places
+		WHERE place_id = ?
+		`, [place_id]);
+		if (results.length > 0)
+			place = results[0];
+	} catch(err) {
+		console.error('Error:', err);
+	} finally {
+		conn.end()
+		console.log('I: (getPlace)) place:', place);
+		return place;
+	}
+}
+
 async function storeToken(email, token)
 {
 	console.log('I: (storeToken) token:', token);
@@ -240,7 +274,7 @@ async function storeToken(email, token)
 module.exports = {
 	canLogin, registerUser, 
 	hasToken, storeToken,
-	insertPlace, queryPlaces,
+	insertPlace, queryPlaces, getPlace,
 	queryFavouritePlaces, saveFavourite,
 	deleteFavourite
 };

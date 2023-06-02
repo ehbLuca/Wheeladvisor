@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+j!DOCTYPE html>
 <html lang="en-US">
 
 	<head>
@@ -10,36 +10,26 @@
 
 	<body>
 		<header class="fixed">
-			<section id="sec">
-				<a id="back" href="start.html"><img src="icons/arrow.svg" alt="img" ></a>
-
-				<form action="zoek.html" id="zoek">
-					<input type="text" id="zoek-query" name="q" placeholder="ZOEKEN?" value="">
-					<!--<input type="text" id="zoek-category" name="category" placeholder="Wat is deze plaats?" value="">
-					<input type="text" id="zoek-adres" name="adres" placeholder="Waar is deze plaats?" value="">
-					<button type="submit" value="Submit">Zoeken!</button>-->
-				</form>
-
-				<form id="login-form" method="POST" action="/login">
-					<img id="login" src="icons/icons8-login.svg" alt="img" value="a" onclick="document.getElementById('login-form').submit()">
-				</form>
-			</section>
-			<section2 id="sec2">
-				<select name="category" id="zoek-category">
-					<option value="NULL">NONE</option>
-					<option value="shop">SHOP</option>
-					<option value="hotel">HOTEL</option>
-					<option value="restaurant">RESTAURANT</option>
-					<option value="public_transport">PUBLIC TRANSPORT</option>
+			<a id="back" href="start.html"><img src="icons/arrow.svg" alt="img" ></a>
+			<form action="zoek.html" id="zoek">
+				<input type="text" id="zoek-query" name="q" placeholder="ZOEKEN?" value="">
+				<input type="text" id="zoek-address" name="adres" placeholder="gemeente" value="">
+				<select name="category" id="zoek-category" >
+					<option value="" selected>geen</option>
+					<option value="shop">winkel</option>
+					<option value="hotel">hotel</option>
+					<option value="restaurant">restaurant</option>
+					<option value="public_transport">openbaar vervoer</option>
 				</select>
-				<button id="submit-btn">Find Nearest Place</button>
-			</section2>
+				<input id="zoek-submit" type="submit" value="zoeken">
+			</form>
+		<form id="login-form" method="POST" action="/login">
+			<img id="login" src="icons/icons8-login.svg" alt="img" onclick="document.getElementById('login-form').submit()">
+		</form>
+			<button id="submit-btn">Find Nearest Place</button>
 		</header>
 
-
 		<div id="contentContainer"></div>
-		
-		<!--<button id="submit-btn">Find Nearest Place</button>-->
 
 		<script src="js/zoek.js"></script>
 		<script src="js/login.js"></script>
