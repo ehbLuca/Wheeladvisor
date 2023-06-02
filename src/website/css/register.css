@@ -11,23 +11,82 @@ body{
 	margin: 0.5em;
 	padding: 0;
     color: white;
-    
+    font-family: Arial, sans-serif;
 }
 
 
-.container{
+header{
+    width: 30%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-.form a{
+
+
+
+a{
     color: white;
     text-decoration: none;
 }
 
 .form{
+    
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100vh;
+    justify-content: center;
+    
 }
+
+.form label{
+    width: 100%;
+    text-align: center;
+    padding: 0.5em;
+}
+
+input{
+    width: 50%;
+}
+
+.name{
+    padding: 1em;
+    border-radius: 2em ;
+}
+
+.email{
+    padding: 1em;
+    border-radius: 2em ;
+}
+
+.password{
+    padding: 1em;
+    border-radius: 2em ;
+}
+
+.submit{
+    border-radius: 1em;
+    padding: 0.5em;
+    background-color: var(--color2);
+}
+
+#back{
+    margin: 20px;
+    margin-right: 0%;
+  }
+  #back img{
+    display: block;
+    width: 40px;
+    filter: invert(100%);
+  }
+  #back :hover{
+    filter: none;
+  }
+
+  .header a{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+  }

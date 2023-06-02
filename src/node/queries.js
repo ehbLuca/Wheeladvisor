@@ -7,7 +7,7 @@ async function dbConnect() {
 	try {
 		conn = await mariadb.createConnection({
 			// database connection details
-			host: '10.3.50.5',
+			host: '0.0.0.0',
 			user: 'padmin',
 			password: 'bulbizarre',
 			database: 'padmindb'
@@ -141,6 +141,7 @@ async function mostFavorite (){
 	try{
 
 		conn = await dbConnect();
+
 		results = await conn.query(`SELECT * FROM places
 		WHERE place_id = (SELECT place_id FROM favorites
 		GROUP BY place_id 
@@ -156,7 +157,9 @@ async function mostFavorite (){
 	}finally{
 
 		conn.end();
+
 		return results[0];
+
 
 	}
 
