@@ -78,6 +78,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 	document.querySelector('h1').textContent = place.name;
 	document.querySelector('.description').textContent = place.description;
 	document.querySelector('.address').textContent = place.address;
+	document.getElementById('form-maps').action = `https://www.google.com/maps/place/${place.latitude},${place.longitude}`
 
 	let imageElement = document.getElementById("plek-foto");
 	let fileURL = `images/places/${place.place_id}`;
