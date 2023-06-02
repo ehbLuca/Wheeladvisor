@@ -9,3 +9,9 @@ done
 
 cd "$thidir"
 docker compose up -d
+
+docker cp ../../src/sql/tables.sql mariadb:/tmp/
+docker exec -it mariadb sh -c '
+mariadb < /tmp/tables.sql
+shred -uz /tmp/tables.sql
+'

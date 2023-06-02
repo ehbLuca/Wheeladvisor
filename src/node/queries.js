@@ -7,7 +7,7 @@ async function dbConnect() {
 	try {
 		conn = await mariadb.createConnection({
 			// database connection details
-			host: '10.3.50.5',
+			host: 'mariadb',
 			user: 'padmin',
 			password: 'bulbizarre',
 			database: 'padmindb'

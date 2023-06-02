@@ -16,7 +16,7 @@ COPY config/startup.sh /usr/local/bin/startup
 RUN chmod +x /usr/local/bin/mariadb-server
 RUN chmod +x /usr/local/bin/startup
 
-EXPOSE 3306
+# EXPOSE 3306
 
 WORKDIR /etc/my.cnf.d/
 

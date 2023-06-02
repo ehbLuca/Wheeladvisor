@@ -15,6 +15,6 @@ services:
   mariadb:
     image: mariadb:latest
     container_name: mariadb
-    ports:
-      - 3306:3306
+    # ports:
+    #   - 3306:3306
     restart: unless-stopped
