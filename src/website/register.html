@@ -12,37 +12,40 @@
 <body>
     <section class="container">
 
+        <header>
+            <a id="back" href="start.html"><img src="icons/arrow.svg" alt="img" ></a>
+            <H1>WheelAdvisor</H1>
+        </header>
+
         <form method="POST" action="/register" class="form">
             <!--Size en maxlenght kunnen we later aanpassen op basis van de database-->
-            <a href="start.html">Start</a>
-
-            <p>
+        
                 <label class="label1">
-                    <input type="text" name="name" required size="15" maxlength="16" placeholder="Username">
+                    <input class="name" type="text" name="name" required size="15" maxlength="16" placeholder="Username">
                 </label>
-            </p>
+            
 
-            <p>
+            
                 <label class="label">
-                    <input type="email" name="email" required size="15" maxlength="32" placeholder="Email">
+                    <input class="email" type="email" name="email" required size="15" maxlength="32" placeholder="Email">
                 </label>
-            </p>
+            
 
 
-            <p>
+           
                 <label class="label">
-                    <input type="password" name="password" required size="15" maxlength="16" placeholder="wachtwoord">
+                    <input class="password" type="password" name="password" required size="15" maxlength="16" placeholder="wachtwoord">
                 </label>
-            </p>
+            
 
-            <p>
+            
                 <label class="label">
-                    <input type="submit" value="register">
+                    <input class="submit" type="submit" value="register">
                 </label>
-            </p>
+            
 
 
-            <a href="login.html">Ik heb al een accounnt</a>
+            <a href="login.html">Ik heb al een account</a>
 
         </form>
 

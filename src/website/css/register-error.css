@@ -60,6 +60,11 @@ input{
     width: 50%;
 }
 
+.name{
+    padding: 1em;
+    border-radius: 2em ;
+}
+
 .email{
     padding: 1em;
     border-radius: 2em ;
@@ -94,6 +99,3 @@ input{
     display: flex;
     justify-content: flex-start;
   }
-
-
-/*hier begin alles die met de form te maken heeft*/

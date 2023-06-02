@@ -7,7 +7,7 @@ async function dbConnect() {
 	try {
 		conn = await mariadb.createConnection({
 			// database connection details
-			host: '10.3.50.5',
+			host: '0.0.0.0',
 			user: 'padmin',
 			password: 'bulbizarre',
 			database: 'padmindb'
@@ -56,7 +56,7 @@ async function insertPlace(place) {
 	}
 }
 
-async function queryPlaces(query, category, adres) {
+async function queryPlaces(query) {
 	let conn = null;
 	let results = null;
 	try {
@@ -64,9 +64,7 @@ async function queryPlaces(query, category, adres) {
 		results = await conn.query(`
 		SELECT * FROM places
 		WHERE UPPER(name) LIKE UPPER(?)
-		AND UPPER(category) LIKE UPPER(?)
-		AND UPPER(address) LIKE UPPER(?)
-		`, [`%${query}%`,`%${category}%`,`%${adres}%`]);
+		`, [`%${query}%`]);
 	} catch (err) {
 		console.error(`Error while searching for'${query}'`, err);
 	} finally {
@@ -74,22 +72,6 @@ async function queryPlaces(query, category, adres) {
 		return results;
 	}
 } 
-
-async function getPlaces() {
-	let conn = null;
-	let places = null;
-	try {
-		conn = await dbConnect();
-		places = await conn.query(`
-		SELECT * FROM places
-		`);
-	} catch (err) {
-		console.error(`Error while searching for'${coordinate}'`, err);
-	} finally {
-		conn.end();
-		return places;
-	}
-}
 
 // Get favourite places from database
 
@@ -148,6 +130,36 @@ async function deleteFavourite (place_id, user_id){
 	}
 
 }
+
+// to get most saved favorite from the database
+
+async function mostFavorite (){
+
+	let conn = null;
+	let results = null;
+
+	try{
+
+		conn = await dbConnect();
+		results = await conn.query(`SELECT category, COUNT(category) 
+		FROM places GROUP BY category 
+		ORDER BY COUNT(category) DESC;`)
+
+	}catch(err){
+
+		console.error('Error:', err);
+
+	}finally{
+
+		conn.end();
+		return results;
+
+	}
+
+
+}
+
+
 
 // checks credentials of an user returns true if succesful, returns false if an error occurred.
 async function canLogin(values) {
@@ -275,5 +287,5 @@ module.exports = {
 	hasToken, storeToken,
 	insertPlace, queryPlaces, getPlace,
 	queryFavouritePlaces, saveFavourite,
-	deleteFavourite
+	deleteFavourite, mostFavorite
 };
