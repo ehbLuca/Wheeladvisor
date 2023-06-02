@@ -15,7 +15,7 @@ const queries = require('./queries.js');
 
 let app = express();
 const port = 3000;
-const cookieSecret = 'SECRET';
+const cookieSecret = "SECRET";
 
 /* custom logging */
 if (process.env.NODE_ENV !== 'test') app.use(logger(':method :url'))
