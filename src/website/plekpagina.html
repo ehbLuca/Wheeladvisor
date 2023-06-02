@@ -31,7 +31,7 @@
 			<div style="clear:both;"></div>
 			<div class="ster">
 				<div class="gallery">
-					<img src="images/img1.jpg" alt="Image 1 of place">
+					<img id="plek-foto" alt="Image of place">
 
 				</div>
 				<div class="save">
@@ -43,7 +43,7 @@
 						<span class="fa fa-star"></span>
 					</div>
 					<div class="legeDoos">
-						<button type="button" class="sharebutton"><img src="icons/SHARE.png"></button>
+						<button type="button" id="share-button" class="sharebutton"><img src="icons/SHARE.png"></button>
 						<form class="share">
 							<button type="button" class="favbutton"><img src="images/favorite.png" alt="buttonpng" width="25" height="40" /></button>
 						</form>
@@ -68,11 +68,9 @@
 			<div style="clear:both;"></div>
 			&nbsp;
 			<p class="address">adres</p>
-			<iframe width=80% height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-				src="https://www.openstreetmap.org/export/embed.html?bbox=3.025360107421875%2C50.45575537567455%2C4.791412353515625%2C50.993878771898764&amp;layer=mapnik"
-				style="border: 1px solid black"></iframe><br /><small><a
-					href="https://www.openstreetmap.org/#map=10/50.7256/3.9084">Map bigger size?</a></small>
-			<form action="https://www.google.be/maps">
+			<div id="map" style="width: 80%; height: 500px;"></div>
+
+			<form id="form-maps" action="https://www.google.be/maps">
 				<input type="submit" value="Open in Google Maps" />
 			</form>
 			&nbsp;
