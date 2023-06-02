@@ -59,15 +59,23 @@ async function insertPlace(place) {
 async function queryPlaces(query, category, address) {
 	let conn = null;
 	let results = [];
-	let variables = [query, category, address]
 	try {
 		conn = await dbConnect();
-		for (let variable of variables)
-			if (variable)
+			if (query)
 				results = results.concat(await conn.query(`
-				SELECT * FROM places
-				WHERE UPPER(name) LIKE UPPER(?)
-				`, [`%${variable}%`]))
+					SELECT * FROM places
+					WHERE UPPER(name) LIKE UPPER(?)
+					`, [`%${query}%`]))
+			if (category)
+				results = results.concat(await conn.query(`
+					SELECT * FROM places
+					WHERE UPPER(category) LIKE UPPER(?)
+					`, [`%${category}%`]))
+			if (address)
+				results = results.concat(await conn.query(`
+					SELECT * FROM places
+					WHERE UPPER(address) LIKE UPPER(?)
+					`, [`%${address}%`]))
 	} catch (err) {
 		console.error(`Error while searching for '${query}'`, err);
 	} finally {
