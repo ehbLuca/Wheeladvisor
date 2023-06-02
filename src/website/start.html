@@ -5,7 +5,7 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Document</title>
+		<title>WheelAdvisor</title>
 		<link rel="stylesheet" href="css/start.css">
 		<link rel="stylesheet" href="css/aanbevelingen.css">
 	</head>
@@ -18,23 +18,22 @@
 				<H1>WheelAdvisor</H1>
 
 				<form id="login-form" method="POST" action="/login">
-					<input id="login" type="submit" value="Login/Register">
+					<img id="login" src="icons/icons8-login.svg" alt="img" value="a" onclick="document.getElementById('login-form').submit()">
 				</form>
+
 			</header>
 
 			<form action="zoek.html" class="zoekbalk">
-				<input type="text" id="search" name="q" placeholder="zoeken">
+				<input type="search" id="search" name="q" placeholder="zoeken">
 			</form>
 
 			<section class="categorie">
 
-				<button>categorie1</button>
-
-				<button>categorie2</button>
-
-				<button>categorie3</button>
-
-				<button>categorie4</button>
+				<a href="zoek.html?category=shop">shop</a>
+				<a href="zoek.html?category=entertainment">entertainment</a>
+				<a href="zoek.html?category=restaurant">restaurant</a>
+				<a href="zoek.html?category=hotel">hotel</a>
+				<a href="zoek.html?category=public_transport">public_transport</a>
 
 			</section>
 
@@ -42,15 +41,7 @@
 
 			<section class="Kader">
 				<!--Hier word een mini kader gemaakt met een plek afbelding en tags -->
-				
-
-					
-					
-
 					<div id="contentContainer"></div>
-					
-
-
 		</section>
 
 		<div>

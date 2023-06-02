@@ -7,7 +7,7 @@ async function dbConnect() {
 	try {
 		conn = await mariadb.createConnection({
 			// database connection details
-			host: '0.0.0.0',
+			host: '10.3.50.5',
 			user: 'padmin',
 			password: 'bulbizarre',
 			database: 'padmindb'
@@ -56,17 +56,28 @@ async function insertPlace(place) {
 	}
 }
 
-async function queryPlaces(query) {
+async function queryPlaces(query, category, address) {
 	let conn = null;
-	let results = null;
+	let results = [];
 	try {
 		conn = await dbConnect();
-		results = await conn.query(`
-		SELECT * FROM places
-		WHERE UPPER(name) LIKE UPPER(?)
-		`, [`%${query}%`]);
+			if (query)
+				results = results.concat(await conn.query(`
+					SELECT * FROM places
+					WHERE UPPER(name) LIKE UPPER(?)
+					`, [`%${query}%`]))
+			if (category)
+				results = results.concat(await conn.query(`
+					SELECT * FROM places
+					WHERE UPPER(category) LIKE UPPER(?)
+					`, [`%${category}%`]))
+			if (address)
+				results = results.concat(await conn.query(`
+					SELECT * FROM places
+					WHERE UPPER(address) LIKE UPPER(?)
+					`, [`%${address}%`]))
 	} catch (err) {
-		console.error(`Error while searching for'${query}'`, err);
+		console.error(`Error while searching for '${query}'`, err);
 	} finally {
 		conn.end();
 		return results;

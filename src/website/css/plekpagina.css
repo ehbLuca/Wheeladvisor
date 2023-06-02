@@ -1,4 +1,5 @@
-@import"colors.css";
+@import "colors.css";
+@import "loginform.css";
 
 body {
     background-color: var(--bg-color);
@@ -15,7 +16,8 @@ body {
 .container {
     display: flex;
     flex-direction: column;
-    justify-items: center;
+    align-items: center;
+    
 }
 
 /*container eindig hier*/
@@ -47,6 +49,7 @@ body {
 
 .ster {
     display: flex;
+    width: 100%;
     flex-direction: column;
     justify-content: space-between;
 }
@@ -59,16 +62,11 @@ body {
     justify-items: center;
 }
 
-.gallery {
-    align-self: center;
-
-}
-
 .save {
     width: 80%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 /*kader eindigt hier*/
@@ -78,6 +76,10 @@ button {
     background-color: inherit;
     cursor: pointer;
     border: none;
+}
+.legeDoos{
+    display: flex;
+    flex-direction: row;
 }
 
 .backbutton {
@@ -103,12 +105,47 @@ button {
     border-radius: 1em;
 }
 
+.login{
+    padding: 15px;
+    
+}
+.login img{
+    display: flex;
+    width: 100%;
+    filter: invert();
+    
+}
+.login :hover{
+    filter: none;
+}
+
+.sharebutton {
+  padding: 5px;
+  margin-right: 0;
+  width: 45px;
+  display: block;
+}
+.sharebutton img{
+    display: block;
+    width: 100%;
+    filter: invert();
+}
+.sharebutton :hover{
+    filter: none;    
+}
 .favbutton {
+    float: right;
     border: none;
     padding: 2em;
     margin: 1em;
     border-radius: 1em;
     background-color: transparent;
+}
+.favbutton img{
+    filter: invert();
+}
+.favbutton :hover{
+    filter: none;
 }
 
 .favbutton img {
@@ -132,7 +169,6 @@ h1 {
 
 .staraverage {
     align-self: center;
-    justify-self: end;
 }
 
 .checked {
@@ -140,27 +176,30 @@ h1 {
 }
 
 .gallery {
+    align-self: center;
     text-align: center;
+
     border: 3px solid black;
-    margin-top: 10px;
-    padding: 80px;
-    background-color: whitesmoke;
     overflow: auto;
     white-space: nowrap;
-    padding: 10px;
-    width: 60%;
-}
 
+    padding: 0px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+	width: 60vw;
+	height: 40vw;
+}
+      
 div.gallery img {
+	display: block;
     padding: 10px;
-    width: 350px;
-    height: 360px;
 }
 
 .description {
     border: 2px outset black;
     width: 45%;
     padding: 20px;
+    align-self: center;
 }
 
 .positives {

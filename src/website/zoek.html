@@ -11,23 +11,28 @@
 	<body>
 		<header class="fixed">
 			<a id="back" href="start.html"><img src="icons/arrow.svg" alt="img" ></a>
-
 			<form action="zoek.html" id="zoek">
-				<input type="text" id="zoek-query" name="q" placeholder="Naam van plaats" value="">
-				<input type="text" id="zoek-category" name="category" placeholder="Wat is deze plaats?" value="">
-				<input type="text" id="zoek-address" name="address" placeholder="Gemeentenummer?" value="">
-				<button type="submit" value="Submit">Zoeken!</button>
+				<input type="text" id="zoek-query" name="q" placeholder="ZOEKEN?" value="">
+				<input type="text" id="zoek-address" name="address" placeholder="gemeente" value="">
+				<select name="category" id="zoek-category" >
+					<option value="" selected>geen</option>
+					<option value="shop">winkel</option>
+					<option value="hotel">hotel</option>
+					<option value="restaurant">restaurant</option>
+					<option value="public_transport">openbaar vervoer</option>
+				</select>
+				<input id="zoek-submit" type="submit" value="zoeken">
 			</form>
-
-		<button id="submit-btn">Find Nearest Place</button>
-
-			<a id="login" href="login.html"><img src="icons/icons8-login.svg" alt="img" ></a>
+		<form id="login-form" method="POST" action="/login">
+			<img id="login" src="icons/icons8-login.svg" alt="img" onclick="document.getElementById('login-form').submit()">
+		</form>
+			<button id="submit-btn">Find Nearest Place</button>
 		</header>
 
-
 		<div id="contentContainer"></div>
-		
+
 		<script src="js/zoek.js"></script>
+		<script src="js/login.js"></script>
 	</body>
 
 </html>

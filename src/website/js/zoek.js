@@ -1,14 +1,12 @@
 'use strict'
-
 async function searchPlaces(query, category, address) {
-
 	return fetch("/search", {
 		method: "POST",
 		headers: {
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify({
-			query, category, address,
+			q: query, category, address,
 		})
 	}).then(
 		result => result.json()
@@ -23,6 +21,7 @@ async function createPlaces(places)
 	contentContainer.innerHTML = ''
 
 	for (let place of places) {
+		console.log("logging")
 		console.log(place)
 		var anchorElement = document.createElement('a');
 		var postElement = document.createElement('div');
@@ -77,6 +76,7 @@ async function findNearestPlace(position) {
 		)
 	createPlaces(places);
 }
+
 window.addEventListener('DOMContentLoaded', async function () {
 	const urlParams = new URLSearchParams(window.location.search);
 	const query = urlParams.get("q");

@@ -1,43 +1,43 @@
 
 @import "colors.css";
+@import "loginform.css";
 
 *
 {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body{
-    background-color: var(--bg-color);
-    width:auto;
+	background-color: var(--bg-color);
+	width: auto;
 	margin: 0.5em;
 	padding: 0;
-    font-family: Arial, sans-serif;
+	font-family: Arial, sans-serif;
 }
 
 
 
 /*container is rond de andere containers*/
 .container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .loginbalk h1{
-    text-align: center;
-    color: white;
-    margin-bottom: 0;
+	text-align: center;
+	color: white;
+	width: 90%;
+	font-size:xx-large;
 
 }
 
 .loginbalk{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    
-}
+	width: 90%;
+	display: flex;
+	justify-content: space-around;
 
+}
 
 
 /*loginbalk eindig hier*/
@@ -47,19 +47,20 @@ body{
 
 
 .zoekbalk input {
-    padding: 1em;
-    border-radius: 5rem;
-    margin-top: 5%;
-    margin-bottom: 10%;
-    width: 100%;
-    
+	padding: 1em;
+	border-radius: 5rem;
+	border: 1px;
+	width: 100%;
+
 }
 
 
 .zoekbalk{   
-    width: 90%;
+	width: 90%;
 }
-
+#search{
+	text-align: center;
+}
 /*zoek balk eindig hier*/
 
 
@@ -68,19 +69,24 @@ body{
 /*categorie categorieën*/
 
 .categorie{
-   display: grid;
-   grid-template-columns: 50% 50%;  
-  
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap; 
+	margin-bottom: 50px;
+	width: 100%;
+
 }
 
 
-.categorie button{
-  color: white;
-  background-color: var(--fg-color);
-  border: none;
-  border-radius: 1em;
-  padding: 2em; 
-  margin: 1em;
+.categorie a{
+	text-decoration: none;
+	cursor: pointer;
+	color: white;
+	background-color: var(--fg-color);
+	border: none;
+	border-radius: 1em;
+	padding: 1em; 
+	margin: 1em;
 }
 
 
@@ -91,24 +97,26 @@ body{
 
 /*Alles die met Kader te maken heeft zit hier*/
 
-ul {
-    margin: 0;
-}
 
 .Kader img {
-    display: block;
-    width: 50%;
+	display: block;
+	width: 95%;
+}
+
+.Kader{
+	text-align: center;
+	width: 90%;
 }
 
 .flex{
-    margin-top: 5%;
-	margin-bottom: 5%;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: var(--fg-color);
-    border-radius: 3rem;
+
+	color: white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: var(--fg-color);
+	border-radius: 3rem;
+	cursor: pointer;
 }
 
 .ul_list{
@@ -144,24 +152,24 @@ border: none;
 
 @media screen and (min-width:1000px ){
 
-    body{
-        background-color: var(--bg-color);
-    }
+	body{
+		background-color: var(--bg-color);
+	}
 
-    .loginbalk{
-       display: flex;
-       flex-direction: row;
-     }
+	.loginbalk{
+		display: flex;
+		flex-direction: row;
+	}
 
-     .loginbalk form{
-        align-self: flex-end;
-     }
+	.loginbalk form{
+		align-self: flex-end;
+	}
 
-     .flex{
-        background-color: var(--fg-color);
-    }
+	.flex{
+		background-color: var(--fg-color);
+	}
 
-    .categorie button{
-        background-color: var(--fg-color);
-    }
+	.categorie a{
+		background-color: var(--fg-color);
+	}
 }

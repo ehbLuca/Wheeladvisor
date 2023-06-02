@@ -32,14 +32,10 @@ app.get('/', (req, res) => {
 // returns the user's email if he is signed in
 app.get('/loggedIn', async(req, res) => {
 	let {authToken} = req.cookies;
-	let user_id;
-	if(authToken){
+	let user_id = null;
+	if(authToken)
 		user_id = await queries.hasToken(authToken)
-		res.send(JSON.stringify(user_id));
-		console.log(user_id);
-	}
-	else
-		res.send(JSON.stringify(null))
+	res.send(JSON.stringify(user_id))
 });
 
 // route for logging in with credentials or with a token in the cookies
@@ -106,9 +102,8 @@ app.post('/register', async (req, res) => {
 });
 
 app.post('/search', async (req, res) => {
-	let category = req.body.category;
-	let address = req.body.address;
-	let query = req.body.query;
+	let {q: query, category, address} = req.body;
+	console.log('query:', query);
 	console.error(`I: (/search) Searching for places matching '${query}'.`);
 	let places = await queries.queryPlaces(query, category, address);
 	res.send(places);
