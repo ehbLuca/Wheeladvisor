@@ -84,22 +84,6 @@ async function queryPlaces(query, category, address) {
 	}
 } 
 
-async function getPlaces() {
-	let conn = null;
-	let places = null;
-	try {
-		conn = await dbConnect();
-		places = await conn.query(`
-		SELECT * FROM places
-		`);
-	} catch (err) {
-		console.error(`Error while searching for'${coordinate}'`, err);
-	} finally {
-		conn.end();
-		return places;
-	}
-}
-
 // Get favourite places from database
 
 async function queryFavouritePlaces(user_id) {
@@ -157,6 +141,43 @@ async function deleteFavourite (place_id, user_id){
 	}
 
 }
+
+// to get most saved favorite from the database
+
+async function mostFavorite (){
+
+	let conn = null;
+	let results = null;
+
+	try{
+
+		conn = await dbConnect();
+
+		results = await conn.query(`SELECT * FROM places
+		WHERE place_id = (SELECT place_id FROM favorites
+		GROUP BY place_id 
+		ORDER BY COUNT(place_id) DESC
+		LIMIT 1);`)
+
+		console.log("I: (mostfavourite)" + results)
+
+	}catch(err){
+
+		console.error('Error:', err);
+
+	}finally{
+
+		conn.end();
+
+		return results[0];
+
+
+	}
+
+
+}
+
+
 
 // checks credentials of an user returns true if succesful, returns false if an error occurred.
 async function canLogin(values) {
@@ -284,5 +305,5 @@ module.exports = {
 	hasToken, storeToken,
 	insertPlace, queryPlaces, getPlace,
 	queryFavouritePlaces, saveFavourite,
-	deleteFavourite
+	deleteFavourite, mostFavorite
 };

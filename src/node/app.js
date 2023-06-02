@@ -191,6 +191,19 @@ app.get('/deleteFavorite/user_id/:user_id/place_id/:place_id', async (req, res) 
 });
 
 
+//for the recomandtion
+
+app.get('/mostFavorite', async function (req, res) {
+
+	let result = await queries.mostFavorite();
+	console.log(result);
+	res.send(result);
+
+})
+
+
+
+
 app.post('/getplace', async (req, res) => {
 	let place_id = req.body.place_id;
 	let place = await queries.getPlace(place_id);
