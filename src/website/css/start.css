@@ -126,7 +126,17 @@ ul {
 
 .flex h3 {
     width: 80%;
+} 
+
+#favoriete{
+    color: white;
+background-color: var(--fg-color);
+border-radius: 1em;
+padding: 1em;
+border: none;
 }
+
+
 
 /*Kader eindig hier*/
 

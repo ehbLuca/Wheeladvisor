@@ -141,9 +141,14 @@ async function mostFavorite (){
 	try{
 
 		conn = await dbConnect();
-		results = await conn.query(`SELECT category, COUNT(category) 
-		FROM places GROUP BY category 
-		ORDER BY COUNT(category) DESC;`)
+
+		results = await conn.query(`SELECT * FROM places
+		WHERE place_id = (SELECT place_id FROM favorites
+		GROUP BY place_id 
+		ORDER BY COUNT(place_id) DESC
+		LIMIT 1);`)
+
+		console.log("I: (mostfavourite)" + results)
 
 	}catch(err){
 
@@ -152,7 +157,9 @@ async function mostFavorite (){
 	}finally{
 
 		conn.end();
-		return results;
+
+		return results[0];
+
 
 	}
 
