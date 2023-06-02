@@ -8,7 +8,6 @@ async function getPlaces() {
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify(result)
 	}).then(
 		result => result.json()
 	)
@@ -21,9 +20,11 @@ window.addEventListener('DOMContentLoaded', async function() {
 
 	let place = await getPlaces();
 
-	
+	console.log(place)
 		
 		var anchorElement = document.createElement('a');
+		var titelElement = document.createElement('h3');
+		
 		var postElement = document.createElement('div');
 		var imageElement = document.createElement('img');
 		let fileURL = `images/places/${place.place_id}`;
@@ -43,7 +44,11 @@ window.addEventListener('DOMContentLoaded', async function() {
 		imageElement.classList.add('post-image');
 		postElement.classList.add('post');
 		postElement.textContent = place.name;
+		titelElement.innerText = "Aanbeveling";
 
+
+		
+		postElement.appendChild(titelElement);
 		postElement.appendChild(imageElement);
 		contentContainer.appendChild(anchorElement);
 		anchorElement.appendChild(postElement);
