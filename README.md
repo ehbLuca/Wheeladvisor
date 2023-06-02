@@ -9,8 +9,7 @@ Wheeladvisor is a web application that aims to provide wheelchair users with rec
 
 - **Wheelchair-accessible Place Recommendations:** Wheeladvisor offers a curated list of wheelchair-accessible places based on user preferences and location.
 - **Search Functionality:** Users can search for specific places or filter results based on various criteria such as distance, category, or accessibility features.
-- **User Reviews and Ratings:** Users can provide reviews and ratings for wheelchair-accessible places they have visited, allowing others to make informed decisions.
-- **User Profiles:** Registered users can create profiles, save favorite places, and manage their reviews and ratings.
+- **User Profiles:** Registered users can create profiles, and save their favorite places
 - **Integration with Mapping Services:** Integration with mapping services like [OpenStreetmaps](https://www.openstreetmap.org/) can provide directions to recommended places from the user's current location.
 - **API:** The application provides an API that allows developers to make requests to the backend, retrieving information on wheelchair-accessible places.
 
