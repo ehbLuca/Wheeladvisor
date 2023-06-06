@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "node app.js",
-    "start-dev": "nodemon app.js"
+    "dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
     "express": "^4.18.2",
     "mariadb": "^3.1.2"
