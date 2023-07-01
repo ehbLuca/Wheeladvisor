@@ -10,6 +10,7 @@ const express = require('express');
 const logger = require('morgan');
 const path = require('path');
 const { isNull } = require('util');
+const compression = require('compression');
 
 const queries = require('./queries.js');
 
@@ -20,9 +21,11 @@ const cookieSecret = "SECRET";
 /* custom logging */
 if (process.env.NODE_ENV !== 'test') app.use(logger(':method :url'))
 
+// middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser(cookieSecret));
+app.use(compression());
 app.use('/', express.static(path.join(__dirname, 'website')));
 
 app.get('/', (req, res) => {
