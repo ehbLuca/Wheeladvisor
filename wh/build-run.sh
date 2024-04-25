@@ -1,4 +1,5 @@
 #!/bin/sh
+
 thisdir=$(realpath "$0" | xargs -I {} dirname "{}")
 
 for container in mariadb wheeladvisor
@@ -6,12 +7,12 @@ do
 	cd "$thisdir"/$container
 	docker build -t $container . 
 done
+printf 'Done.\n\n'
 
-cd "$thidir"
+cd "$thisdir"
+
 docker compose up -d
+>&2 printf 'Done.\n\n'
 
-docker cp ../../src/sql/tables.sql mariadb:/tmp/
-docker exec -it mariadb sh -c '
-mariadb < /tmp/tables.sql
-shred -uz /tmp/tables.sql
-'
+>&2 printf 'Setting up the database from backup..\n'
+docker container exec -i wh-mariadb-1 mariadb < ./all_databases.sql

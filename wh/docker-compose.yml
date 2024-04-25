@@ -1,8 +1,6 @@
-version: '3'
 services:
   wheeladvisor:
     image: wheeladvisor:latest
-    container_name: wheeladvisor
     ports:
       - 80:3000
     volumes:
@@ -14,7 +12,4 @@ services:
 
   mariadb:
     image: mariadb:latest
-    container_name: mariadb
-    # ports:
-    #   - 3306:3306
     restart: unless-stopped
